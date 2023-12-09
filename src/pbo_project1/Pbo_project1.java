@@ -15,6 +15,7 @@ public class Pbo_project1 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        new Paket().setVisible(true);
     }
     
 }

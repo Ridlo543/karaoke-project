@@ -12,7 +12,6 @@ import java.util.List;
  * @author LENOVO
  */
 public class PaketModel {
-    private int hargaRuanganPerJam = 0;
     private List<Ruangan> ruanganList;
 
     public List<Ruangan> getRuanganList() {
@@ -28,18 +27,6 @@ public class PaketModel {
         ruanganList.add(new Ruangan("Deluxe", 14, 100000));
         ruanganList.add(new Ruangan("VVIP", 14, 200000));
     }
-    public void updateHargaRuangan(String ruanganSelected, List<Ruangan> ruanganList) {
-        for (Ruangan ruangan : ruanganList) {
-            if (ruanganSelected.contains(ruangan.getNama())) {
-                hargaRuanganPerJam = ruangan.getHargaPerJam();
-                break;
-            }
-        }
-    }
-
-    public int hitungTotalHarga(String durasiSelected) {
-        int durasi = Integer.parseInt(durasiSelected.split(" ")[0]);
-        return durasi * hargaRuanganPerJam;
-    }
+   
 }
 

@@ -5,6 +5,7 @@
 package View;
 
 import Controller.LoginController;
+import Model.User;
 import Model.UserModel;
 
 /**
@@ -147,7 +148,7 @@ public class Login extends javax.swing.JFrame {
         
         if (loginSuccessful) {
             // Jika login berhasil, pindah ke halaman paket
-            loginController.switchToPaket();
+            loginController.switchToPaket(username);
         } else {
             // Jika login gagal, tambahkan logika lainnya jika diperlukan
             System.out.println("Login Gagal!");

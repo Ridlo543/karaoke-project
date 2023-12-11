@@ -19,13 +19,17 @@ import java.util.List;
 
 public class Paket extends javax.swing.JFrame {
 
+    // Variabel username sebagai atribut kelas
+    private String username;
     private PaketModel paketModel;
     private PaketController paketController;
 
-    public Paket(PaketModel paketModel) {
+    public Paket(PaketModel paketModel, String username) {
         initComponents();
         this.paketModel = paketModel;
+        this.username = username; 
         setPaketController(new PaketController(paketModel, this));
+        paketController.setWelcomeLabel(username);
     }
 
     public void setPaketController(PaketController paketController) {
@@ -61,7 +65,7 @@ public class Paket extends javax.swing.JFrame {
         jComboBoxRuangan = new javax.swing.JComboBox<>();
         jLabelTotal = new javax.swing.JLabel();
         jButtonNext = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        jLabelWelcome = new javax.swing.JLabel();
 
         jInternalFrame1.setVisible(true);
 
@@ -106,7 +110,7 @@ public class Paket extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Selamat Datang, ");
+        jLabelWelcome.setText("Selamat Datang, ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -115,7 +119,7 @@ public class Paket extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
+                    .addComponent(jLabelWelcome)
                     .addComponent(jButtonNext)
                     .addComponent(jLabelTotal)
                     .addGroup(layout.createSequentialGroup()
@@ -132,7 +136,7 @@ public class Paket extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(89, 89, 89)
-                .addComponent(jLabel1)
+                .addComponent(jLabelWelcome)
                 .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelRuangan)
@@ -152,34 +156,24 @@ public class Paket extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNextActionPerformed
-        // Get the selected duration
         String durasiSelected = jComboBoxDurasi.getSelectedItem().toString();
         int durasi = Integer.parseInt(durasiSelected.split(" ")[0]);
 
-        // Create an instance of MediaPlayer and pass the duration
-        MediaPlayer mediaPlayerFrame = new MediaPlayer(1);
-
-        // Set the visibility of the current frame to false
-        this.setVisible(false);
-
-        // Set the default close operation for the current frame
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        // Make the MediaPlayer frame visible
-        mediaPlayerFrame.setVisible(true);
+        // Memanggil metode switchToMediaPlayer pada PaketController
+        paketController.switchToMediaPlayer(username, durasi);
     }//GEN-LAST:event_jButtonNextActionPerformed
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 // Buat objek PaketModel dan inisialisasi sesuai kebutuhan
                 PaketModel paketModel = new PaketModel();
 
-                // Buat objek Paket dan kirimkan objek PaketModel
-                new Paket(paketModel).setVisible(true);
+                // Buat objek Paket dan kirimkan objek PaketModel serta nama pengguna
+                new Paket(paketModel, "NamaPengguna").setVisible(true);
             }
         });
     }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonNext;
@@ -187,9 +181,13 @@ public class Paket extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBoxRuangan;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JInternalFrame jInternalFrame1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelDurasi;
     private javax.swing.JLabel jLabelRuangan;
     private javax.swing.JLabel jLabelTotal;
+    private javax.swing.JLabel jLabelWelcome;
     // End of variables declaration//GEN-END:variables
+
+    public javax.swing.JLabel getjLabelWelcome() {
+        return jLabelWelcome;
+    }
 }

@@ -64,11 +64,13 @@ public class LoginController {
         return loginView;
     }
 
-    public void switchToPaket() {
-        // Membuat objek Paket
+    public void switchToPaket(String username) {
+        // Membuat objek PaketModel
         PaketModel paketModel = new PaketModel();
-        Paket paketView = new Paket(paketModel);
-// cannot find symbol variable paketModel
+
+        // Membuat objek Paket
+        Paket paketView = new Paket(paketModel, username);
+
         // Membuat objek PaketController dan menghubungkannya dengan PaketModel
         PaketController paketController = new PaketController(paketModel, paketView);
         paketView.setPaketController(paketController);

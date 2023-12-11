@@ -65,7 +65,7 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelWelcome" min="-2" max="-2" attributes="0"/>
                   <Component id="jButtonNext" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabelTotal" min="-2" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
@@ -88,7 +88,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <Component id="jLabelWelcome" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabelRuangan" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -163,7 +163,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonNextActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="jLabelWelcome">
       <Properties>
         <Property name="text" type="java.lang.String" value="Selamat Datang, "/>
       </Properties>

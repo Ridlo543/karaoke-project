@@ -2,21 +2,18 @@ package Controller;
 
 import Model.PaketModel;
 import Model.Ruangan;
+import View.MediaPlayer;
 import View.Paket;
-
-
-
+import javax.swing.JFrame;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 /**
  *
  * @author LENOVO
  */
-
 public class PaketController {
 
     private final PaketModel paketModel;
@@ -32,7 +29,7 @@ public class PaketController {
         // Menambahkan ActionListener untuk menghitung total harga saat perubahan pada ComboBox durasi atau ruangan
         paketView.getjComboBoxDurasi().addActionListener(e -> updateTotal());
         paketView.getjComboBoxRuangan().addActionListener(e -> updateTotal());
-        
+
         // Melakukan update total saat pertama kali aplikasi dijalankan
         updateTotal();
     }
@@ -47,7 +44,7 @@ public class PaketController {
 
         // Menghitung total harga
         int totalHarga = durasi * hargaRuanganPerJam;
-        
+
         // Menampilkan total harga pada JLabel
         paketView.getjLabelTotal().setText("Total: " + totalHarga);
     }
@@ -62,14 +59,20 @@ public class PaketController {
         return 0; // Mengembalikan 0 jika tidak ada harga yang ditemukan
     }
 
-    public void switchToNextPage() {
-        // Implementasi untuk pindah ke halaman berikutnya (MediaPlayer)
-        // ...
+    public void switchToMediaPlayer(String username, int durasi) {
+        // Implementasi untuk pindah ke halaman MediaPlayer
+        MediaPlayer mediaPlayerFrame = new MediaPlayer(username, durasi);
 
-        // Contoh: Setelah Next ditekan, kembali ke halaman login
+        // Menyembunyikan frame Paket
         paketView.setVisible(false);
-        paketView.dispose();  // Tutup frame Paket
-        // Tambahkan logika untuk menampilkan halaman MediaPlayer atau yang lainnya
+        paketView.dispose();
+
+        // Menampilkan frame MediaPlayer
+        mediaPlayerFrame.setVisible(true);
+    }
+
+    public void setWelcomeLabel(String username) {
+        // Menampilkan selamat datang dengan nama pengguna pada JLabel
+        paketView.getjLabelWelcome().setText("Selamat Datang, " + username);
     }
 }
-

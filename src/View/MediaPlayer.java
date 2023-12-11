@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package pbo_project1;
+package View;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -41,7 +41,6 @@ public class MediaPlayer extends JFrame {
         jButtonLeave = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1080, 608));
         setSize(new java.awt.Dimension(1080, 608));
 
         jLabelSelamatDatang.setText("Selamat Datang");

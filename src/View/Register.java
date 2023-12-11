@@ -13,16 +13,18 @@ import Model.UserModel;
  * @author LENOVO
  */
 public class Register extends javax.swing.JFrame {
-    private final UserModel userModel;
-    private  RegisterController registerController;
+
+    private UserModel userModel;
+    private RegisterController registerController;
 
     public Register(UserModel userModel, RegisterController registerController) {
         initComponents();
         this.userModel = userModel;
         setRegisterController(registerController);
+        registerController.setRegisterView(this); 
     }
-    
-    public void setRegisterController(RegisterController loginController) {
+
+    public void setRegisterController(RegisterController registerController) {
         this.registerController = registerController;
     }
 
@@ -179,7 +181,11 @@ public class Register extends javax.swing.JFrame {
     private void jButtonToLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonToLoginActionPerformed
         // TODO add your handling code here:
 
-        registerController.switchToLogin();
+        if (registerController != null) {
+            registerController.switchToLogin();
+        } else {
+            System.err.println("RegisterController is null. Make sure it is set before calling switchToLogin.");
+        }
     }//GEN-LAST:event_jButtonToLoginActionPerformed
 
     /**

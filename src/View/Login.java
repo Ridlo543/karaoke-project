@@ -12,6 +12,7 @@ import Model.UserModel;
  * @author LENOVO
  */
 public class Login extends javax.swing.JFrame {
+
     private final UserModel userModel;
     private LoginController loginController;
 
@@ -140,7 +141,17 @@ public class Login extends javax.swing.JFrame {
         String role = jComboBox1.getSelectedItem().toString();
         String username = jTextField1.getText();
         String password = new String(jPasswordField1.getPassword());
-        loginController.processLogin(role, username, password);
+        
+        // Memanggil metode processLogin pada LoginController
+        boolean loginSuccessful = loginController.processLogin(role, username, password);
+        
+        if (loginSuccessful) {
+            // Jika login berhasil, pindah ke halaman paket
+            loginController.switchToPaket();
+        } else {
+            // Jika login gagal, tambahkan logika lainnya jika diperlukan
+            System.out.println("Login Gagal!");
+        }
     }//GEN-LAST:event_jButtonLoginActionPerformed
 
     private void jButtonToRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonToRegisterActionPerformed
@@ -155,7 +166,6 @@ public class Login extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonLogin;

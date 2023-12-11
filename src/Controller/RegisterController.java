@@ -14,37 +14,36 @@ import View.Register;
  * @author LENOVO
  */
 public class RegisterController {
-    private final UserModel userModel;
+    private UserModel userModel;
     private Register registerView;
-    private final LoginController loginController;
+    private LoginController loginController;
 
     public RegisterController(UserModel userModel, LoginController loginController) {
         this.userModel = userModel;
-        this.registerView = registerView;
         this.loginController = loginController;
-        registerView.setRegisterController(this);
     }
 
-    public void switchToLogin() {
-        registerView.setVisible(false);
-        loginController.switchToLogin();
-    }
-
-    // Metode setRegisterView
     public void setRegisterView(Register registerView) {
         this.registerView = registerView;
     }
 
-    public void processRegister(String role, String username, String telepon, String password, String confirmPassword) {
-        // Tambahkan validasi atau logika registrasi sesuai kebutuhan
-        // ...
-
-        // Contoh penambahan user ke dalam UserModel
-        userModel.addUser(new User(role, username, telepon, password));
-
-        // Setelah registrasi, kembali ke halaman login
-        switchToLogin();
+    public void switchToLogin() {
+        if (registerView != null) {
+            registerView.setVisible(false);
+            loginController.getLoginView().setVisible(true);
+        } else {
+            System.err.println("RegisterView is null. Make sure it is set before calling switchToLogin.");
+        }
     }
 
-    
+    public void processRegister(String role, String username, String telepon, String password, String confirmPassword) {
+        if (password.equals(confirmPassword)) {
+            User newUser = new User(role, username, telepon, password);
+            userModel.addUser(newUser);
+            System.out.println("Register Berhasil!");
+            switchToLogin();
+        } else {
+            System.out.println("Password tidak sesuai dengan konfirmasi!");
+        }
+    }
 }

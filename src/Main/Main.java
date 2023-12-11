@@ -5,10 +5,12 @@
 package Main;
 
 import Controller.LoginController;
-import Model.User;
 import Model.UserModel;
 import Util.FileHandler;
 import View.Login;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -16,7 +18,7 @@ import View.Login;
  */
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         // Membuat file jika belum ada
         FileHandler.createFile();
 
@@ -35,11 +37,15 @@ public class Main {
         java.awt.EventQueue.invokeLater(() -> {
             loginController.getLoginView().setVisible(true);
         });
-        
+
         final UserModel finalUserModel = userModel;
         // Menyimpan data ke file JSON saat aplikasi ditutup
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            FileHandler.writeData(finalUserModel);
+            try {
+                FileHandler.writeData(finalUserModel);
+            } catch (IOException ex) {
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }));
     }
 }

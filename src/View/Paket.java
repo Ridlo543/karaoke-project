@@ -2,12 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package pbo_project1;
+package View;
 
 /**
  *
  * @author LENOVO
  */
+import Controller.PaketController;
+import Model.PaketModel;
+import Model.Ruangan;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,62 +19,29 @@ import java.util.List;
 
 public class Paket extends javax.swing.JFrame {
 
-    private int hargaRuanganPerJam = 0;
-    private Ruangan ruangan;
-    private List<Ruangan> ruanganList;
+    private PaketModel paketModel;
+    private PaketController paketController;
 
-    public Paket() {
+    public Paket(PaketModel paketModel) {
         initComponents();
-        initCustomComponents();
-        initRuanganList();
+        this.paketModel = paketModel;
+        setPaketController(new PaketController(paketModel, this));
     }
 
-    private void initCustomComponents() {
-        jComboBoxDurasi.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                updateTotal();
-            }
-        });
-
-        jComboBoxRuangan.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                updateHargaRuangan();
-                updateTotal();
-            }
-        });
+    public void setPaketController(PaketController paketController) {
+        this.paketController = paketController;
     }
 
-    private void initRuanganList() {
-        // Inisialisasi ruanganList dengan daftar ruangan
-        ruanganList = new ArrayList<>();
-        ruanganList.add(new Ruangan("Small", 5, 50000));
-        ruanganList.add(new Ruangan("Medium", 8, 60000));
-        ruanganList.add(new Ruangan("Large", 10, 80000));
-        ruanganList.add(new Ruangan("Deluxe", 14, 100000));
-        ruanganList.add(new Ruangan("VVIP", 14, 200000));
+    public javax.swing.JComboBox<String> getjComboBoxDurasi() {
+        return jComboBoxDurasi;
     }
 
-    private void updateHargaRuangan() {
-        String ruanganSelected = jComboBoxRuangan.getSelectedItem().toString();
-
-        // Pindahkan logika ini ke Ruangan class untuk kejelasan
-        for (Ruangan ruangan : ruanganList) {
-            if (ruanganSelected.contains(ruangan.getNama())) {
-                this.ruangan = ruangan;
-                hargaRuanganPerJam = ruangan.getHargaPerJam();
-                break;
-            }
-        }
+    public javax.swing.JComboBox<String> getjComboBoxRuangan() {
+        return jComboBoxRuangan;
     }
 
-    private void updateTotal() {
-        String durasiSelected = jComboBoxDurasi.getSelectedItem().toString();
-
-        int durasi = Integer.parseInt(durasiSelected.split(" ")[0]);
-        int totalHarga = durasi * hargaRuanganPerJam;
-        jLabelTotal.setText("Total: " + totalHarga);
+    public javax.swing.JLabel getjLabelTotal() {
+        return jLabelTotal;
     }
 
     /**
@@ -118,7 +88,6 @@ public class Paket extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1080, 608));
 
         jComboBoxDurasi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 jam", "2 jam ", "3 jam ", "4 jam" }));
 
@@ -199,41 +168,18 @@ public class Paket extends javax.swing.JFrame {
         // Make the MediaPlayer frame visible
         mediaPlayerFrame.setVisible(true);
     }//GEN-LAST:event_jButtonNextActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Paket.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Paket.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Paket.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Paket.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Paket().setVisible(true);
+                // Buat objek PaketModel dan inisialisasi sesuai kebutuhan
+                PaketModel paketModel = new PaketModel();
+
+                // Buat objek Paket dan kirimkan objek PaketModel
+                new Paket(paketModel).setVisible(true);
             }
         });
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonNext;

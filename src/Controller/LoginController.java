@@ -4,9 +4,11 @@
  */
 package Controller;
 
+import Model.PaketModel;
 import Model.User;
 import Model.UserModel;
 import View.Login;
+import View.Paket;
 import View.Register;
 
 /**
@@ -15,16 +17,15 @@ import View.Register;
  */
 public class LoginController {
 
-    private final UserModel userModel;
+    private UserModel userModel;
     private Login loginView;
     private Register registerView;
 
     public LoginController(UserModel userModel, Login loginView) {
         this.userModel = userModel;
         this.loginView = loginView;
-        this.registerView = registerView;
+        this.registerView = new Register(userModel, new RegisterController(userModel, this));
         loginView.setLoginController(this);
-        registerView.setRegisterController(new RegisterController(userModel, this));
     }
 
     public void switchToRegister() {
@@ -32,20 +33,18 @@ public class LoginController {
         registerView.setVisible(true);
     }
 
-    public void switchToLogin() {
-        registerView.setVisible(false);
-        loginView.setVisible(true);
-    }
-
-    public void processLogin(String role, String username, String password) {
+    public boolean processLogin(String role, String username, String password) {
         // Verifikasi login
         User user = findUser(role, username, password);
+
         if (user != null) {
             // Implementasi logika setelah login berhasil
             System.out.println("Login Berhasil!");
+            return true;
         } else {
             // Implementasi logika setelah login gagal
             System.out.println("Login Gagal!");
+            return false;
         }
     }
 
@@ -63,6 +62,24 @@ public class LoginController {
     // Metode untuk mendapatkan tampilan login
     public Login getLoginView() {
         return loginView;
+    }
+
+    public void switchToPaket() {
+        // Membuat objek Paket
+        PaketModel paketModel = new PaketModel();
+        Paket paketView = new Paket(paketModel);
+// cannot find symbol variable paketModel
+        // Membuat objek PaketController dan menghubungkannya dengan PaketModel
+        PaketController paketController = new PaketController(paketModel, paketView);
+        paketView.setPaketController(paketController);
+
+        // Menampilkan frame Paket
+        java.awt.EventQueue.invokeLater(() -> {
+            paketView.setVisible(true);
+        });
+
+        // Menyembunyikan frame login
+        loginView.setVisible(false);
     }
 
 }

@@ -2,9 +2,14 @@ package Controller;
 
 import Model.PaketModel;
 import Model.Ruangan;
+import Model.TransaksiModel;
+import Util.FileHandler;
 import View.MediaPlayer;
 import View.Paket;
-import javax.swing.JFrame;
+import View.Transaksi;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Date;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -18,10 +23,12 @@ public class PaketController {
 
     private final PaketModel paketModel;
     private final Paket paketView;
+    private TransaksiModel transaksiModel;
 
-    public PaketController(PaketModel paketModel, Paket paketView) {
+    public PaketController(PaketModel paketModel, Paket paketView, TransaksiModel transaksiModel) {
         this.paketModel = paketModel;
         this.paketView = paketView;
+        this.transaksiModel = transaksiModel;
         initController();
     }
 
@@ -47,6 +54,13 @@ public class PaketController {
 
         // Menampilkan total harga pada JLabel
         paketView.getjLabelTotal().setText("Total: " + totalHarga);
+
+        // Pemeriksaan null sebelum memanggil metode pada objek transaksiModel
+        if (transaksiModel != null) {
+            transaksiModel.setTotalHarga(totalHarga);
+        }
+        // Menyimpan total harga ke dalam model transaksi
+        transaksiModel.setTotalHarga(totalHarga);
     }
 
     private int getHargaRuangan(String ruanganSelected) {
@@ -71,8 +85,39 @@ public class PaketController {
         mediaPlayerFrame.setVisible(true);
     }
 
+    public void switchToTransaksi(Date tanggalTransaksi, String username, int durasi, int totalHarga) {
+        // Menyimpan data transaksi ke dalam model
+        transaksiModel.setTanggalTransaksi(tanggalTransaksi);
+        transaksiModel.setUsername(username);
+        transaksiModel.setDurasi(durasi);
+        transaksiModel.setTotalHarga(totalHarga);
+
+        // Menyimpan model transaksi ke dalam file JSON
+        try {
+            FileHandler.createTransaksiFile();
+            FileHandler.writeTransaksi(transaksiModel);
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Handle exception, misalnya dengan menampilkan pesan error
+        }
+
+        // Menampilkan halaman transaksi
+        Transaksi transaksiFrame = new Transaksi(transaksiModel);
+        paketView.setVisible(false);
+        paketView.dispose();
+        transaksiFrame.setVisible(true);
+    }
+
     public void setWelcomeLabel(String username) {
         // Menampilkan selamat datang dengan nama pengguna pada JLabel
         paketView.getjLabelWelcome().setText("Selamat Datang, " + username);
+    }
+
+    public void setTransaksiModel(TransaksiModel transaksiModel) {
+        this.transaksiModel = transaksiModel;
+    }
+
+    public TransaksiModel getTransaksiModel() {
+        return transaksiModel;
     }
 }

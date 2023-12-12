@@ -14,6 +14,7 @@ import View.Register;
  * @author LENOVO
  */
 public class RegisterController {
+
     private UserModel userModel;
     private Register registerView;
     private LoginController loginController;
@@ -37,13 +38,17 @@ public class RegisterController {
     }
 
     public void processRegister(String role, String username, String telepon, String password, String confirmPassword) {
-        if (password.equals(confirmPassword)) {
-            User newUser = new User(role, username, telepon, password);
-            userModel.addUser(newUser);
-            System.out.println("Register Berhasil!");
-            switchToLogin();
-        } else {
-            System.out.println("Password tidak sesuai dengan konfirmasi!");
+        try {
+            if (password.equals(confirmPassword)) {
+                User newUser = new User(role, username, telepon, password);
+                userModel.addUser(newUser);
+                System.out.println("Register Berhasil!");
+                switchToLogin();
+            } else {
+                System.out.println("Password tidak sesuai dengan konfirmasi!");
+            }
+        } catch (Exception e) {
+            System.err.println("Error: " + e.getMessage());
         }
     }
 }

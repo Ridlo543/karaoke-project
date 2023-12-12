@@ -5,6 +5,7 @@
 package Controller;
 
 import Model.PaketModel;
+import Model.TransaksiModel;
 import Model.User;
 import Model.UserModel;
 import View.Login;
@@ -67,12 +68,13 @@ public class LoginController {
     public void switchToPaket(String username) {
         // Membuat objek PaketModel
         PaketModel paketModel = new PaketModel();
+        TransaksiModel transaksiModel = new TransaksiModel();
 
         // Membuat objek Paket
-        Paket paketView = new Paket(paketModel, username);
+        Paket paketView = new Paket(paketModel, username, transaksiModel);
 
         // Membuat objek PaketController dan menghubungkannya dengan PaketModel
-        PaketController paketController = new PaketController(paketModel, paketView);
+        PaketController paketController = new PaketController(paketModel, paketView, transaksiModel);
         paketView.setPaketController(paketController);
 
         // Menampilkan frame Paket

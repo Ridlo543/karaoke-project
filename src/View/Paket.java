@@ -1,34 +1,28 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package View;
 
-/**
- *
- * @author LENOVO
- */
 import Controller.PaketController;
 import Model.PaketModel;
-import Model.Ruangan;
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
+import Model.TransaksiModel;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
 
 public class Paket extends javax.swing.JFrame {
 
     // Variabel username sebagai atribut kelas
     private String username;
     private PaketModel paketModel;
+    private TransaksiModel transaksiModel; // Tambahkan atribut TransaksiModel
     private PaketController paketController;
 
-    public Paket(PaketModel paketModel, String username) {
+    // Ubah konstruktor untuk menerima TransaksiModel
+    public Paket(PaketModel paketModel, String username, TransaksiModel transaksiModel) {
         initComponents();
         this.paketModel = paketModel;
-        this.username = username; 
-        setPaketController(new PaketController(paketModel, this));
+        this.username = username;
+        this.transaksiModel = transaksiModel; // Inisialisasi atribut TransaksiModel
+        setPaketController(new PaketController(paketModel, this, transaksiModel)); // Teruskan TransaksiModel ke PaketController
         paketController.setWelcomeLabel(username);
     }
 
@@ -159,8 +153,17 @@ public class Paket extends javax.swing.JFrame {
         String durasiSelected = jComboBoxDurasi.getSelectedItem().toString();
         int durasi = Integer.parseInt(durasiSelected.split(" ")[0]);
 
-        // Memanggil metode switchToMediaPlayer pada PaketController
-        paketController.switchToMediaPlayer(username, durasi);
+        // Mendapatkan tanggal hari ini
+        Date tanggalTransaksi = Calendar.getInstance().getTime();
+        
+        // Mendapatkan username dari atribut kelas
+        String username = this.username;
+
+        // Mendapatkan total harga dari model transaksi
+        int totalHarga = paketController.getTransaksiModel().getTotalHarga();
+
+        // Memanggil metode switchToTransaksi pada PaketController
+        paketController.switchToTransaksi(tanggalTransaksi, username, durasi, totalHarga);
     }//GEN-LAST:event_jButtonNextActionPerformed
 
     public static void main(String args[]) {
@@ -169,8 +172,11 @@ public class Paket extends javax.swing.JFrame {
                 // Buat objek PaketModel dan inisialisasi sesuai kebutuhan
                 PaketModel paketModel = new PaketModel();
 
-                // Buat objek Paket dan kirimkan objek PaketModel serta nama pengguna
-                new Paket(paketModel, "NamaPengguna").setVisible(true);
+                // Buat objek TransaksiModel
+                TransaksiModel transaksiModel = new TransaksiModel();
+
+                // Buat objek Paket dan kirimkan objek PaketModel, nama pengguna, dan objek TransaksiModel
+                new Paket(paketModel, "NamaPengguna", transaksiModel).setVisible(true);
             }
         });
     }

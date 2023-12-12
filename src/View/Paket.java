@@ -162,8 +162,9 @@ public class Paket extends javax.swing.JFrame {
         // Mendapatkan total harga dari model transaksi
         int totalHarga = paketController.getTransaksiModel().getTotalHarga();
 
+        paketController.saveTransaksi(tanggalTransaksi, username, durasi, totalHarga);
         // Memanggil metode switchToTransaksi pada PaketController
-        paketController.switchToTransaksi(tanggalTransaksi, username, durasi, totalHarga);
+        paketController.switchToTransaksi();
     }//GEN-LAST:event_jButtonNextActionPerformed
 
     public static void main(String args[]) {

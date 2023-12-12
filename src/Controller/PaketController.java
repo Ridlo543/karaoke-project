@@ -8,7 +8,6 @@ import View.MediaPlayer;
 import View.Paket;
 import View.Transaksi;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.Date;
 
 /*
@@ -52,15 +51,13 @@ public class PaketController {
         // Menghitung total harga
         int totalHarga = durasi * hargaRuanganPerJam;
 
-        // Menampilkan total harga pada JLabel
-        paketView.getjLabelTotal().setText("Total: " + totalHarga);
-
         // Pemeriksaan null sebelum memanggil metode pada objek transaksiModel
         if (transaksiModel != null) {
             transaksiModel.setTotalHarga(totalHarga);
         }
-        // Menyimpan total harga ke dalam model transaksi
-        transaksiModel.setTotalHarga(totalHarga);
+
+        // Menampilkan total harga pada JLabel
+        paketView.getjLabelTotal().setText("Total: " + totalHarga);
     }
 
     private int getHargaRuangan(String ruanganSelected) {
@@ -85,7 +82,7 @@ public class PaketController {
         mediaPlayerFrame.setVisible(true);
     }
 
-    public void switchToTransaksi(Date tanggalTransaksi, String username, int durasi, int totalHarga) {
+    public void saveTransaksi(Date tanggalTransaksi, String username, int durasi, int totalHarga) {
         // Menyimpan data transaksi ke dalam model
         transaksiModel.setTanggalTransaksi(tanggalTransaksi);
         transaksiModel.setUsername(username);
@@ -100,6 +97,9 @@ public class PaketController {
             e.printStackTrace();
             // Handle exception, misalnya dengan menampilkan pesan error
         }
+    }
+
+    public void switchToTransaksi() {
 
         // Menampilkan halaman transaksi
         Transaksi transaksiFrame = new Transaksi(transaksiModel);

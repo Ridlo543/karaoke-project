@@ -25,7 +25,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import Model.Song;
 import Model.SongDAO;
 import View.MediaPlayer;
-import View.MusicPlayer;
 
 public class MusicController{
 

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package libraries;
+package View;
 
 import com.mpatric.mp3agic.ID3v1;
 import com.mpatric.mp3agic.ID3v2;
@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
 import Model.Song;
-import View.UserInterface;
+import View.MediaPlayer;
 
 /**
  *
@@ -70,11 +70,11 @@ public class MusicPlayer {
                 try {
                     player.play();
                     
-                    if(player.isComplete() && UserInterface.count == 1){
+                    if(player.isComplete() && MediaPlayer.count == 1){
                         Play(fileLocation);
                     }
                     if(player.isComplete()){
-                        UserInterface.Display="";
+                        MediaPlayer.Display="";
                     }
                 } catch (JavaLayerException ex) {
                     

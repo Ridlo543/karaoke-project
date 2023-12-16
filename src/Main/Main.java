@@ -32,7 +32,7 @@ public class Main {
         // Membuat objek LoginController dan Login
         Login loginView = new Login(userModel, null);
         LoginController loginController = new LoginController(userModel, loginView);
-        loginView.setLoginController(loginController); // Setelah itu, inisialisasi objek Login
+        loginView.setLoginController(loginController);
 
         // Menampilkan halaman login
         java.awt.EventQueue.invokeLater(() -> {

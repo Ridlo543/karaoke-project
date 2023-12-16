@@ -14,7 +14,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import libraries.Conexion;
+import Util.Conexion;
 import Model.Song;
 
 /**
@@ -75,12 +75,12 @@ public class SongDAO {
 //----------------------------------------------------------- falta arreglar esto
         try {
             if(readConexion!=null){
-                System.out.println("dentro de songDAO, getsongs.. existe cancionesss");
+                System.out.println("di songDAO, mendapatkan lagu.. terdapat lagu");
                 songs = (List<Song>) readConexion.readObject();
                 conn.closeReadConexion(readConexion);
                return songs;
             }else{
-                System.out.println("dentro de songDAO, getsongs. devolvio nulo");
+                System.out.println("di songDAO, mendapatkan lagu... tidak ada lagu");
                 return null;
             }
             

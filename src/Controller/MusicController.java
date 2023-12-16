@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package libraries;
+package Controller;
 
 
 import java.io.File;
@@ -30,7 +30,8 @@ import javax.swing.JProgressBar;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import Model.Song;
 import Model.SongDAO;
-import View.UserInterface;
+import View.MediaPlayer;
+import View.MusicPlayer;
 
 /**
  *
@@ -38,7 +39,7 @@ import View.UserInterface;
  */
 
 
-public class FrontController{
+public class MusicController{
     
     private MusicPlayer musicPlayer;
     private List<Song> songList;
@@ -68,7 +69,7 @@ public class FrontController{
     
     private SongDAO songDAO;
             
-    public FrontController(){
+    public MusicController(){
            songDAO = new SongDAO();
            musicPlayer = new MusicPlayer();
            songList = new LinkedList<>();
@@ -127,7 +128,7 @@ public class FrontController{
             
             pauseDynamicDetails();
         } catch (IOException ex) {
-            Logger.getLogger(FrontController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MusicController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -277,7 +278,7 @@ public class FrontController{
                     timeRem--;
                     progressBar++;
 
-                    FrontController.jprogressBar.setValue(progressBar);
+                    MusicController.jprogressBar.setValue(progressBar);
 
                     setTimeLabel(timeTrans, labelTimeElapsed);
 
@@ -289,7 +290,7 @@ public class FrontController{
 
         int musicLength = (int) songList.get(currentMusicPlaying).getLengthInSeconds();
         
-        FrontController.jprogressBar.setMaximum(musicLength);
+        MusicController.jprogressBar.setMaximum(musicLength);
             
         int lapse=0;
 
@@ -337,10 +338,10 @@ public class FrontController{
     public void setDetail(int selectedIndex){
         currentMusicPlaying=selectedIndex;
         Song music=songList.get(currentMusicPlaying);
-        FrontController.labelDetail.setText(music.getSummary());
-        FrontController.labelMusicTitle.setText(music.getTitle());
-        FrontController.jlistPanel.setSelectedIndex(currentMusicPlaying);
-        FrontController.jprogressBar.setValue(0);
+        MusicController.labelDetail.setText(music.getSummary());
+        MusicController.labelMusicTitle.setText(music.getTitle());
+        MusicController.jlistPanel.setSelectedIndex(currentMusicPlaying);
+        MusicController.jprogressBar.setValue(0);
         ImageIcon imageIcon=null;
         if(music.getImageData()!=null){
             imageIcon = new ImageIcon(new ImageIcon(music.getImageData()).getImage().getScaledInstance(257, 207, java.awt.Image.SCALE_DEFAULT));
@@ -370,10 +371,10 @@ public class FrontController{
             @Override
             public void run() {
                 if(isFinishedPlaying){
-                    if(UserInterface.random){
+                    if(MediaPlayer.random){
                         playRandom();
                     }
-                    if(UserInterface.repeat){
+                    if(MediaPlayer.repeat){
                         play(currentMusicPlaying);
                     }
                     else{

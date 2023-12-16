@@ -4,7 +4,7 @@ import Model.PaketModel;
 import Model.Ruangan;
 import Model.TransaksiModel;
 import Util.FileHandler;
-import View.MediaPlayer;
+import View.MediaPlayer2;
 import View.Paket;
 import View.Transaksi;
 import java.io.IOException;
@@ -72,7 +72,7 @@ public class PaketController {
 
     public void switchToMediaPlayer(String username, int durasi) {
         // Implementasi untuk pindah ke halaman MediaPlayer
-        MediaPlayer mediaPlayerFrame = new MediaPlayer(username, durasi);
+        MediaPlayer2 mediaPlayerFrame = new MediaPlayer2(username, durasi);
 
         // Menyembunyikan frame Paket
         paketView.setVisible(false);

@@ -15,7 +15,6 @@ import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
 import Model.Song;
 import View.MediaPlayer;
-import View.MediaPlayer;
 
 public class MusicPlayer {
 

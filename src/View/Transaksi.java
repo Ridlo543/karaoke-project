@@ -25,10 +25,10 @@ public class Transaksi extends javax.swing.JFrame {
 
     private void displayData() {
         // Menampilkan data transaksi pada label-label yang sesuai
-        jLabelTanggal.setText("Tanggal Transaksi: " + transaksiModel.getTanggalTransaksi());
-        jLabelUsername.setText("Username: " + transaksiModel.getUsername());
-        jLabelDurasi.setText("Durasi: " + transaksiModel.getDurasi() + " jam");
-        jLabelTotalHarga.setText("Total Harga: " + transaksiModel.getTotalHarga());
+//        jLabelTanggal.setText("Tanggal Transaksi: " + transaksiModel.getTanggalTransaksi());
+//        jLabelUsername.setText("Username: " + transaksiModel.getUsername());
+//        jLabelDurasi.setText("Durasi: " + transaksiModel.getDurasi() + " jam");
+//        jLabelTotalHarga.setText("Total Harga: " + transaksiModel.getTotalHarga());
     }
 
     /**

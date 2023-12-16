@@ -12,10 +12,6 @@ import View.Login;
 import View.Paket;
 import View.Register;
 
-/**
- *
- * @author LENOVO
- */
 public class LoginController {
 
     private UserModel userModel;

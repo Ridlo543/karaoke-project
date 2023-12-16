@@ -1,4 +1,3 @@
-
 package View;
 
 import java.awt.Image;
@@ -11,7 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import Controller.MusicController;
-
+import Controller.PaketController;
 
 public class MediaPlayer extends javax.swing.JFrame {
 
@@ -19,43 +18,48 @@ public class MediaPlayer extends javax.swing.JFrame {
     public static String Display;
     public static boolean random;
     public static boolean repeat;
-    
+
     public String playImageEntered;
     public String playImageExited;
     public String randomImageEntered;
     public String randomImageExited;
     public String repeatImageEntered;
     public String repeatImageExited;
-    
+
+    private PaketController paketController;
+
     public String playState;
+
     /**
      * Creates new form UserInterface
      */
-    public MediaPlayer() {
-        //start variables
+    public MediaPlayer(String username, int timeRemaining, PaketController paketController ) {
         initComponents();
         this.setLocationRelativeTo(null);
-        MusicController.jlistPanel=jList1;
+        MusicController.jlistPanel = jList1;
+
+        this.paketController = paketController;
         controller = new MusicController();
-        random=false;
+        random = false;
         repeat = false;
         playState = "";
-        playImageEntered="images/play_h.png";
-        playImageExited="images/play.png";
+        playImageEntered = "images/play_h.png";
+        playImageExited = "images/play.png";
         randomImageEntered = "images/random_h.png";
         randomImageExited = "images/random.png";
         repeatImageEntered = "images/repeat_h.png";
         repeatImageExited = "images/repeat.png";
-       
-        MusicController.labelDetail=labelDetail;
-        MusicController.labelMusicTitle=labelMusicTitle;
-        MusicController.labelTimeElapsed=labelTimeElapsed;
-        MusicController.labelTimeRemaining=labelTimeRemaining;
-        MusicController.lebelImageAlbum=lebelImageAlbum;
-        MusicController.jprogressBar=jProgressBar1;
-        
-        
-        
+
+        MusicController.labelDetail = labelDetail;
+        MusicController.labelMusicTitle = labelMusicTitle;
+        MusicController.labelTimeElapsed = labelTimeElapsed;
+        MusicController.labelTimeRemaining = labelTimeRemaining;
+        MusicController.lebelImageAlbum = lebelImageAlbum;
+        MusicController.jprogressBar = jProgressBar1;
+
+        // Update labels with provided values
+        jLabelWelcome.setText("Welcome, " + username);
+        jLabelTimeRemaining.setText("Time Remaining: " + timeRemaining + " hours");
     }
 
     /**
@@ -69,13 +73,13 @@ public class MediaPlayer extends javax.swing.JFrame {
 
         kGradientPanel1 = new keeptoo.KGradientPanel();
         jPanel1 = new javax.swing.JPanel();
-        btnClose = new javax.swing.JButton();
-        btnMinimize = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextPane1 = new javax.swing.JTextPane();
         jPanel3 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jProgressBar1 = new javax.swing.JProgressBar();
@@ -97,55 +101,30 @@ public class MediaPlayer extends javax.swing.JFrame {
         btnUpload = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         btnDeleteAll = new javax.swing.JButton();
+        jButtonLeave = new javax.swing.JButton();
+        jPanel11 = new javax.swing.JPanel();
+        jLabelWelcome = new javax.swing.JLabel();
+        jLabelTimeRemaining = new javax.swing.JLabel();
+        jButtonAddDuration = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
         setResizable(false);
 
         kGradientPanel1.setkEndColor(new java.awt.Color(42, 41, 76));
         kGradientPanel1.setkStartColor(new java.awt.Color(189, 110, 111));
+        kGradientPanel1.setPreferredSize(new java.awt.Dimension(1080, 610));
 
         jPanel1.setOpaque(false);
-
-        btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/close.png"))); // NOI18N
-        btnClose.setBorderPainted(false);
-        btnClose.setContentAreaFilled(false);
-        btnClose.setFocusPainted(false);
-        btnClose.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                closeClick(evt);
-            }
-        });
-
-        btnMinimize.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/minimize.png"))); // NOI18N
-        btnMinimize.setBorderPainted(false);
-        btnMinimize.setContentAreaFilled(false);
-        btnMinimize.setFocusPainted(false);
-        btnMinimize.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                minimizeClick(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnMinimize, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(13, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnMinimize, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+            .addGap(0, 42, Short.MAX_VALUE)
         );
 
         jPanel2.setOpaque(false);
@@ -165,23 +144,32 @@ public class MediaPlayer extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jList1);
 
+        jScrollPane2.setViewportView(jTextPane1);
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
-                .addContainerGap())
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(112, 112, 112)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(112, 112, 112)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(jScrollPane2)))
+                .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap(161, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -255,12 +243,12 @@ public class MediaPlayer extends javax.swing.JFrame {
                     .addComponent(labelDetail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addComponent(labelMusicTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 34, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(50, 50, 50)
                 .addComponent(lebelImageAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -279,7 +267,7 @@ public class MediaPlayer extends javax.swing.JFrame {
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 374, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -312,14 +300,6 @@ public class MediaPlayer extends javax.swing.JFrame {
         btnRandom.setBorderPainted(false);
         btnRandom.setContentAreaFilled(false);
         btnRandom.setFocusPainted(false);
-        btnRandom.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                EnteredRandom(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                exitedRandom(evt);
-            }
-        });
         btnRandom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 randomClicked(evt);
@@ -330,14 +310,6 @@ public class MediaPlayer extends javax.swing.JFrame {
         btnPrevious.setBorderPainted(false);
         btnPrevious.setContentAreaFilled(false);
         btnPrevious.setFocusPainted(false);
-        btnPrevious.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                enteredPrevious(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                exitedPrevious(evt);
-            }
-        });
         btnPrevious.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 previousClicked(evt);
@@ -348,14 +320,6 @@ public class MediaPlayer extends javax.swing.JFrame {
         btnPlay.setBorderPainted(false);
         btnPlay.setContentAreaFilled(false);
         btnPlay.setFocusPainted(false);
-        btnPlay.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                enteredPlay(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                exitedPlay(evt);
-            }
-        });
         btnPlay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 playClicked(evt);
@@ -366,14 +330,6 @@ public class MediaPlayer extends javax.swing.JFrame {
         btnNext.setBorderPainted(false);
         btnNext.setContentAreaFilled(false);
         btnNext.setFocusPainted(false);
-        btnNext.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                enteredNext(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                exitedNext(evt);
-            }
-        });
         btnNext.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nextClicked(evt);
@@ -384,14 +340,6 @@ public class MediaPlayer extends javax.swing.JFrame {
         btnRepeat.setBorderPainted(false);
         btnRepeat.setContentAreaFilled(false);
         btnRepeat.setFocusPainted(false);
-        btnRepeat.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                enteredRepeat(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                exitedRepeat(evt);
-            }
-        });
         btnRepeat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 repeatClicked(evt);
@@ -418,7 +366,7 @@ public class MediaPlayer extends javax.swing.JFrame {
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap(19, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -435,32 +383,23 @@ public class MediaPlayer extends javax.swing.JFrame {
 
         jPanel6.setOpaque(false);
 
-        btnUpload.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/upload.png"))); // NOI18N
+        btnUpload.setForeground(new java.awt.Color(204, 255, 204));
+        btnUpload.setText("add music");
         btnUpload.setBorderPainted(false);
         btnUpload.setContentAreaFilled(false);
         btnUpload.setFocusPainted(false);
-        btnUpload.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                enteredUpload(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                exitedUpload(evt);
-            }
-        });
         btnUpload.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 uploadClicked(evt);
             }
         });
 
-        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/delete.png"))); // NOI18N
+        btnDelete.setForeground(new java.awt.Color(204, 255, 204));
+        btnDelete.setText("delete music");
         btnDelete.setBorderPainted(false);
         btnDelete.setContentAreaFilled(false);
         btnDelete.setFocusPainted(false);
         btnDelete.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                enteredDelete(evt);
-            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 exitedDelete(evt);
             }
@@ -471,18 +410,11 @@ public class MediaPlayer extends javax.swing.JFrame {
             }
         });
 
-        btnDeleteAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/delete-all.png"))); // NOI18N
+        btnDeleteAll.setForeground(new java.awt.Color(204, 255, 204));
+        btnDeleteAll.setText("remove all playlist");
         btnDeleteAll.setBorderPainted(false);
         btnDeleteAll.setContentAreaFilled(false);
         btnDeleteAll.setFocusPainted(false);
-        btnDeleteAll.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                exitedDeleteAll(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                enteredDeleteAll(evt);
-            }
-        });
         btnDeleteAll.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteAllClicked(evt);
@@ -493,69 +425,143 @@ public class MediaPlayer extends javax.swing.JFrame {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
-                .addComponent(btnUpload, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnDeleteAll, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23))
+                .addComponent(btnUpload)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
+                .addComponent(btnDeleteAll, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnDeleteAll, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnDeleteAll, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnUpload, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGap(35, 35, 35))
         );
+
+        jButtonLeave.setText("Leave");
+        jButtonLeave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLeaveActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addGap(413, 413, 413)
+                        .addComponent(jButtonLeave)))
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(28, 28, 28))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(0, 26, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(58, 58, 58))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonLeave)
+                        .addContainerGap())))
         );
+
+        jPanel11.setOpaque(false);
+
+        jLabelWelcome.setText("Selamat Datang, ");
+
+        jLabelTimeRemaining.setText("Time Remaining: ");
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelWelcome)
+                    .addComponent(jLabelTimeRemaining))
+                .addContainerGap(238, Short.MAX_VALUE))
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelWelcome)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelTimeRemaining)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jButtonAddDuration.setText("Add Duration");
+        jButtonAddDuration.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddDurationActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout kGradientPanel1Layout = new javax.swing.GroupLayout(kGradientPanel1);
         kGradientPanel1.setLayout(kGradientPanel1Layout);
         kGradientPanel1Layout.setHorizontalGroup(
             kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
+                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 234, Short.MAX_VALUE)))
+                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
+                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jButtonAddDuration, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(16, 16, 16))))
             .addGroup(kGradientPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         kGradientPanel1Layout.setVerticalGroup(
             kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonAddDuration, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(23, 23, 23))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(21, 21, 21)))
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -572,8 +578,7 @@ public class MediaPlayer extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-     //=====================================================================================================  hovers
-    
+    //=====================================================================================================  hovers
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -603,73 +608,13 @@ public class MediaPlayer extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new MediaPlayer().setVisible(true);
+                // Provide the username and timeRemaining when creating an instance
+//                new MediaPlayer("UsernameFromPaket", 10, ).setVisible(true);
             }
         });
     }
-    
-    private void EnteredRandom(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EnteredRandom
-        changeImage(randomImageEntered, btnRandom);
-    }//GEN-LAST:event_EnteredRandom
 
-    private void exitedRandom(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitedRandom
-        changeImage(randomImageExited, btnRandom);
-    }//GEN-LAST:event_exitedRandom
-
-    private void enteredPrevious(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_enteredPrevious
-        changeImage("images/previous_h.png", btnPrevious);
-    }//GEN-LAST:event_enteredPrevious
-
-    private void exitedPrevious(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitedPrevious
-         changeImage("images/previous.png", btnPrevious);
-    }//GEN-LAST:event_exitedPrevious
-
-    private void enteredPlay(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_enteredPlay
-        changeImage(playImageEntered, btnPlay);
-    }//GEN-LAST:event_enteredPlay
-
-    private void enteredNext(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_enteredNext
-        changeImage("images/next_h.png", btnNext);
-    }//GEN-LAST:event_enteredNext
-
-    private void exitedNext(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitedNext
-        changeImage("images/next.png", btnNext);
-    }//GEN-LAST:event_exitedNext
-
-    private void enteredRepeat(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_enteredRepeat
-        changeImage(repeatImageEntered, btnRepeat);
-    }//GEN-LAST:event_enteredRepeat
-
-    private void exitedRepeat(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitedRepeat
-        changeImage(repeatImageExited, btnRepeat);
-    }//GEN-LAST:event_exitedRepeat
-
-    private void enteredUpload(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_enteredUpload
-        changeImage("images/upload_h.png", btnUpload);
-    }//GEN-LAST:event_enteredUpload
-
-    private void exitedUpload(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitedUpload
-        changeImage("images/upload.png", btnUpload);
-    }//GEN-LAST:event_exitedUpload
-
-    private void enteredDelete(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_enteredDelete
-        changeImage("images/delete_h.png", btnDelete);
-    }//GEN-LAST:event_enteredDelete
-
-    private void exitedDelete(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitedDelete
-        changeImage("images/delete.png", btnDelete);
-    }//GEN-LAST:event_exitedDelete
-
-    private void exitedDeleteAll(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitedDeleteAll
-        changeImage("images/delete-all_h.png", btnDeleteAll);
-    }//GEN-LAST:event_exitedDeleteAll
-
-    private void enteredDeleteAll(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_enteredDeleteAll
-        changeImage("images/delete-all.png", btnDeleteAll);
-    }//GEN-LAST:event_enteredDeleteAll
-
-    
-    private void changeImage(String path, JButton button){
+    private void changeImage(String path, JButton button) {
         Image img = null;
         try {
             img = ImageIO.read(getClass().getResource(path));
@@ -679,34 +624,21 @@ public class MediaPlayer extends javax.swing.JFrame {
         button.setIcon(new ImageIcon(img));
     }
 //======================================================================================================END hovers
-    
-    
-    
-    
-    private void minimizeClick(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeClick
-        setExtendedState(JFrame.CROSSHAIR_CURSOR);
-    }//GEN-LAST:event_minimizeClick
 
-    private void closeClick(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeClick
-        controller.saveMusics();
-        this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
-    }//GEN-LAST:event_closeClick
-
-    
 ///////////////////////////////////////////////////////////////////////////////////////end close y minimize operations    
-    
+
     private void randomClicked(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_randomClicked
-        random = !random;
-        if(random){
-            randomImageEntered = "images/random.png";
-            randomImageExited =  "images/randomSelected.png";
-            changeImage(randomImageExited, btnRandom);
-        }
-        else{
-            randomImageEntered = "images/random_h.png";
-            randomImageExited = "images/random.png";
-            changeImage(randomImageExited, btnRandom);
-        }
+//        random = !random;
+//        if(random){
+//            randomImageEntered = "images/random.png";
+//            randomImageExited =  "images/randomSelected.png";
+//            changeImage(randomImageExited, btnRandom);
+//        }
+//        else{
+//            randomImageEntered = "images/random_h.png";
+//            randomImageExited = "images/random.png";
+//            changeImage(randomImageExited, btnRandom);
+//        }
         repeat = false;
     }//GEN-LAST:event_randomClicked
 
@@ -717,27 +649,27 @@ public class MediaPlayer extends javax.swing.JFrame {
     private void playClicked(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playClicked
 
         //switch can be used
-        if(playState.equals("PLAYING")){
-            playImageEntered="images/play_h.png";
-            playImageExited="images/play.png";
+        if (playState.equals("PLAYING")) {
+            playImageEntered = "images/play_h.png";
+            playImageExited = "images/play.png";
             changeImage(playImageExited, btnPlay);
             controller.pause();
             playState = "PAUSED";
             return;
         }
-        
-        if(playState.equals("SELECTED")){
-            playImageEntered="images/pause_h.png";
-            playImageExited="images/pause.png";
+
+        if (playState.equals("SELECTED")) {
+            playImageEntered = "images/pause_h.png";
+            playImageExited = "images/pause.png";
             changeImage(playImageExited, btnPlay);
             controller.play(selectedIndex);
             playState = "PLAYING";
             return;
         }
-        
-        if(playState.equals("PAUSED")){
-            playImageEntered="images/pause_h.png";
-            playImageExited="images/pause.png";
+
+        if (playState.equals("PAUSED")) {
+            playImageEntered = "images/pause_h.png";
+            playImageExited = "images/pause.png";
             changeImage(playImageExited, btnPlay);
             controller.resume();
             playState = "PLAYING";
@@ -751,12 +683,11 @@ public class MediaPlayer extends javax.swing.JFrame {
 
     private void repeatClicked(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_repeatClicked
         repeat = !repeat;
-        if(repeat){
+        if (repeat) {
             repeatImageEntered = "images/repeat.png";
-            repeatImageExited =  "images/repeatSelected.png";
+            repeatImageExited = "images/repeatSelected.png";
             changeImage(repeatImageExited, btnRepeat);
-        }
-        else{
+        } else {
             repeatImageEntered = "images/repeat_h.png";
             repeatImageExited = "images/repeat.png";
             changeImage(repeatImageExited, btnRepeat);
@@ -764,72 +695,88 @@ public class MediaPlayer extends javax.swing.JFrame {
         random = false;
     }//GEN-LAST:event_repeatClicked
 
-    private void uploadClicked(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadClicked
-        controller.addFiles(jList1);
-    }//GEN-LAST:event_uploadClicked
-
     private void deleteClicked(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteClicked
         controller.deleteMusic(jList1.getSelectedIndex());
-        playImageEntered="images/play_h.png";
-        playImageExited="images/play.png";
+        playImageEntered = "images/play_h.png";
+        playImageExited = "images/play.png";
         changeImage(playImageExited, btnPlay);
     }//GEN-LAST:event_deleteClicked
 
     private void deleteAllClicked(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteAllClicked
         controller.deleteAllMusics();
-        playImageEntered="images/play_h.png";
-        playImageExited="images/play.png";
+        playImageEntered = "images/play_h.png";
+        playImageExited = "images/play.png";
         changeImage(playImageExited, btnPlay);
     }//GEN-LAST:event_deleteAllClicked
 
     private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
-        if (evt.getClickCount() == 2){ 
-            
+        if (evt.getClickCount() == 2) {
+
             selectedIndex = jList1.getSelectedIndex();
-            
+
             controller.play(selectedIndex);
-            
-            playImageEntered="images/pause_h.png";
-            playImageExited="images/pause.png";
+
+            playImageEntered = "images/pause_h.png";
+            playImageExited = "images/pause.png";
             changeImage(playImageExited, btnPlay);
-            
+
             playState = "PLAYING";
- 
-        }else{
-            
+
+        } else {
+
             selectedIndex = jList1.getSelectedIndex();
-            
+
             controller.setDetail(selectedIndex);
-            
+
             playState = "SELECTED";
-            
+
         }
     }//GEN-LAST:event_jList1MouseClicked
 
-    private void exitedPlay(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitedPlay
-        changeImage(playImageExited, btnPlay);
-    }//GEN-LAST:event_exitedPlay
+    private void jButtonAddDurationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddDurationActionPerformed
+        // TODO add your handling code here:
+        // Tambahkan durasi
+//        duration += 1;
+
+        // Perbarui label
+//        jLabelTimeRemaining.setText("Time Remaining: " + duration + " jam");
+    }//GEN-LAST:event_jButtonAddDurationActionPerformed
+
+    private void jButtonLeaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLeaveActionPerformed
+        // TODO add your handling code here:
+        paketController.switchToTransaksi();
+    }//GEN-LAST:event_jButtonLeaveActionPerformed
+
+    private void uploadClicked(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadClicked
+        controller.addFiles(jList1);
+    }//GEN-LAST:event_uploadClicked
+
+    private void exitedDelete(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitedDelete
+        changeImage("images/delete.png", btnDelete);
+    }//GEN-LAST:event_exitedDelete
 
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnClose;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnDeleteAll;
-    private javax.swing.JButton btnMinimize;
     private javax.swing.JButton btnNext;
     private javax.swing.JButton btnPlay;
     private javax.swing.JButton btnPrevious;
     private javax.swing.JButton btnRandom;
     private javax.swing.JButton btnRepeat;
     private javax.swing.JButton btnUpload;
+    private javax.swing.JButton jButtonAddDuration;
+    private javax.swing.JButton jButtonLeave;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabelTimeRemaining;
+    private javax.swing.JLabel jLabelWelcome;
     private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -840,6 +787,8 @@ public class MediaPlayer extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextPane jTextPane1;
     private keeptoo.KGradientPanel kGradientPanel1;
     private javax.swing.JLabel labelDetail;
     private javax.swing.JLabel labelMusicTitle;
@@ -848,9 +797,8 @@ public class MediaPlayer extends javax.swing.JFrame {
     private javax.swing.JLabel lebelImageAlbum;
     // End of variables declaration//GEN-END:variables
 
-    
     //variables
     private int selectedIndex;
-    
+
     private MusicController controller;
 }

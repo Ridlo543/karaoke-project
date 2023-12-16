@@ -21,6 +21,7 @@ public class Paket extends javax.swing.JFrame {
         initComponents();
         this.paketModel = paketModel;
         this.username = username;
+
         this.transaksiModel = transaksiModel; // Inisialisasi atribut TransaksiModel
         setPaketController(new PaketController(paketModel, this, transaksiModel)); // Teruskan TransaksiModel ke PaketController
         paketController.setWelcomeLabel(username);
@@ -155,7 +156,7 @@ public class Paket extends javax.swing.JFrame {
 
         // Mendapatkan tanggal hari ini
         Date tanggalTransaksi = Calendar.getInstance().getTime();
-        
+
         // Mendapatkan username dari atribut kelas
         String username = this.username;
 
@@ -163,8 +164,8 @@ public class Paket extends javax.swing.JFrame {
         int totalHarga = paketController.getTransaksiModel().getTotalHarga();
 
         paketController.saveTransaksi(tanggalTransaksi, username, durasi, totalHarga);
-        // Memanggil metode switchToTransaksi pada PaketController
-        paketController.switchToTransaksi();
+        // Memanggil metode switchToMediaPlayer pada PaketController
+        paketController.switchToMediaPlayer(username, durasi);
     }//GEN-LAST:event_jButtonNextActionPerformed
 
     public static void main(String args[]) {

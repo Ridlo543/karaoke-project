@@ -4,7 +4,7 @@ import Model.PaketModel;
 import Model.Ruangan;
 import Model.TransaksiModel;
 import Util.FileHandler;
-import View.MediaPlayer2;
+import View.MediaPlayer;
 import View.Paket;
 import View.Transaksi;
 import java.io.IOException;
@@ -70,18 +70,6 @@ public class PaketController {
         return 0; // Mengembalikan 0 jika tidak ada harga yang ditemukan
     }
 
-    public void switchToMediaPlayer(String username, int durasi) {
-        // Implementasi untuk pindah ke halaman MediaPlayer
-        MediaPlayer2 mediaPlayerFrame = new MediaPlayer2(username, durasi);
-
-        // Menyembunyikan frame Paket
-        paketView.setVisible(false);
-        paketView.dispose();
-
-        // Menampilkan frame MediaPlayer
-        mediaPlayerFrame.setVisible(true);
-    }
-
     public void saveTransaksi(Date tanggalTransaksi, String username, int durasi, int totalHarga) {
         // Menyimpan data transaksi ke dalam model
         transaksiModel.setTanggalTransaksi(tanggalTransaksi);
@@ -106,6 +94,13 @@ public class PaketController {
         paketView.setVisible(false);
         paketView.dispose();
         transaksiFrame.setVisible(true);
+    }
+
+    public void switchToMediaPlayer(String username, int timeRemaining) {
+        MediaPlayer mediaPlayerFrame = new MediaPlayer(username, timeRemaining, this);
+        paketView.setVisible(false);
+        paketView.dispose();
+        mediaPlayerFrame.setVisible(true);
     }
 
     public void setWelcomeLabel(String username) {

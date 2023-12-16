@@ -11,8 +11,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import Controller.MusicController;
 import Controller.PaketController;
+import Model.TransaksiModel;
 
 public class MediaPlayer extends javax.swing.JFrame {
+    
+    private TransaksiModel transaksiModel;
 
     public static int count;
     public static String Display;
@@ -26,20 +29,19 @@ public class MediaPlayer extends javax.swing.JFrame {
     public String repeatImageEntered;
     public String repeatImageExited;
 
-    private PaketController paketController;
 
     public String playState;
 
     /**
      * Creates new form UserInterface
      */
-    public MediaPlayer(String username, int timeRemaining, PaketController paketController ) {
+    public MediaPlayer(String username, int timeRemaining) {
         initComponents();
         this.setLocationRelativeTo(null);
         MusicController.jlistPanel = jList1;
-
-        this.paketController = paketController;
-        controller = new MusicController();
+        controller = new MusicController(this);
+        
+//        this.setMusicController(new MusicController());
         random = false;
         repeat = false;
         playState = "";
@@ -60,6 +62,10 @@ public class MediaPlayer extends javax.swing.JFrame {
         // Update labels with provided values
         jLabelWelcome.setText("Welcome, " + username);
         jLabelTimeRemaining.setText("Time Remaining: " + timeRemaining + " hours");
+    }
+
+    public void setMusicController(MusicController controller) {
+        this.controller = controller;
     }
 
     /**
@@ -743,8 +749,11 @@ public class MediaPlayer extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAddDurationActionPerformed
 
     private void jButtonLeaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLeaveActionPerformed
-        // TODO add your handling code here:
-        paketController.switchToTransaksi();
+        if (controller != null) {
+            controller.switchToTransaksi();
+        } else {
+            System.err.println("musicController is null");
+        }
     }//GEN-LAST:event_jButtonLeaveActionPerformed
 
     private void uploadClicked(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadClicked
@@ -801,4 +810,8 @@ public class MediaPlayer extends javax.swing.JFrame {
     private int selectedIndex;
 
     private MusicController controller;
+    
+    public TransaksiModel getTransaksiModel() {
+        return transaksiModel;
+    }
 }

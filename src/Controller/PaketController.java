@@ -87,17 +87,17 @@ public class PaketController {
         }
     }
 
-    public void switchToTransaksi() {
-
-        // Menampilkan halaman transaksi
-        Transaksi transaksiFrame = new Transaksi(transaksiModel);
-        paketView.setVisible(false);
-        paketView.dispose();
-        transaksiFrame.setVisible(true);
-    }
+//    public void switchToTransaksi() {
+//
+//        // Menampilkan halaman transaksi
+//        Transaksi transaksiFrame = new Transaksi(transaksiModel);
+//        paketView.setVisible(false);
+//        paketView.dispose();
+//        transaksiFrame.setVisible(true);
+//    }
 
     public void switchToMediaPlayer(String username, int timeRemaining) {
-        MediaPlayer mediaPlayerFrame = new MediaPlayer(username, timeRemaining, this);
+        MediaPlayer mediaPlayerFrame = new MediaPlayer(username, timeRemaining);
         paketView.setVisible(false);
         paketView.dispose();
         mediaPlayerFrame.setVisible(true);

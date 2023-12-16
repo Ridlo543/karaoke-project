@@ -24,11 +24,16 @@ import javax.swing.JProgressBar;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import Model.Song;
 import Model.SongDAO;
+import Model.TransaksiModel;
 import View.MediaPlayer;
+import View.Transaksi;
 
-public class MusicController{
+public class MusicController {
 
+    private TransaksiModel transaksiModel;
     private MusicPlayer musicPlayer;
+    private MediaPlayer mediaPlayer;
+
     private List<Song> songList;
     private DefaultListModel defaultModel;
     public static int index;
@@ -48,51 +53,53 @@ public class MusicController{
 
     private static ScheduledExecutorService scheduler = null;
 
-    private Runnable dynamicDetails=null;
+    private Runnable dynamicDetails = null;
 
-    private ScheduledFuture<?> dynamicDetailsHandle=null;
+    private ScheduledFuture<?> dynamicDetailsHandle = null;
 
     private SongDAO songDAO;
 
-    public MusicController(){
-           songDAO = new SongDAO();
-           musicPlayer = new MusicPlayer();
-           songList = new LinkedList<>();
-           defaultModel = new DefaultListModel();
-           currentMusicPlaying=0;
-           isFinishedPlaying = false;
-           playingState = "";
+    public MusicController(MediaPlayer mediaPlayer) {
+        this.mediaPlayer = mediaPlayer;
 
-           songList = songDAO.getSongs();
-           if(songList!=null){
-               if (songList.size() > 0) {
-                   for (Song music : songList) {
+        musicPlayer = new MusicPlayer();
+        songDAO = new SongDAO();
+        songList = new LinkedList<>();
+        defaultModel = new DefaultListModel();
+        currentMusicPlaying = 0;
+        isFinishedPlaying = false;
+        playingState = "";
 
-                       defaultModel.addElement(music.getFileName());
-                   }
-               }else{
-                   infoMesagge();
-               }
+        songList = songDAO.getSongs();
+        if (songList != null) {
+            if (songList.size() > 0) {
+                for (Song music : songList) {
 
-               jlistPanel.setModel(defaultModel);
+                    defaultModel.addElement(music.getFileName());
+                }
+            } else {
+                infoMesagge();
+            }
 
-           }else{
-               infoMesagge();
-               songList = new LinkedList<>();
-           }
+            jlistPanel.setModel(defaultModel);
+
+        } else {
+            infoMesagge();
+            songList = new LinkedList<>();
+        }
     }
 
-    public void play(int index){
+    public void play(int index) {
 
         jlistPanel.setSelectedIndex(index);
 
-         if(playingState.equals("PLAYING")){
+        if (playingState.equals("PLAYING")) {
             pauseDynamicDetails();
-         }
+        }
 
         String path = songList.get(index).getPath();
         musicPlayer.Play(path);
-        currentMusicPlaying=index;
+        currentMusicPlaying = index;
 
         playingState = "PLAYING";
         setDynamicDetails(currentMusicPlaying);
@@ -100,7 +107,7 @@ public class MusicController{
         automatic = new Automatic();
     }
 
-    public void pause(){
+    public void pause() {
 
         try {
             musicPlayer.Pause();
@@ -113,7 +120,7 @@ public class MusicController{
         }
     }
 
-    public void resume(){
+    public void resume() {
 
         playingState = "RESUME";
         setDynamicDetails(currentMusicPlaying);
@@ -121,37 +128,37 @@ public class MusicController{
         automatic = new Automatic();
     }
 
-    public void next(){
+    public void next() {
         currentMusicPlaying++;
 
-        if(songList.size()-1>=currentMusicPlaying){
+        if (songList.size() - 1 >= currentMusicPlaying) {
 
             setDetail(currentMusicPlaying);
             playingState = "PLAYING";
             play(currentMusicPlaying);
 
-        }else{
-            currentMusicPlaying=0;
+        } else {
+            currentMusicPlaying = 0;
             setDetail(currentMusicPlaying);
             playingState = "PLAYING";
-            play(currentMusicPlaying);            
+            play(currentMusicPlaying);
         }
     }
 
-    public void preview(){
+    public void preview() {
 
         currentMusicPlaying--;
-        if(currentMusicPlaying>=0){
+        if (currentMusicPlaying >= 0) {
             setDetail(currentMusicPlaying);
             playingState = "PLAYING";
             play(currentMusicPlaying);
-        }else{
-            currentMusicPlaying=0;
+        } else {
+            currentMusicPlaying = 0;
         }
 
     }
 
-    public void playRandom(){
+    public void playRandom() {
 
         int rnd = new Random().nextInt(songList.size());
 
@@ -160,18 +167,18 @@ public class MusicController{
         play(currentMusicPlaying);
     }
 
-    public void stopMusic(){
+    public void stopMusic() {
         musicPlayer.Stop();
         pauseDynamicDetails();
     }
 
-    private void pauseDynamicDetails(){
-            automatic.pause();
-            dynamicDetailsHandle.cancel(true);
-            scheduler.shutdownNow();
+    private void pauseDynamicDetails() {
+        automatic.pause();
+        dynamicDetailsHandle.cancel(true);
+        scheduler.shutdownNow();
     }
 
-    public void addFiles(JList jlist){
+    public void addFiles(JList jlist) {
 
         JFileChooser fc1 = new JFileChooser();
 
@@ -180,9 +187,9 @@ public class MusicController{
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos *MP3", "mp3");
         fc1.setFileFilter(filter);
 
-        fc1.setMultiSelectionEnabled(true);   
+        fc1.setMultiSelectionEnabled(true);
 
-        int returnVal = fc1.showOpenDialog(null); 
+        int returnVal = fc1.showOpenDialog(null);
 
         if (returnVal == JFileChooser.APPROVE_OPTION) {
 
@@ -204,7 +211,7 @@ public class MusicController{
 
                     musicPlayer.putMetaData(song, path, ff.getName());
 
-                    index+=1;
+                    index += 1;
 
                     song.setId(index);
 
@@ -216,71 +223,71 @@ public class MusicController{
 
             }
             jlist.setModel(defaultModel);
-            jlistPanel=jlist;
+            jlistPanel = jlist;
             saveMusics();
-        }    
+        }
     }
 
     public void setDynamicDetails(int indexMusic) {
 
-        isFinishedPlaying= false;
+        isFinishedPlaying = false;
 
-        dynamicDetailsHandle=null;
+        dynamicDetailsHandle = null;
 
         scheduler = null;
 
-        dynamicDetails=null;
+        dynamicDetails = null;
 
-         dynamicDetails = new Runnable() {
+        dynamicDetails = new Runnable() {
 
-                public void run() {
+            public void run() {
 
-                    timeTrans++;
-                    timeRem--;
-                    progressBar++;
+                timeTrans++;
+                timeRem--;
+                progressBar++;
 
-                    MusicController.jprogressBar.setValue(progressBar);
+                MusicController.jprogressBar.setValue(progressBar);
 
-                    setTimeLabel(timeTrans, labelTimeElapsed);
+                setTimeLabel(timeTrans, labelTimeElapsed);
 
-                    setTimeLabel(timeRem, labelTimeRemaining);
-                }
-            };
+                setTimeLabel(timeRem, labelTimeRemaining);
+            }
+        };
 
         int musicLength = (int) songList.get(currentMusicPlaying).getLengthInSeconds();
 
         MusicController.jprogressBar.setMaximum(musicLength);
 
-        int lapse=0;
+        int lapse = 0;
 
-            if(playingState.equals("PLAYING")){
-                timeTrans = 0;
-                timeRem = (int) musicLength;
-                progressBar = 0;
-                lapse = timeRem;
+        if (playingState.equals("PLAYING")) {
+            timeTrans = 0;
+            timeRem = (int) musicLength;
+            progressBar = 0;
+            lapse = timeRem;
+        }
+
+        if (playingState.equals("RESUME")) {
+            lapse = timeRem;
+        }
+
+        scheduler = Executors.newScheduledThreadPool(1);
+        dynamicDetailsHandle = scheduler.scheduleAtFixedRate(dynamicDetails, 1, 1, SECONDS);
+        scheduler.schedule(new Runnable() {
+            public void run() {
+
+                dynamicDetailsHandle.cancel(true);
+                isFinishedPlaying = true;
+
             }
+        }, lapse, SECONDS);
 
-            if(playingState.equals("RESUME")){
-                lapse = timeRem;
-            }
-
-            scheduler = Executors.newScheduledThreadPool(1);
-         dynamicDetailsHandle = scheduler.scheduleAtFixedRate(dynamicDetails, 1, 1, SECONDS);
-            scheduler.schedule(new Runnable() {
-                public void run() {
-
-                    dynamicDetailsHandle.cancel(true);
-                    isFinishedPlaying = true;
-
-                }
-            }, lapse, SECONDS);
-
-            playingState = "PLAYING";
+        playingState = "PLAYING";
 
     }
 
-    private void setTimeLabel(int totalSecs, JLabel label){
-        String timeString="";
+    private void setTimeLabel(int totalSecs, JLabel label) {
+        String timeString = "";
         int hours = totalSecs / 3600;
         int minutes = (totalSecs % 3600) / 60;
         int seconds = totalSecs % 60;
@@ -288,18 +295,18 @@ public class MusicController{
         label.setText(timeString);
     }
 
-    public void setDetail(int selectedIndex){
-        currentMusicPlaying=selectedIndex;
-        Song music=songList.get(currentMusicPlaying);
+    public void setDetail(int selectedIndex) {
+        currentMusicPlaying = selectedIndex;
+        Song music = songList.get(currentMusicPlaying);
         MusicController.labelDetail.setText(music.getSummary());
         MusicController.labelMusicTitle.setText(music.getTitle());
         MusicController.jlistPanel.setSelectedIndex(currentMusicPlaying);
         MusicController.jprogressBar.setValue(0);
-        ImageIcon imageIcon=null;
-        if(music.getImageData()!=null){
+        ImageIcon imageIcon = null;
+        if (music.getImageData() != null) {
             imageIcon = new ImageIcon(new ImageIcon(music.getImageData()).getImage().getScaledInstance(257, 207, java.awt.Image.SCALE_DEFAULT));
             lebelImageAlbum.setIcon(imageIcon);
-        }else{
+        } else {
 
             imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/view/images/defaultIcon.png")).getImage().getScaledInstance(227, 192, java.awt.Image.SCALE_DEFAULT));
 
@@ -311,21 +318,21 @@ public class MusicController{
     public class Automatic extends Observable {
 
         Timer timer;
+
         public Automatic() {
             timer = new Timer();
             timer.scheduleAtFixedRate(timerTask, 0, 1000);
         }
-         TimerTask timerTask = new TimerTask() {
+        TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
-                if(isFinishedPlaying){
-                    if(MediaPlayer.random){
+                if (isFinishedPlaying) {
+                    if (MediaPlayer.random) {
                         playRandom();
                     }
-                    if(MediaPlayer.repeat){
+                    if (MediaPlayer.repeat) {
                         play(currentMusicPlaying);
-                    }
-                    else{
+                    } else {
                         next();
                     }
                 }
@@ -333,26 +340,25 @@ public class MusicController{
 
         };
 
-        public void pause(){
+        public void pause() {
 
-             timerTask.cancel();
-             timer.cancel();
+            timerTask.cancel();
+            timer.cancel();
         }
 
     }
 
-    public void deleteMusic(int indexMusic){
+    public void deleteMusic(int indexMusic) {
 
-        if(playingState.equals("PLAYING")){
+        if (playingState.equals("PLAYING")) {
             stopMusic();
-        }
-        else{
+        } else {
             musicPlayer.Stop();
         }
 
-        playingState="";
+        playingState = "";
         songDAO.deleteSong(songList, indexMusic);
-        defaultModel.remove(indexMusic);  
+        defaultModel.remove(indexMusic);
         jlistPanel.setModel(defaultModel);
         currentMusicPlaying = 0;
         setDetail(currentMusicPlaying);
@@ -360,12 +366,12 @@ public class MusicController{
         labelTimeRemaining.setText("00:00:00");
     }
 
-    public void deleteAllMusics(){
-        if(playingState.equals("PLAYING")){
+    public void deleteAllMusics() {
+        if (playingState.equals("PLAYING")) {
             stopMusic();
         }
         musicPlayer.Stop();
-        playingState="";
+        playingState = "";
         songDAO.deleteAllSongs(songList);
         defaultModel.removeAllElements();
         jlistPanel.removeAll();
@@ -378,16 +384,40 @@ public class MusicController{
         infoMesagge();
     }
 
-    public List<Song> getMusics(){
+    public List<Song> getMusics() {
         return songList;
     }
 
-    public void saveMusics(){
+    public void saveMusics() {
         songDAO.insertSongs(songList);
     }
 
-    private void infoMesagge(){
+    private void infoMesagge() {
         JOptionPane.showMessageDialog(null, "There are no music to play. Add music", "Add music", JOptionPane.INFORMATION_MESSAGE);
     }
 
+    public void switchToTransaksi() {
+        if (mediaPlayer != null) {
+            mediaPlayer.setVisible(false);
+
+            // Ambil data dari mediaPlayer menggunakan getTransaksiModel()
+            TransaksiModel transaksiModel =  mediaPlayer.getTransaksiModel();
+
+            if (transaksiModel != null) {
+                // Buat instance Transaksi dan controller
+                Transaksi transaksiView = new Transaksi(transaksiModel, mediaPlayer);
+                TransaksiController transaksiController = new TransaksiController(transaksiModel, transaksiView);
+
+                // Simpan data transaksi
+                transaksiController.saveTransaksi();
+
+                // Tampilkan Transaksi
+                transaksiView.setVisible(true);
+            } else {
+                System.err.println("TransaksiModel in mediaPlayer is null");
+            }
+        } else {
+            System.err.println("mediaPlayer is null");
+        }
+    }
 }

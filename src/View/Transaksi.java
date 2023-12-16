@@ -1,34 +1,33 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package View;
 
 import Model.TransaksiModel;
+import java.util.Date;
 
-/**
- *
- * @author LENOVO
- */
+
 public class Transaksi extends javax.swing.JFrame {
 
     private final TransaksiModel transaksiModel;
+    private final MediaPlayer mediaPlayer;
+    
 
     /**
      * Creates new form Transaksi
+     * @param transaksiModel
      */
-    public Transaksi(TransaksiModel transaksiModel) {
+    public Transaksi(TransaksiModel transaksiModel, MediaPlayer mediaPlayer) {
         initComponents();
         this.transaksiModel = transaksiModel;
+        this.mediaPlayer = mediaPlayer;
         displayData();
     }
 
     private void displayData() {
         // Menampilkan data transaksi pada label-label yang sesuai
-//        jLabelTanggal.setText("Tanggal Transaksi: " + transaksiModel.getTanggalTransaksi());
-//        jLabelUsername.setText("Username: " + transaksiModel.getUsername());
-//        jLabelDurasi.setText("Durasi: " + transaksiModel.getDurasi() + " jam");
-//        jLabelTotalHarga.setText("Total Harga: " + transaksiModel.getTotalHarga());
+        jLabelTanggal.setText("Tanggal Transaksi: " + transaksiModel.getTanggalTransaksi());
+        jLabelUsername.setText("Username: " + transaksiModel.getUsername());
+        jLabelDurasi.setText("Durasi: " + transaksiModel.getDurasi() + " jam");
+        jLabelTotalHarga.setText("Total Harga: " + transaksiModel.getTotalHarga());
     }
 
     /**

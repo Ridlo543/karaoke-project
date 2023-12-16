@@ -1,10 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controller;
-
 
 import java.io.File;
 import java.io.IOException;
@@ -33,14 +27,8 @@ import Model.SongDAO;
 import View.MediaPlayer;
 import View.MusicPlayer;
 
-/**
- *
- * @author ysaac
- */
-
-
 public class MusicController{
-    
+
     private MusicPlayer musicPlayer;
     private List<Song> songList;
     private DefaultListModel defaultModel;
@@ -48,27 +36,25 @@ public class MusicController{
     public static String playingState;
 
     public static int currentMusicPlaying;
-    
 
     private static int progressBar, timeTrans, timeRem;
-    
-    // view components
+
     public static JLabel labelDetail, labelMusicTitle, labelTimeElapsed, labelTimeRemaining, lebelImageAlbum;
     public static JList jlistPanel;
     public static JProgressBar jprogressBar;
-    
+
     private static Automatic automatic = null;
-    
+
     private boolean isFinishedPlaying;
-    
+
     private static ScheduledExecutorService scheduler = null;
-    
+
     private Runnable dynamicDetails=null;
-    
+
     private ScheduledFuture<?> dynamicDetailsHandle=null;
-    
+
     private SongDAO songDAO;
-            
+
     public MusicController(){
            songDAO = new SongDAO();
            musicPlayer = new MusicPlayer();
@@ -77,7 +63,7 @@ public class MusicController{
            currentMusicPlaying=0;
            isFinishedPlaying = false;
            playingState = "";
-           
+
            songList = songDAO.getSongs();
            if(songList!=null){
                if (songList.size() > 0) {
@@ -88,70 +74,63 @@ public class MusicController{
                }else{
                    infoMesagge();
                }
-              
+
                jlistPanel.setModel(defaultModel);
-               
+
            }else{
                infoMesagge();
                songList = new LinkedList<>();
            }
     }
-    
-    
-    
+
     public void play(int index){
-        
+
         jlistPanel.setSelectedIndex(index);
-        
+
          if(playingState.equals("PLAYING")){
             pauseDynamicDetails();
          }
-        
- 
+
         String path = songList.get(index).getPath();
         musicPlayer.Play(path);
         currentMusicPlaying=index;
-        
+
         playingState = "PLAYING";
         setDynamicDetails(currentMusicPlaying);
 
         automatic = new Automatic();
     }
-    
+
     public void pause(){
-        
-        
+
         try {
             musicPlayer.Pause();
-            
+
             playingState = "PAUSED";
-            
+
             pauseDynamicDetails();
         } catch (IOException ex) {
             Logger.getLogger(MusicController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    
-    
+
     public void resume(){
-        
+
         playingState = "RESUME";
         setDynamicDetails(currentMusicPlaying);
         musicPlayer.Resume();
         automatic = new Automatic();
     }
-    
-    
+
     public void next(){
         currentMusicPlaying++;
-        
+
         if(songList.size()-1>=currentMusicPlaying){
-            
+
             setDetail(currentMusicPlaying);
             playingState = "PLAYING";
             play(currentMusicPlaying);
-            
+
         }else{
             currentMusicPlaying=0;
             setDetail(currentMusicPlaying);
@@ -159,11 +138,9 @@ public class MusicController{
             play(currentMusicPlaying);            
         }
     }
-    
-    
-    
+
     public void preview(){
-        
+
         currentMusicPlaying--;
         if(currentMusicPlaying>=0){
             setDetail(currentMusicPlaying);
@@ -172,57 +149,48 @@ public class MusicController{
         }else{
             currentMusicPlaying=0;
         }
-        
+
     }
-    
-    
-    
-    //-----------------------------------------------------------------------
-    
+
     public void playRandom(){
-       
+
         int rnd = new Random().nextInt(songList.size());
-        
+
         currentMusicPlaying = rnd;
-        
+
         play(currentMusicPlaying);
     }
-    
+
     public void stopMusic(){
         musicPlayer.Stop();
         pauseDynamicDetails();
     }
-    
-    
-    
-    //===========================================================================================
-    
+
     private void pauseDynamicDetails(){
             automatic.pause();
             dynamicDetailsHandle.cancel(true);
             scheduler.shutdownNow();
     }
-    
-    
+
     public void addFiles(JList jlist){
-        
+
         JFileChooser fc1 = new JFileChooser();
-        
+
         fc1.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-        
+
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos *MP3", "mp3");
         fc1.setFileFilter(filter);
-        
+
         fc1.setMultiSelectionEnabled(true);   
-        
+
         int returnVal = fc1.showOpenDialog(null); 
-        
+
         if (returnVal == JFileChooser.APPROVE_OPTION) {
 
             int length = fc1.getSelectedFiles().length;
-            
+
             File[] files = new File[length];
-            
+
             files = fc1.getSelectedFiles();
 
             for (File f : files) {
@@ -236,13 +204,13 @@ public class MusicController{
                     Song song = new Song();
 
                     musicPlayer.putMetaData(song, path, ff.getName());
-                    
+
                     index+=1;
-                    
+
                     song.setId(index);
-                    
+
                     songList.add(song);
-                    
+
                     defaultModel.addElement(ff.getName());
 
                 }
@@ -253,23 +221,17 @@ public class MusicController{
             saveMusics();
         }    
     }
-    
-    
-   
-    
-    
-    
-    
+
     public void setDynamicDetails(int indexMusic) {
-        
+
         isFinishedPlaying= false;
-        
+
         dynamicDetailsHandle=null;
-        
+
         scheduler = null;
-        
+
         dynamicDetails=null;
-        
+
          dynamicDetails = new Runnable() {
 
                 public void run() {
@@ -285,13 +247,11 @@ public class MusicController{
                     setTimeLabel(timeRem, labelTimeRemaining);
                 }
             };
-         
-    
 
         int musicLength = (int) songList.get(currentMusicPlaying).getLengthInSeconds();
-        
+
         MusicController.jprogressBar.setMaximum(musicLength);
-            
+
         int lapse=0;
 
             if(playingState.equals("PLAYING")){
@@ -300,31 +260,26 @@ public class MusicController{
                 progressBar = 0;
                 lapse = timeRem;
             }
-            
+
             if(playingState.equals("RESUME")){
                 lapse = timeRem;
             }
-            
-           
-            
+
             scheduler = Executors.newScheduledThreadPool(1);
          dynamicDetailsHandle = scheduler.scheduleAtFixedRate(dynamicDetails, 1, 1, SECONDS);
             scheduler.schedule(new Runnable() {
                 public void run() {
-         
+
                     dynamicDetailsHandle.cancel(true);
                     isFinishedPlaying = true;
-                    
+
                 }
             }, lapse, SECONDS);
-            
+
             playingState = "PLAYING";
 
     }
-    
-    
-    
-    
+
     private void setTimeLabel(int totalSecs, JLabel label){
         String timeString="";
         int hours = totalSecs / 3600;
@@ -333,8 +288,7 @@ public class MusicController{
         timeString = String.format("%02d:%02d:%02d", hours, minutes, seconds);
         label.setText(timeString);
     }
-    
-    
+
     public void setDetail(int selectedIndex){
         currentMusicPlaying=selectedIndex;
         Song music=songList.get(currentMusicPlaying);
@@ -347,19 +301,14 @@ public class MusicController{
             imageIcon = new ImageIcon(new ImageIcon(music.getImageData()).getImage().getScaledInstance(257, 207, java.awt.Image.SCALE_DEFAULT));
             lebelImageAlbum.setIcon(imageIcon);
         }else{
-            
 
             imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/view/images/defaultIcon.png")).getImage().getScaledInstance(227, 192, java.awt.Image.SCALE_DEFAULT));
-            
-            
+
             lebelImageAlbum.setIcon(imageIcon);
-     
+
         }
     }
-    
-    
-    
-    
+
     public class Automatic extends Observable {
 
         Timer timer;
@@ -384,24 +333,24 @@ public class MusicController{
             }
 
         };
-        
+
         public void pause(){
-            
+
              timerTask.cancel();
              timer.cancel();
         }
 
     }
-    
+
     public void deleteMusic(int indexMusic){
-     
+
         if(playingState.equals("PLAYING")){
             stopMusic();
         }
         else{
             musicPlayer.Stop();
         }
-        
+
         playingState="";
         songDAO.deleteSong(songList, indexMusic);
         defaultModel.remove(indexMusic);  
@@ -411,7 +360,7 @@ public class MusicController{
         labelTimeElapsed.setText("00:00:00");
         labelTimeRemaining.setText("00:00:00");
     }
-    
+
     public void deleteAllMusics(){
         if(playingState.equals("PLAYING")){
             stopMusic();
@@ -429,15 +378,15 @@ public class MusicController{
         labelMusicTitle.setText("");
         infoMesagge();
     }
-    
+
     public List<Song> getMusics(){
         return songList;
     }
-    
+
     public void saveMusics(){
         songDAO.insertSongs(songList);
     }
-    
+
     private void infoMesagge(){
         JOptionPane.showMessageDialog(null, "There are no music to play. Add music", "Add music", JOptionPane.INFORMATION_MESSAGE);
     }

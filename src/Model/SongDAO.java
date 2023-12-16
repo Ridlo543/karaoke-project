@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model;
 
 import java.io.FileNotFoundException;
@@ -14,24 +9,21 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import Util.Conexion;
+import Util.Connection;
 import Model.Song;
 
-/**
- *
- * @author ysaac
- */
+
 public class SongDAO {
     
     List<Song> songs=null;
     private ObjectInputStream readConexion;
     private ObjectOutputStream writeConexion;
-    private Conexion conn=null;
+    private Connection conn=null;
     
     //ObjectOutputStream
     
     public SongDAO(){
-        conn = new Conexion();
+        conn = new Connection();
         songs = new LinkedList<>();
     }
     

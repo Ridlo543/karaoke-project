@@ -96,7 +96,7 @@ public class Login extends javax.swing.JFrame {
         jLabelDeskription.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabelDeskription.setText("Role");
         getContentPane().add(jLabelDeskription);
-        jLabelDeskription.setBounds(640, 120, 70, 30);
+        jLabelDeskription.setBounds(640, 110, 70, 30);
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,7 +108,7 @@ public class Login extends javax.swing.JFrame {
 
         jComboBox1.setBackground(new java.awt.Color(174, 210, 255));
         jComboBox1.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
-        jComboBox1.setForeground(new java.awt.Color(228, 241, 255));
+        jComboBox1.setForeground(new java.awt.Color(148, 0, 255));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "User", "Staff" }));
         getContentPane().add(jComboBox1);
         jComboBox1.setBounds(640, 150, 260, 30);
@@ -132,21 +132,23 @@ public class Login extends javax.swing.JFrame {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(570, 602, 0, 0);
 
+        fTextFieldUsername.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
         fTextFieldUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fTextFieldUsernameActionPerformed(evt);
             }
         });
         getContentPane().add(fTextFieldUsername);
-        fTextFieldUsername.setBounds(640, 330, 270, 39);
+        fTextFieldUsername.setBounds(640, 330, 270, 48);
 
+        fTextFieldPassword.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
         fTextFieldPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fTextFieldPasswordActionPerformed(evt);
             }
         });
         getContentPane().add(fTextFieldPassword);
-        fTextFieldPassword.setBounds(640, 240, 260, 39);
+        fTextFieldPassword.setBounds(640, 240, 260, 48);
 
         jButtonToRegister.setText("Register");
         jButtonToRegister.addActionListener(new java.awt.event.ActionListener() {
@@ -168,6 +170,11 @@ public class Login extends javax.swing.JFrame {
 
         fButtonLogin.setText("Login");
         fButtonLogin.setMaximumSize(new java.awt.Dimension(120, 36));
+        fButtonLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fButtonLoginActionPerformed(evt);
+            }
+        });
         getContentPane().add(fButtonLogin);
         fButtonLogin.setBounds(640, 410, 110, 40);
 
@@ -239,6 +246,24 @@ public class Login extends javax.swing.JFrame {
     private void fTextFieldPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fTextFieldPasswordActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_fTextFieldPasswordActionPerformed
+
+    private void fButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fButtonLoginActionPerformed
+        // TODO add your handling code here:
+         String role = jComboBox1.getSelectedItem().toString();
+        String username = jTextField1.getText();
+        String password = new String(jPasswordField1.getPassword());
+        
+        // Memanggil metode processLogin pada LoginController
+        boolean loginSuccessful = loginController.processLogin(role, username, password);
+        
+        if (loginSuccessful) {
+            // Jika login berhasil, pindah ke halaman paket
+            loginController.switchToPaket(username);
+        } else {
+            // Jika login gagal, tambahkan logika lainnya jika diperlukan
+            System.out.println("Login Gagal!");
+        }
+    }//GEN-LAST:event_fButtonLoginActionPerformed
 
     /**
      * @param args the command line arguments

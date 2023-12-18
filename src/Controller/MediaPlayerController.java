@@ -24,9 +24,20 @@ import javax.swing.JProgressBar;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import Model.Song;
 import Model.SongDAO;
+import Model.SongLyric;
+//import Model.SongLyricList;
 import Model.TransaksiModel;
 import View.MediaPlayer;
 import View.Transaksi;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import java.io.FileReader;
+import java.lang.reflect.Type;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class MediaPlayerController {
 
@@ -295,6 +306,7 @@ public class MediaPlayerController {
         label.setText(timeString);
     }
 
+    // MusicController
     public void setDetail(int selectedIndex) {
         currentMusicPlaying = selectedIndex;
         Song music = songList.get(currentMusicPlaying);
@@ -307,14 +319,64 @@ public class MediaPlayerController {
             imageIcon = new ImageIcon(new ImageIcon(music.getImageData()).getImage().getScaledInstance(257, 207, java.awt.Image.SCALE_DEFAULT));
             lebelImageAlbum.setIcon(imageIcon);
         } else {
-
             imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/view/images/defaultIcon.png")).getImage().getScaledInstance(227, 192, java.awt.Image.SCALE_DEFAULT));
-
             lebelImageAlbum.setIcon(imageIcon);
+        }
 
+        // Cari lirik berdasarkan judul lagu di JSON
+        String titleToSearch = music.getTitle();
+        System.out.println(music.getTitle());
+        String lyricText = findLyricByTitle(titleToSearch, "lyric.json");
+
+        // Tampilkan lirik di PanelLyric di kelas MediaPlayer
+        if (lyricText != null && !lyricText.isEmpty()) {
+            mediaPlayer.setLyric(lyricText);
+        } else {
+            mediaPlayer.setLyric("Lirik tidak tersedia.");
         }
     }
 
+    // Metode untuk mencari lirik berdasarkan judul di JSON
+    private String findLyricByTitle(String titleToSearch, String filePath) {
+        try {
+            // Baca file JSON menggunakan Gson
+            Gson gson = new Gson();
+            Path path = Paths.get(filePath);
+            FileReader reader = new FileReader(path.toFile());
+
+//            SongLyricList songLyricList = gson.fromJson(reader, SongLyricList.class);
+            // Dapatkan daftar song_lyric
+            List<SongLyric> songLyricListData = gson.fromJson(reader, new TypeToken<List<SongLyric>>() {
+            }.getType());
+
+            // Cari lirik berdasarkan judul
+            for (SongLyric songLyric : songLyricListData) {
+                if (titleToSearch.equals(songLyric.getTitle())) {
+                    // Temukan judul yang cocok, kembalikan lirik
+                    return songLyric.getLyric();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Tidak ada judul yang cocok ditemukan atau terjadi kesalahan
+        return null;
+    }
+
+//     private void displayLyric(String title) {
+//        // Panggil metode untuk mencari lirik berdasarkan judul
+//        String lyric = findLyricByTitle(title, "lyric.json");
+//
+//        // Periksa apakah lirik ditemukan
+//        if (lyric != null) {
+//            // Tampilkan lirik di PanelLyric
+//            PanelLyric.setText(lyric);
+//        } else {
+//            // Lirik tidak ditemukan
+//            PanelLyric.setText("Lirik tidak ditemukan");
+//        }
+//    }
     public class Automatic extends Observable {
 
         Timer timer;

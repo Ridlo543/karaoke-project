@@ -9,15 +9,20 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.Timer;
 import Controller.MediaPlayerController;
 import Controller.PaketController;
+import Model.Lyric;
 import Model.TransaksiModel;
+import Util.LyricLoader;
+import java.util.Map;
 import javax.swing.SwingWorker;
 
 public class MediaPlayer extends javax.swing.JFrame {
 
     private TransaksiModel transaksiModel;
     private int timeRemaining;
+    private Timer timer;
 
     public static int count;
     public static String Display;
@@ -48,7 +53,6 @@ public class MediaPlayer extends javax.swing.JFrame {
         this.transaksiModel = transaksiModel;
         this.timeRemaining = timeRemaining;  // Inisialisasi timeRemaining
 
-//        this.setMusicController(new MediaPlayerController());
         random = false;
         repeat = false;
         playState = "";
@@ -66,9 +70,7 @@ public class MediaPlayer extends javax.swing.JFrame {
         MediaPlayerController.lebelImageAlbum = lebelImageAlbum;
         MediaPlayerController.jprogressBar = jProgressBar1;
 
-        // Update labels with provided values
         jLabelWelcome.setText("Welcome, " + username);
-//        updateTimeRemaining(timeRemaining);
 
     }
 
@@ -130,6 +132,22 @@ public class MediaPlayer extends javax.swing.JFrame {
         }
     }
 
+    private void loadLyrics(String jsonFilePath) {
+        Map<String, Lyric> lyricsMap = LyricLoader.loadLyrics(jsonFilePath);
+        if (lyricsMap != null) {
+            // Tampilkan lirik sesuai dengan lagu yang sedang diputar
+            String currentSongTitle = "JudulLagu"; // Ganti dengan judul lagu yang sedang diputar
+            Lyric currentLyric = lyricsMap.get(currentSongTitle);
+            if (currentLyric != null) {
+                PanelLyric.setText(currentLyric.getContent());
+            }
+        }
+    }
+    
+    public void setLyric(String lyricText) {
+        PanelLyric.setText(lyricText);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -147,7 +165,7 @@ public class MediaPlayer extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
+        PanelLyric = new javax.swing.JTextPane();
         jPanel3 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jProgressBar1 = new javax.swing.JProgressBar();
@@ -212,7 +230,7 @@ public class MediaPlayer extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jList1);
 
-        jScrollPane2.setViewportView(jTextPane1);
+        jScrollPane2.setViewportView(PanelLyric);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -749,20 +767,16 @@ public class MediaPlayer extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jList1MouseClicked
 
+    public void addDuration(int additionalHours) {
+        timeRemaining += additionalHours; // Tambahkan durasi ke waktu tersisa
+        updateTimeRemaining(timeRemaining); // Perbarui label waktu tersisa
+    }
+
     private void jButtonAddDurationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddDurationActionPerformed
-        // Menambah satu jam ke timeRemaining
-        timeRemaining += 3600; // Menambah 3600 detik (satu jam)
+        addDuration(1); // Tambahkan durasi satu jam
 
-        // Perbarui label dan transaksi model
-        updateTimeRemaining(timeRemaining);
-
-        // Perbarui model transaksi dengan durasi yang baru
-        if (transaksiModel != null) {
-            transaksiModel.setDurasi(transaksiModel.getDurasi() + 1);
-            // Perbarui total harga berdasarkan durasi yang baru
-            int totalHarga = calculateTotalHarga(transaksiModel.getDurasi());
-            transaksiModel.setTotalHarga(totalHarga);
-        }
+        // Perbarui label waktu tersisa
+//        updateTimeRemaining(timeRemaining);
     }//GEN-LAST:event_jButtonAddDurationActionPerformed
 
     private void jButtonLeaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLeaveActionPerformed
@@ -782,6 +796,7 @@ public class MediaPlayer extends javax.swing.JFrame {
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextPane PanelLyric;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnDeleteAll;
     private javax.swing.JButton btnNext;
@@ -810,7 +825,6 @@ public class MediaPlayer extends javax.swing.JFrame {
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextPane jTextPane1;
     private keeptoo.KGradientPanel kGradientPanel1;
     private javax.swing.JLabel labelDetail;
     private javax.swing.JLabel labelMusicTitle;

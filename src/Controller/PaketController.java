@@ -41,7 +41,10 @@ public class PaketController {
     }
 
     private void updateTotal() {
-        String durasiSelected = paketView.getjComboBoxDurasi().getSelectedItem().toString();
+        String durasiSelected = "";
+        if (paketView.getjComboBoxDurasi().getSelectedItem() != null) {
+            durasiSelected = paketView.getjComboBoxDurasi().getSelectedItem().toString();
+        }
         int durasi = Integer.parseInt(durasiSelected.split(" ")[0]);
 
         // Mengambil harga ruangan terpilih dari ComboBox
@@ -95,12 +98,16 @@ public class PaketController {
 //        paketView.dispose();
 //        transaksiFrame.setVisible(true);
 //    }
-
     public void switchToMediaPlayer(String username, int timeRemaining) {
-        MediaPlayer mediaPlayerFrame = new MediaPlayer(username, timeRemaining);
-        paketView.setVisible(false);
-        paketView.dispose();
-        mediaPlayerFrame.setVisible(true);
+        if (transaksiModel != null) {
+            MediaPlayer mediaPlayerFrame = new MediaPlayer(username, timeRemaining, transaksiModel);
+            paketView.setVisible(false);
+            paketView.dispose();
+            mediaPlayerFrame.showMediaPlayer();
+        } else {
+            System.err.println("TransaksiModel is null");
+            // Lakukan penanganan kesalahan atau tindakan yang sesuai
+        }
     }
 
     public void setWelcomeLabel(String username) {

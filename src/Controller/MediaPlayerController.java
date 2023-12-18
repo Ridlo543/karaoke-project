@@ -28,7 +28,7 @@ import Model.TransaksiModel;
 import View.MediaPlayer;
 import View.Transaksi;
 
-public class MusicController {
+public class MediaPlayerController {
 
     private TransaksiModel transaksiModel;
     private MusicPlayer musicPlayer;
@@ -59,7 +59,7 @@ public class MusicController {
 
     private SongDAO songDAO;
 
-    public MusicController(MediaPlayer mediaPlayer) {
+    public MediaPlayerController(MediaPlayer mediaPlayer) {
         this.mediaPlayer = mediaPlayer;
 
         musicPlayer = new MusicPlayer();
@@ -116,7 +116,7 @@ public class MusicController {
 
             pauseDynamicDetails();
         } catch (IOException ex) {
-            Logger.getLogger(MusicController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MediaPlayerController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -246,7 +246,7 @@ public class MusicController {
                 timeRem--;
                 progressBar++;
 
-                MusicController.jprogressBar.setValue(progressBar);
+                MediaPlayerController.jprogressBar.setValue(progressBar);
 
                 setTimeLabel(timeTrans, labelTimeElapsed);
 
@@ -256,7 +256,7 @@ public class MusicController {
 
         int musicLength = (int) songList.get(currentMusicPlaying).getLengthInSeconds();
 
-        MusicController.jprogressBar.setMaximum(musicLength);
+        MediaPlayerController.jprogressBar.setMaximum(musicLength);
 
         int lapse = 0;
 
@@ -298,10 +298,10 @@ public class MusicController {
     public void setDetail(int selectedIndex) {
         currentMusicPlaying = selectedIndex;
         Song music = songList.get(currentMusicPlaying);
-        MusicController.labelDetail.setText(music.getSummary());
-        MusicController.labelMusicTitle.setText(music.getTitle());
-        MusicController.jlistPanel.setSelectedIndex(currentMusicPlaying);
-        MusicController.jprogressBar.setValue(0);
+        MediaPlayerController.labelDetail.setText(music.getSummary());
+        MediaPlayerController.labelMusicTitle.setText(music.getTitle());
+        MediaPlayerController.jlistPanel.setSelectedIndex(currentMusicPlaying);
+        MediaPlayerController.jprogressBar.setValue(0);
         ImageIcon imageIcon = null;
         if (music.getImageData() != null) {
             imageIcon = new ImageIcon(new ImageIcon(music.getImageData()).getImage().getScaledInstance(257, 207, java.awt.Image.SCALE_DEFAULT));
@@ -398,14 +398,15 @@ public class MusicController {
 
     public void switchToTransaksi() {
         if (mediaPlayer != null) {
+            musicPlayer.Stop();
             mediaPlayer.setVisible(false);
 
             // Ambil data dari mediaPlayer menggunakan getTransaksiModel()
-            TransaksiModel transaksiModel =  mediaPlayer.getTransaksiModel();
+            TransaksiModel transaksiModel = mediaPlayer.getTransaksiModel();
 
             if (transaksiModel != null) {
                 // Buat instance Transaksi dan controller
-                Transaksi transaksiView = new Transaksi(transaksiModel, mediaPlayer);
+                Transaksi transaksiView = new Transaksi(transaksiModel);
                 TransaksiController transaksiController = new TransaksiController(transaksiModel, transaksiView);
 
                 // Simpan data transaksi
@@ -420,4 +421,5 @@ public class MusicController {
             System.err.println("mediaPlayer is null");
         }
     }
+
 }

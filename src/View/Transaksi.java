@@ -2,25 +2,30 @@
 package View;
 
 import Model.TransaksiModel;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
 public class Transaksi extends javax.swing.JFrame {
 
-    private final TransaksiModel transaksiModel;
-    private final MediaPlayer mediaPlayer;
-    
 
-    /**
-     * Creates new form Transaksi
-     * @param transaksiModel
-     */
-    public Transaksi(TransaksiModel transaksiModel, MediaPlayer mediaPlayer) {
+    private final TransaksiModel transaksiModel;
+
+    public Transaksi(TransaksiModel transaksiModel) {
         initComponents();
         this.transaksiModel = transaksiModel;
-        this.mediaPlayer = mediaPlayer;
         displayData();
     }
+
+//    private void displayData() {
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+//
+//        // Menampilkan data transaksi pada label-label yang sesuai
+//        jLabelTanggal.setText("Tanggal Transaksi: " + dateFormat.format(transaksiModel.getTanggalTransaksi()));
+//        jLabelUsername.setText("Username: " + transaksiModel.getUsername());
+//        jLabelDurasi.setText("Durasi: " + transaksiModel.getDurasi() + " jam");
+//        jLabelTotalHarga.setText("Total Harga: " + transaksiModel.getTotalHarga());
+//    }
 
     private void displayData() {
         // Menampilkan data transaksi pada label-label yang sesuai
@@ -28,6 +33,10 @@ public class Transaksi extends javax.swing.JFrame {
         jLabelUsername.setText("Username: " + transaksiModel.getUsername());
         jLabelDurasi.setText("Durasi: " + transaksiModel.getDurasi() + " jam");
         jLabelTotalHarga.setText("Total Harga: " + transaksiModel.getTotalHarga());
+        System.out.println(transaksiModel.getTanggalTransaksi());
+        System.out.println(transaksiModel.getUsername());
+        System.out.println(transaksiModel.getDurasi());
+        System.out.println(transaksiModel.getTotalHarga());
     }
 
     /**

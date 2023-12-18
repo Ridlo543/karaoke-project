@@ -9,13 +9,15 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import Controller.MusicController;
+import Controller.MediaPlayerController;
 import Controller.PaketController;
 import Model.TransaksiModel;
+import javax.swing.SwingWorker;
 
 public class MediaPlayer extends javax.swing.JFrame {
-    
+
     private TransaksiModel transaksiModel;
+    private int timeRemaining;
 
     public static int count;
     public static String Display;
@@ -29,19 +31,24 @@ public class MediaPlayer extends javax.swing.JFrame {
     public String repeatImageEntered;
     public String repeatImageExited;
 
-
     public String playState;
 
     /**
-     * Creates new form UserInterface
+     * Creates new form MediaPlayer
+     *
+     * @param username
+     * @param timeRemaining
+     * @param transaksiModel
      */
-    public MediaPlayer(String username, int timeRemaining) {
+    public MediaPlayer(String username, int timeRemaining, TransaksiModel transaksiModel) {
         initComponents();
         this.setLocationRelativeTo(null);
-        MusicController.jlistPanel = jList1;
-        controller = new MusicController(this);
-        
-//        this.setMusicController(new MusicController());
+        MediaPlayerController.jlistPanel = jList1;
+        controller = new MediaPlayerController(this);
+        this.transaksiModel = transaksiModel;
+        this.timeRemaining = timeRemaining;  // Inisialisasi timeRemaining
+
+//        this.setMusicController(new MediaPlayerController());
         random = false;
         repeat = false;
         playState = "";
@@ -52,20 +59,75 @@ public class MediaPlayer extends javax.swing.JFrame {
         repeatImageEntered = "images/repeat_h.png";
         repeatImageExited = "images/repeat.png";
 
-        MusicController.labelDetail = labelDetail;
-        MusicController.labelMusicTitle = labelMusicTitle;
-        MusicController.labelTimeElapsed = labelTimeElapsed;
-        MusicController.labelTimeRemaining = labelTimeRemaining;
-        MusicController.lebelImageAlbum = lebelImageAlbum;
-        MusicController.jprogressBar = jProgressBar1;
+        MediaPlayerController.labelDetail = labelDetail;
+        MediaPlayerController.labelMusicTitle = labelMusicTitle;
+        MediaPlayerController.labelTimeElapsed = labelTimeElapsed;
+        MediaPlayerController.labelTimeRemaining = labelTimeRemaining;
+        MediaPlayerController.lebelImageAlbum = lebelImageAlbum;
+        MediaPlayerController.jprogressBar = jProgressBar1;
 
         // Update labels with provided values
         jLabelWelcome.setText("Welcome, " + username);
-        jLabelTimeRemaining.setText("Time Remaining: " + timeRemaining + " hours");
+//        updateTimeRemaining(timeRemaining);
+
     }
 
-    public void setMusicController(MusicController controller) {
+    public void showMediaPlayer() {
+        startUpdatingTimeRemaining();
+        setVisible(true);
+    }
+
+    private void startUpdatingTimeRemaining() {
+        SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
+            @Override
+            protected Void doInBackground() throws Exception {
+                updateTimeRemaining(timeRemaining);
+                return null;
+            }
+        };
+
+        worker.execute();
+    }
+
+    public void setMusicController(MediaPlayerController controller) {
         this.controller = controller;
+    }
+
+    private int calculateTotalHarga(int durasi) {
+        int hargaPerJam = 10000;
+        return durasi * hargaPerJam;
+    }
+
+    private void updateTimeRemaining(int timeRemainingInHours) {
+        int timeRemainingInSeconds = timeRemainingInHours * 3600; // konversi jam ke detik
+        int hours, minutes, seconds;
+
+        while (timeRemainingInSeconds >= 0) {
+            hours = timeRemainingInSeconds / 3600;
+            minutes = (timeRemainingInSeconds % 3600) / 60;
+            seconds = timeRemainingInSeconds % 60;
+
+            String formattedTime = String.format("%02d:%02d:%02d", hours, minutes, seconds);
+
+            // Perbarui label dengan waktu yang diformat
+            jLabelTimeRemaining.setText("Time Remaining: " + formattedTime);
+
+            // Cek apakah waktu tersisa sudah habis
+            if (timeRemainingInSeconds == 0) {
+                // Lakukan tindakan yang diperlukan ketika waktu habis, misalnya, otomatis keluar
+                jButtonLeaveActionPerformed(null);
+            }
+
+            // Tunggu 1 detik
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            // Kurangi waktu tersisa setiap detik
+            timeRemainingInSeconds--;
+        }
     }
 
     /**
@@ -405,11 +467,6 @@ public class MediaPlayer extends javax.swing.JFrame {
         btnDelete.setBorderPainted(false);
         btnDelete.setContentAreaFilled(false);
         btnDelete.setFocusPainted(false);
-        btnDelete.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                exitedDelete(evt);
-            }
-        });
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteClicked(evt);
@@ -539,11 +596,10 @@ public class MediaPlayer extends javax.swing.JFrame {
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jButtonAddDuration, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jButtonAddDuration, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(16, 16, 16))))
             .addGroup(kGradientPanel1Layout.createSequentialGroup()
                 .addContainerGap()
@@ -585,41 +641,6 @@ public class MediaPlayer extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     //=====================================================================================================  hovers
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MediaPlayer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MediaPlayer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MediaPlayer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MediaPlayer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                // Provide the username and timeRemaining when creating an instance
-//                new MediaPlayer("UsernameFromPaket", 10, ).setVisible(true);
-            }
-        });
-    }
-
     private void changeImage(String path, JButton button) {
         Image img = null;
         try {
@@ -634,17 +655,6 @@ public class MediaPlayer extends javax.swing.JFrame {
 ///////////////////////////////////////////////////////////////////////////////////////end close y minimize operations    
 
     private void randomClicked(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_randomClicked
-//        random = !random;
-//        if(random){
-//            randomImageEntered = "images/random.png";
-//            randomImageExited =  "images/randomSelected.png";
-//            changeImage(randomImageExited, btnRandom);
-//        }
-//        else{
-//            randomImageEntered = "images/random_h.png";
-//            randomImageExited = "images/random.png";
-//            changeImage(randomImageExited, btnRandom);
-//        }
         repeat = false;
     }//GEN-LAST:event_randomClicked
 
@@ -656,7 +666,7 @@ public class MediaPlayer extends javax.swing.JFrame {
 
         //switch can be used
         if (playState.equals("PLAYING")) {
-            playImageEntered = "images/play_h.png";
+//            playImageEntered = "images/play_h.png";
             playImageExited = "images/play.png";
             changeImage(playImageExited, btnPlay);
             controller.pause();
@@ -665,7 +675,7 @@ public class MediaPlayer extends javax.swing.JFrame {
         }
 
         if (playState.equals("SELECTED")) {
-            playImageEntered = "images/pause_h.png";
+//            playImageEntered = "images/pause_h.png";
             playImageExited = "images/pause.png";
             changeImage(playImageExited, btnPlay);
             controller.play(selectedIndex);
@@ -674,7 +684,7 @@ public class MediaPlayer extends javax.swing.JFrame {
         }
 
         if (playState.equals("PAUSED")) {
-            playImageEntered = "images/pause_h.png";
+//            playImageEntered = "images/pause_h.png";
             playImageExited = "images/pause.png";
             changeImage(playImageExited, btnPlay);
             controller.resume();
@@ -740,12 +750,19 @@ public class MediaPlayer extends javax.swing.JFrame {
     }//GEN-LAST:event_jList1MouseClicked
 
     private void jButtonAddDurationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddDurationActionPerformed
-        // TODO add your handling code here:
-        // Tambahkan durasi
-//        duration += 1;
+        // Menambah satu jam ke timeRemaining
+        timeRemaining += 3600; // Menambah 3600 detik (satu jam)
 
-        // Perbarui label
-//        jLabelTimeRemaining.setText("Time Remaining: " + duration + " jam");
+        // Perbarui label dan transaksi model
+        updateTimeRemaining(timeRemaining);
+
+        // Perbarui model transaksi dengan durasi yang baru
+        if (transaksiModel != null) {
+            transaksiModel.setDurasi(transaksiModel.getDurasi() + 1);
+            // Perbarui total harga berdasarkan durasi yang baru
+            int totalHarga = calculateTotalHarga(transaksiModel.getDurasi());
+            transaksiModel.setTotalHarga(totalHarga);
+        }
     }//GEN-LAST:event_jButtonAddDurationActionPerformed
 
     private void jButtonLeaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLeaveActionPerformed
@@ -759,10 +776,6 @@ public class MediaPlayer extends javax.swing.JFrame {
     private void uploadClicked(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadClicked
         controller.addFiles(jList1);
     }//GEN-LAST:event_uploadClicked
-
-    private void exitedDelete(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitedDelete
-        changeImage("images/delete.png", btnDelete);
-    }//GEN-LAST:event_exitedDelete
 
     /**
      * @param args the command line arguments
@@ -809,8 +822,8 @@ public class MediaPlayer extends javax.swing.JFrame {
     //variables
     private int selectedIndex;
 
-    private MusicController controller;
-    
+    private MediaPlayerController controller;
+
     public TransaksiModel getTransaksiModel() {
         return transaksiModel;
     }

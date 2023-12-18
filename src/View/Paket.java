@@ -13,7 +13,7 @@ public class Paket extends javax.swing.JFrame {
     // Variabel username sebagai atribut kelas
     private String username;
     private PaketModel paketModel;
-    private TransaksiModel transaksiModel; // Tambahkan atribut TransaksiModel
+    private TransaksiModel transaksiModel; 
     private PaketController paketController;
 
     // Ubah konstruktor untuk menerima TransaksiModel
@@ -22,7 +22,7 @@ public class Paket extends javax.swing.JFrame {
         this.paketModel = paketModel;
         this.username = username;
 
-        this.transaksiModel = transaksiModel; // Inisialisasi atribut TransaksiModel
+        this.transaksiModel = transaksiModel; 
         setPaketController(new PaketController(paketModel, this, transaksiModel)); // Teruskan TransaksiModel ke PaketController
         paketController.setWelcomeLabel(username);
     }

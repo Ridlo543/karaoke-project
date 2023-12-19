@@ -45,48 +45,52 @@ public class Transaksi extends javax.swing.JFrame {
         jLabelUsername = new javax.swing.JLabel();
         jLabelDurasi = new javax.swing.JLabel();
         jLabelTotalHarga = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1080, 608));
+        setPreferredSize(new java.awt.Dimension(1080, 608));
+        setResizable(false);
+        getContentPane().setLayout(null);
 
         jLabel1.setText("TRANSAKSI");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(24, 18, 62, 16);
 
         jLabelTanggal.setText("Tanggal Transaksi:");
+        getContentPane().add(jLabelTanggal);
+        jLabelTanggal.setBounds(24, 40, 97, 16);
 
         jLabelUsername.setText("Username:");
+        getContentPane().add(jLabelUsername);
+        jLabelUsername.setBounds(24, 62, 55, 16);
 
         jLabelDurasi.setText("Durasi:");
+        getContentPane().add(jLabelDurasi);
+        jLabelDurasi.setBounds(24, 84, 36, 16);
 
         jLabelTotalHarga.setText("Total Harga:");
+        getContentPane().add(jLabelTotalHarga);
+        jLabelTotalHarga.setBounds(24, 106, 66, 16);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelTanggal)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabelUsername)
-                    .addComponent(jLabelDurasi)
-                    .addComponent(jLabelTotalHarga))
-                .addContainerGap(280, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelTanggal)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelUsername)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelDurasi)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelTotalHarga)
-                .addContainerGap(178, Short.MAX_VALUE))
-        );
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/images/backgroundImage.png"))); // NOI18N
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(0, 340, 600, 270);
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/images/backgroundImage.png"))); // NOI18N
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(600, 350, 480, 260);
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/images/backgroundImage.png"))); // NOI18N
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(0, 0, 600, 340);
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/images/backgroundImage.png"))); // NOI18N
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(600, 0, 480, 340);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -97,6 +101,10 @@ public class Transaksi extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabelDurasi;
     private javax.swing.JLabel jLabelTanggal;
     private javax.swing.JLabel jLabelTotalHarga;

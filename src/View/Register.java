@@ -38,21 +38,23 @@ public class Register extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabelRole = new javax.swing.JLabel();
         jLabelUsername = new javax.swing.JLabel();
+        jLabelTelepon = new javax.swing.JLabel();
         jLabelPassword = new javax.swing.JLabel();
+        jLabelConfirmPassword = new javax.swing.JLabel();
+        jComboBoxRole = new javax.swing.JComboBox<>();
+        fTextFieldUsername = new source_ui.FTextField();
+        fTextFieldTelepon = new source_ui.FTextField();
+        fPasswordFieldPassword = new source_ui.FPasswordField();
+        fPasswordFieldConfirmPassword = new source_ui.FPasswordField();
+        jTextFieldTelepon = new javax.swing.JTextField();
         jTextFieldUsername = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabelUsername1 = new javax.swing.JLabel();
+        fButtonToLogin = new source_ui.FButton();
+        fButtonToRegister = new source_ui.FButton();
         jPasswordField1 = new javax.swing.JPasswordField();
         jButtonRegister = new javax.swing.JButton();
-        jLabelConfirmPassword = new javax.swing.JLabel();
         jPasswordField2 = new javax.swing.JPasswordField();
-        jLabelTelepon = new javax.swing.JLabel();
-        jTextFieldTelepon = new javax.swing.JTextField();
-        fTextField2 = new source_ui.FTextField();
-        fTextField3 = new source_ui.FTextField();
-        fTextField4 = new source_ui.FTextField();
-        fTextField5 = new source_ui.FTextField();
         jButtonToLogin = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -66,18 +68,85 @@ public class Register extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(1080, 608));
         getContentPane().setLayout(null);
 
+        jLabelRole.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
+        jLabelRole.setForeground(new java.awt.Color(225, 241, 255));
+        jLabelRole.setText("Role");
+        getContentPane().add(jLabelRole);
+        jLabelRole.setBounds(350, 60, 80, 30);
+
         jLabelUsername.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
         jLabelUsername.setForeground(new java.awt.Color(228, 241, 255));
         jLabelUsername.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelUsername.setText("Username");
         getContentPane().add(jLabelUsername);
-        jLabelUsername.setBounds(340, 140, 120, 30);
+        jLabelUsername.setBounds(340, 120, 120, 30);
+
+        jLabelTelepon.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
+        jLabelTelepon.setForeground(new java.awt.Color(228, 241, 255));
+        jLabelTelepon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelTelepon.setText("Nomor Telepon");
+        getContentPane().add(jLabelTelepon);
+        jLabelTelepon.setBounds(340, 190, 170, 30);
 
         jLabelPassword.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
         jLabelPassword.setForeground(new java.awt.Color(228, 241, 255));
         jLabelPassword.setText("Password");
         getContentPane().add(jLabelPassword);
-        jLabelPassword.setBounds(360, 290, 120, 20);
+        jLabelPassword.setBounds(360, 260, 120, 30);
+
+        jLabelConfirmPassword.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
+        jLabelConfirmPassword.setForeground(new java.awt.Color(228, 241, 255));
+        jLabelConfirmPassword.setText("Confirm Password");
+        getContentPane().add(jLabelConfirmPassword);
+        jLabelConfirmPassword.setBounds(360, 330, 210, 30);
+
+        jComboBoxRole.setBackground(new java.awt.Color(174, 210, 255));
+        jComboBoxRole.setFont(new java.awt.Font("Poppins", 1, 12)); // NOI18N
+        jComboBoxRole.setForeground(new java.awt.Color(39, 0, 93));
+        jComboBoxRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "User", "Staff" }));
+        jComboBoxRole.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxRoleActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jComboBoxRole);
+        jComboBoxRole.setBounds(350, 90, 380, 29);
+
+        fTextFieldUsername.setFont(new java.awt.Font("Poppins", 1, 14)); // NOI18N
+        fTextFieldUsername.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fTextFieldUsernameActionPerformed(evt);
+            }
+        });
+        getContentPane().add(fTextFieldUsername);
+        fTextFieldUsername.setBounds(350, 150, 380, 40);
+
+        fTextFieldTelepon.setFont(new java.awt.Font("Poppins", 1, 14)); // NOI18N
+        fTextFieldTelepon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fTextFieldTeleponActionPerformed(evt);
+            }
+        });
+        getContentPane().add(fTextFieldTelepon);
+        fTextFieldTelepon.setBounds(350, 220, 380, 40);
+        getContentPane().add(fPasswordFieldPassword);
+        fPasswordFieldPassword.setBounds(350, 290, 370, 39);
+
+        fPasswordFieldConfirmPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fPasswordFieldConfirmPasswordActionPerformed(evt);
+            }
+        });
+        getContentPane().add(fPasswordFieldConfirmPassword);
+        fPasswordFieldConfirmPassword.setBounds(350, 360, 370, 39);
+
+        jTextFieldTelepon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldTeleponActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jTextFieldTelepon);
+        jTextFieldTelepon.setBounds(791, 140, 72, 26);
 
         jTextFieldUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,18 +156,25 @@ public class Register extends javax.swing.JFrame {
         getContentPane().add(jTextFieldUsername);
         jTextFieldUsername.setBounds(791, 108, 72, 26);
 
-        jComboBox1.setBackground(new java.awt.Color(174, 210, 255));
-        jComboBox1.setFont(new java.awt.Font("Poppins", 1, 12)); // NOI18N
-        jComboBox1.setForeground(new java.awt.Color(39, 0, 93));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "User", "Staff" }));
-        getContentPane().add(jComboBox1);
-        jComboBox1.setBounds(350, 110, 380, 29);
+        fButtonToLogin.setText("Login");
+        fButtonToLogin.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
+        fButtonToLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fButtonToLoginActionPerformed(evt);
+            }
+        });
+        getContentPane().add(fButtonToLogin);
+        fButtonToLogin.setBounds(320, 440, 190, 50);
 
-        jLabelUsername1.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
-        jLabelUsername1.setForeground(new java.awt.Color(225, 241, 255));
-        jLabelUsername1.setText("Role");
-        getContentPane().add(jLabelUsername1);
-        jLabelUsername1.setBounds(350, 80, 80, 30);
+        fButtonToRegister.setText("Register");
+        fButtonToRegister.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
+        fButtonToRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fButtonToRegisterActionPerformed(evt);
+            }
+        });
+        getContentPane().add(fButtonToRegister);
+        fButtonToRegister.setBounds(570, 440, 190, 50);
         getContentPane().add(jPasswordField1);
         jPasswordField1.setBounds(791, 172, 72, 26);
 
@@ -110,65 +186,8 @@ public class Register extends javax.swing.JFrame {
         });
         getContentPane().add(jButtonRegister);
         jButtonRegister.setBounds(790, 242, 77, 27);
-
-        jLabelConfirmPassword.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
-        jLabelConfirmPassword.setForeground(new java.awt.Color(228, 241, 255));
-        jLabelConfirmPassword.setText("Confirm Password");
-        getContentPane().add(jLabelConfirmPassword);
-        jLabelConfirmPassword.setBounds(360, 360, 210, 30);
         getContentPane().add(jPasswordField2);
         jPasswordField2.setBounds(791, 204, 72, 26);
-
-        jLabelTelepon.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
-        jLabelTelepon.setForeground(new java.awt.Color(228, 241, 255));
-        jLabelTelepon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelTelepon.setText("Nomor Telepon");
-        getContentPane().add(jLabelTelepon);
-        jLabelTelepon.setBounds(340, 210, 170, 30);
-
-        jTextFieldTelepon.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldTeleponActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jTextFieldTelepon);
-        jTextFieldTelepon.setBounds(791, 140, 72, 26);
-
-        fTextField2.setFont(new java.awt.Font("Poppins", 1, 14)); // NOI18N
-        fTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fTextField2ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(fTextField2);
-        fTextField2.setBounds(350, 170, 380, 40);
-
-        fTextField3.setFont(new java.awt.Font("Poppins", 1, 14)); // NOI18N
-        fTextField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fTextField3ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(fTextField3);
-        fTextField3.setBounds(350, 240, 380, 40);
-
-        fTextField4.setFont(new java.awt.Font("Poppins", 1, 14)); // NOI18N
-        fTextField4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fTextField4ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(fTextField4);
-        fTextField4.setBounds(350, 390, 370, 40);
-
-        fTextField5.setFont(new java.awt.Font("Poppins", 1, 14)); // NOI18N
-        fTextField5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fTextField5ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(fTextField5);
-        fTextField5.setBounds(350, 310, 370, 40);
 
         jButtonToLogin.setText("Login");
         jButtonToLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -181,7 +200,7 @@ public class Register extends javax.swing.JFrame {
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/images/backgroundRegister.png"))); // NOI18N
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(320, 70, 440, 390);
+        jLabel5.setBounds(320, 50, 440, 370);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/images/backgroundImage.png"))); // NOI18N
         getContentPane().add(jLabel1);
@@ -208,7 +227,7 @@ public class Register extends javax.swing.JFrame {
 
     private void jButtonRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegisterActionPerformed
         // TODO add your handling code here:
-        String role = jComboBox1.getSelectedItem().toString();
+        String role = jComboBoxRole.getSelectedItem().toString();
         String username = jTextFieldUsername.getText();
         String telepon = jTextFieldTelepon.getText();
         String password = new String(jPasswordField1.getPassword());
@@ -231,34 +250,44 @@ public class Register extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonToLoginActionPerformed
 
-    private void fTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fTextField2ActionPerformed
+    private void fTextFieldUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fTextFieldUsernameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_fTextField2ActionPerformed
+    }//GEN-LAST:event_fTextFieldUsernameActionPerformed
 
-    private void fTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fTextField3ActionPerformed
+    private void fTextFieldTeleponActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fTextFieldTeleponActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_fTextField3ActionPerformed
+    }//GEN-LAST:event_fTextFieldTeleponActionPerformed
 
-    private void fTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fTextField5ActionPerformed
+    private void fButtonToRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fButtonToRegisterActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_fTextField5ActionPerformed
+    }//GEN-LAST:event_fButtonToRegisterActionPerformed
 
-    private void fTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fTextField4ActionPerformed
+    private void jComboBoxRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxRoleActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_fTextField4ActionPerformed
+    }//GEN-LAST:event_jComboBoxRoleActionPerformed
+
+    private void fButtonToLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fButtonToLoginActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fButtonToLoginActionPerformed
+
+    private void fPasswordFieldConfirmPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fPasswordFieldConfirmPasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fPasswordFieldConfirmPasswordActionPerformed
 
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private source_ui.FTextField fTextField2;
-    private source_ui.FTextField fTextField3;
-    private source_ui.FTextField fTextField4;
-    private source_ui.FTextField fTextField5;
+    private source_ui.FButton fButtonToLogin;
+    private source_ui.FButton fButtonToRegister;
+    private source_ui.FPasswordField fPasswordFieldConfirmPassword;
+    private source_ui.FPasswordField fPasswordFieldPassword;
+    private source_ui.FTextField fTextFieldTelepon;
+    private source_ui.FTextField fTextFieldUsername;
     private javax.swing.JButton jButtonRegister;
     private javax.swing.JButton jButtonToLogin;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBoxRole;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -266,9 +295,9 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabelConfirmPassword;
     private javax.swing.JLabel jLabelPassword;
+    private javax.swing.JLabel jLabelRole;
     private javax.swing.JLabel jLabelTelepon;
     private javax.swing.JLabel jLabelUsername;
-    private javax.swing.JLabel jLabelUsername1;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JPasswordField jPasswordField2;
     private javax.swing.JTextField jTextFieldTelepon;

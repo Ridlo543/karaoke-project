@@ -37,24 +37,23 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabelNameKaraoke = new javax.swing.JLabel();
+        jLabelDescription = new javax.swing.JLabel();
         jLabelUsername = new javax.swing.JLabel();
         jLabelPassword = new javax.swing.JLabel();
         jLabelRole = new javax.swing.JLabel();
-        nameKaraoke = new javax.swing.JLabel();
-        jLabelDeskription = new javax.swing.JLabel();
+        jComboBoxRole = new javax.swing.JComboBox<>();
+        fTextFieldUsername = new source_ui.FTextField();
+        fPasswordFieldPassword = new source_ui.FPasswordField();
+        fButtonToRegister = new source_ui.FButton();
+        fButtonToLogin = new source_ui.FButton();
         jTextField1 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
         jPasswordField1 = new javax.swing.JPasswordField();
         jButtonLogin = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        fTextFieldUsername = new source_ui.FTextField();
-        fTextFieldPassword = new source_ui.FTextField();
         jButtonToRegister = new javax.swing.JButton();
-        fButtonRegister = new source_ui.FButton();
-        fButtonLogin = new source_ui.FButton();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        jLabelBackground1 = new javax.swing.JLabel();
+        jLabelBackground2 = new javax.swing.JLabel();
+        jLabelBackground3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login Page");
@@ -62,6 +61,20 @@ public class Login extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(1080, 608));
         setResizable(false);
         getContentPane().setLayout(null);
+
+        jLabelNameKaraoke.setFont(new java.awt.Font("Poppins", 1, 70)); // NOI18N
+        jLabelNameKaraoke.setForeground(new java.awt.Color(228, 241, 255));
+        jLabelNameKaraoke.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelNameKaraoke.setText("UVUtopia");
+        getContentPane().add(jLabelNameKaraoke);
+        jLabelNameKaraoke.setBounds(30, 20, 350, 70);
+
+        jLabelDescription.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
+        jLabelDescription.setForeground(new java.awt.Color(228, 241, 255));
+        jLabelDescription.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabelDescription.setText("In a world of noise, \nfind your melody \nwith us.");
+        getContentPane().add(jLabelDescription);
+        jLabelDescription.setBounds(30, 90, 460, 30);
 
         jLabelUsername.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
         jLabelUsername.setForeground(new java.awt.Color(228, 241, 255));
@@ -79,24 +92,47 @@ public class Login extends javax.swing.JFrame {
 
         jLabelRole.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
         jLabelRole.setForeground(new java.awt.Color(228, 241, 255));
-        jLabelRole.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabelRole.setText("In a world of noise, \nfind your melody \nwith us.");
+        jLabelRole.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabelRole.setText("Role");
         getContentPane().add(jLabelRole);
-        jLabelRole.setBounds(30, 90, 460, 30);
+        jLabelRole.setBounds(640, 110, 70, 30);
 
-        nameKaraoke.setFont(new java.awt.Font("Poppins", 1, 70)); // NOI18N
-        nameKaraoke.setForeground(new java.awt.Color(228, 241, 255));
-        nameKaraoke.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        nameKaraoke.setText("UVUtopia");
-        getContentPane().add(nameKaraoke);
-        nameKaraoke.setBounds(30, 20, 350, 70);
+        jComboBoxRole.setBackground(new java.awt.Color(174, 210, 255));
+        jComboBoxRole.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
+        jComboBoxRole.setForeground(new java.awt.Color(148, 0, 255));
+        jComboBoxRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "User", "Staff" }));
+        getContentPane().add(jComboBoxRole);
+        jComboBoxRole.setBounds(640, 150, 260, 30);
 
-        jLabelDeskription.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
-        jLabelDeskription.setForeground(new java.awt.Color(228, 241, 255));
-        jLabelDeskription.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabelDeskription.setText("Role");
-        getContentPane().add(jLabelDeskription);
-        jLabelDeskription.setBounds(640, 110, 70, 30);
+        fTextFieldUsername.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
+        fTextFieldUsername.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fTextFieldUsernameActionPerformed(evt);
+            }
+        });
+        getContentPane().add(fTextFieldUsername);
+        fTextFieldUsername.setBounds(640, 240, 260, 48);
+        getContentPane().add(fPasswordFieldPassword);
+        fPasswordFieldPassword.setBounds(640, 330, 270, 50);
+
+        fButtonToRegister.setText("Register");
+        fButtonToRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fButtonToRegisterActionPerformed(evt);
+            }
+        });
+        getContentPane().add(fButtonToRegister);
+        fButtonToRegister.setBounds(790, 410, 110, 40);
+
+        fButtonToLogin.setText("Login");
+        fButtonToLogin.setMaximumSize(new java.awt.Dimension(120, 36));
+        fButtonToLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fButtonToLoginActionPerformed(evt);
+            }
+        });
+        getContentPane().add(fButtonToLogin);
+        fButtonToLogin.setBounds(640, 410, 110, 40);
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,13 +141,6 @@ public class Login extends javax.swing.JFrame {
         });
         getContentPane().add(jTextField1);
         jTextField1.setBounds(894, 191, 72, 26);
-
-        jComboBox1.setBackground(new java.awt.Color(174, 210, 255));
-        jComboBox1.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
-        jComboBox1.setForeground(new java.awt.Color(148, 0, 255));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "User", "Staff" }));
-        getContentPane().add(jComboBox1);
-        jComboBox1.setBounds(640, 150, 260, 30);
 
         jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,26 +158,6 @@ public class Login extends javax.swing.JFrame {
         });
         getContentPane().add(jButtonLogin);
         jButtonLogin.setBounds(940, 330, 76, 27);
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(570, 602, 0, 0);
-
-        fTextFieldUsername.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
-        fTextFieldUsername.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fTextFieldUsernameActionPerformed(evt);
-            }
-        });
-        getContentPane().add(fTextFieldUsername);
-        fTextFieldUsername.setBounds(640, 330, 270, 48);
-
-        fTextFieldPassword.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
-        fTextFieldPassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fTextFieldPasswordActionPerformed(evt);
-            }
-        });
-        getContentPane().add(fTextFieldPassword);
-        fTextFieldPassword.setBounds(640, 240, 260, 48);
 
         jButtonToRegister.setText("Register");
         jButtonToRegister.addActionListener(new java.awt.event.ActionListener() {
@@ -159,43 +168,24 @@ public class Login extends javax.swing.JFrame {
         getContentPane().add(jButtonToRegister);
         jButtonToRegister.setBounds(910, 110, 76, 27);
 
-        fButtonRegister.setText("Register");
-        fButtonRegister.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fButtonRegisterActionPerformed(evt);
-            }
-        });
-        getContentPane().add(fButtonRegister);
-        fButtonRegister.setBounds(790, 410, 110, 40);
+        jLabelBackground1.setBackground(new java.awt.Color(39, 0, 93));
+        jLabelBackground1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/images/backgroundImage.png"))); // NOI18N
+        jLabelBackground1.setText("jLabel2");
+        getContentPane().add(jLabelBackground1);
+        jLabelBackground1.setBounds(540, 340, 540, 270);
 
-        fButtonLogin.setText("Login");
-        fButtonLogin.setMaximumSize(new java.awt.Dimension(120, 36));
-        fButtonLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fButtonLoginActionPerformed(evt);
-            }
-        });
-        getContentPane().add(fButtonLogin);
-        fButtonLogin.setBounds(640, 410, 110, 40);
+        jLabelBackground2.setBackground(new java.awt.Color(39, 0, 93));
+        jLabelBackground2.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        jLabelBackground2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/images/backgroundImage.png"))); // NOI18N
+        jLabelBackground2.setText("jLabel2");
+        getContentPane().add(jLabelBackground2);
+        jLabelBackground2.setBounds(540, 0, 540, 340);
 
-        jLabel2.setBackground(new java.awt.Color(39, 0, 93));
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/images/backgroundImage.png"))); // NOI18N
-        jLabel2.setText("jLabel2");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(540, 340, 540, 270);
-
-        jLabel4.setBackground(new java.awt.Color(39, 0, 93));
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/images/backgroundImage.png"))); // NOI18N
-        jLabel4.setText("jLabel2");
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(540, 0, 540, 340);
-
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/images/loginImage.png"))); // NOI18N
-        jLabel5.setText("jLabel5");
-        jLabel5.setPreferredSize(new java.awt.Dimension(540, 608));
-        getContentPane().add(jLabel5);
-        jLabel5.setBounds(0, 0, 540, 610);
+        jLabelBackground3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/images/loginImage.png"))); // NOI18N
+        jLabelBackground3.setText("jLabel5");
+        jLabelBackground3.setPreferredSize(new java.awt.Dimension(540, 608));
+        getContentPane().add(jLabelBackground3);
+        jLabelBackground3.setBounds(0, 0, 540, 610);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -206,7 +196,7 @@ public class Login extends javax.swing.JFrame {
 
     private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
         // TODO add your handling code here:
-        String role = jComboBox1.getSelectedItem().toString();
+        String role = jComboBoxRole.getSelectedItem().toString();
         String username = jTextField1.getText();
         String password = new String(jPasswordField1.getPassword());
         
@@ -235,21 +225,17 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jPasswordField1ActionPerformed
 
-    private void fButtonRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fButtonRegisterActionPerformed
+    private void fButtonToRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fButtonToRegisterActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_fButtonRegisterActionPerformed
+    }//GEN-LAST:event_fButtonToRegisterActionPerformed
 
     private void fTextFieldUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fTextFieldUsernameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_fTextFieldUsernameActionPerformed
 
-    private void fTextFieldPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fTextFieldPasswordActionPerformed
+    private void fButtonToLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fButtonToLoginActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_fTextFieldPasswordActionPerformed
-
-    private void fButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fButtonLoginActionPerformed
-        // TODO add your handling code here:
-         String role = jComboBox1.getSelectedItem().toString();
+         String role = jComboBoxRole.getSelectedItem().toString();
         String username = jTextField1.getText();
         String password = new String(jPasswordField1.getPassword());
         
@@ -263,30 +249,29 @@ public class Login extends javax.swing.JFrame {
             // Jika login gagal, tambahkan logika lainnya jika diperlukan
             System.out.println("Login Gagal!");
         }
-    }//GEN-LAST:event_fButtonLoginActionPerformed
+    }//GEN-LAST:event_fButtonToLoginActionPerformed
 
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private source_ui.FButton fButtonLogin;
-    private source_ui.FButton fButtonRegister;
-    private source_ui.FTextField fTextFieldPassword;
+    private source_ui.FButton fButtonToLogin;
+    private source_ui.FButton fButtonToRegister;
+    private source_ui.FPasswordField fPasswordFieldPassword;
     private source_ui.FTextField fTextFieldUsername;
     private javax.swing.JButton jButtonLogin;
     private javax.swing.JButton jButtonToRegister;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabelDeskription;
+    private javax.swing.JComboBox<String> jComboBoxRole;
+    private javax.swing.JLabel jLabelBackground1;
+    private javax.swing.JLabel jLabelBackground2;
+    private javax.swing.JLabel jLabelBackground3;
+    private javax.swing.JLabel jLabelDescription;
+    private javax.swing.JLabel jLabelNameKaraoke;
     private javax.swing.JLabel jLabelPassword;
     private javax.swing.JLabel jLabelRole;
     private javax.swing.JLabel jLabelUsername;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JLabel nameKaraoke;
     // End of variables declaration//GEN-END:variables
 }

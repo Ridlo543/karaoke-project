@@ -41,10 +41,16 @@ public class Transaksi extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabelTanggal = new javax.swing.JLabel();
-        jLabelUsername = new javax.swing.JLabel();
-        jLabelDurasi = new javax.swing.JLabel();
         jLabelTotalHarga = new javax.swing.JLabel();
+        panelRounded1 = new source_ui.PanelRounded();
+        panelRounded2 = new source_ui.PanelRounded();
+        jLabelDurasi = new javax.swing.JLabel();
+        panelRounded3 = new source_ui.PanelRounded();
+        jLabel7 = new javax.swing.JLabel();
+        jLabelUsername1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabelTanggal = new javax.swing.JLabel();
+        fButton1 = new source_ui.FButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -60,21 +66,124 @@ public class Transaksi extends javax.swing.JFrame {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(24, 18, 62, 16);
 
-        jLabelTanggal.setText("Tanggal Transaksi:");
-        getContentPane().add(jLabelTanggal);
-        jLabelTanggal.setBounds(24, 40, 97, 16);
-
-        jLabelUsername.setText("Username:");
-        getContentPane().add(jLabelUsername);
-        jLabelUsername.setBounds(24, 62, 55, 16);
-
-        jLabelDurasi.setText("Durasi:");
-        getContentPane().add(jLabelDurasi);
-        jLabelDurasi.setBounds(24, 84, 36, 16);
-
         jLabelTotalHarga.setText("Total Harga:");
         getContentPane().add(jLabelTotalHarga);
         jLabelTotalHarga.setBounds(24, 106, 66, 16);
+
+        panelRounded1.setBackground(new java.awt.Color(148, 0, 255));
+        panelRounded1.setRoundBottomLeft(50);
+        panelRounded1.setRoundBottomRight(50);
+        panelRounded1.setRoundTopLeft(50);
+        panelRounded1.setRoundTopRight(50);
+
+        panelRounded2.setBackground(new java.awt.Color(174, 210, 255));
+        panelRounded2.setRoundBottomLeft(50);
+        panelRounded2.setRoundBottomRight(50);
+        panelRounded2.setRoundTopLeft(50);
+        panelRounded2.setRoundTopRight(50);
+
+        jLabelDurasi.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
+        jLabelDurasi.setForeground(new java.awt.Color(148, 0, 255));
+        jLabelDurasi.setText("Durasi           :");
+
+        panelRounded3.setBackground(new java.awt.Color(148, 0, 255));
+        panelRounded3.setRoundBottomLeft(60);
+        panelRounded3.setRoundBottomRight(60);
+        panelRounded3.setRoundTopLeft(60);
+        panelRounded3.setRoundTopRight(60);
+
+        jLabel7.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
+        jLabel7.setText("Total Price :");
+
+        javax.swing.GroupLayout panelRounded3Layout = new javax.swing.GroupLayout(panelRounded3);
+        panelRounded3.setLayout(panelRounded3Layout);
+        panelRounded3Layout.setHorizontalGroup(
+            panelRounded3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRounded3Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(288, Short.MAX_VALUE))
+        );
+        panelRounded3Layout.setVerticalGroup(
+            panelRounded3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRounded3Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jLabel7)
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+
+        jLabelUsername1.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
+        jLabelUsername1.setForeground(new java.awt.Color(148, 0, 255));
+        jLabelUsername1.setText("Username  :");
+
+        javax.swing.GroupLayout panelRounded2Layout = new javax.swing.GroupLayout(panelRounded2);
+        panelRounded2.setLayout(panelRounded2Layout);
+        panelRounded2Layout.setHorizontalGroup(
+            panelRounded2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRounded2Layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addGroup(panelRounded2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelUsername1)
+                    .addComponent(jLabelDurasi)
+                    .addComponent(panelRounded3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(155, Short.MAX_VALUE))
+        );
+        panelRounded2Layout.setVerticalGroup(
+            panelRounded2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRounded2Layout.createSequentialGroup()
+                .addGap(65, 65, 65)
+                .addComponent(jLabelUsername1)
+                .addGap(18, 18, 18)
+                .addComponent(jLabelDurasi)
+                .addGap(32, 32, 32)
+                .addComponent(panelRounded3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
+        );
+
+        jLabel2.setFont(new java.awt.Font("Poppins", 1, 36)); // NOI18N
+        jLabel2.setText("Cost Details");
+
+        jLabelTanggal.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
+        jLabelTanggal.setText("Tanggal Transaksi:");
+
+        javax.swing.GroupLayout panelRounded1Layout = new javax.swing.GroupLayout(panelRounded1);
+        panelRounded1.setLayout(panelRounded1Layout);
+        panelRounded1Layout.setHorizontalGroup(
+            panelRounded1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRounded1Layout.createSequentialGroup()
+                .addContainerGap(36, Short.MAX_VALUE)
+                .addComponent(panelRounded2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(64, 64, 64))
+            .addGroup(panelRounded1Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jLabel2)
+                .addGap(114, 114, 114)
+                .addComponent(jLabelTanggal, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelRounded1Layout.setVerticalGroup(
+            panelRounded1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRounded1Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(panelRounded1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabelTanggal))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panelRounded2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(154, 154, 154))
+        );
+
+        getContentPane().add(panelRounded1);
+        panelRounded1.setBounds(170, 70, 760, 390);
+
+        fButton1.setText("Pay");
+        fButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(fButton1);
+        fButton1.setBounds(170, 490, 140, 40);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/images/backgroundImage.png"))); // NOI18N
         getContentPane().add(jLabel3);
@@ -82,7 +191,7 @@ public class Transaksi extends javax.swing.JFrame {
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/images/backgroundImage.png"))); // NOI18N
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(600, 350, 480, 260);
+        jLabel4.setBounds(600, 340, 480, 270);
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/images/backgroundImage.png"))); // NOI18N
         getContentPane().add(jLabel5);
@@ -95,19 +204,29 @@ public class Transaksi extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void fButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fButton1ActionPerformed
+
         /**
          * @param args the command line arguments
          */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private source_ui.FButton fButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabelDurasi;
     private javax.swing.JLabel jLabelTanggal;
     private javax.swing.JLabel jLabelTotalHarga;
-    private javax.swing.JLabel jLabelUsername;
+    private javax.swing.JLabel jLabelUsername1;
+    private source_ui.PanelRounded panelRounded1;
+    private source_ui.PanelRounded panelRounded2;
+    private source_ui.PanelRounded panelRounded3;
     // End of variables declaration//GEN-END:variables
 }

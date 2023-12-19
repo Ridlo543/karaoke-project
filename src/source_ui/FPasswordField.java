@@ -1,13 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package source_ui;
 
-/**
- *
- * @author Reni Uswatun Hasanah
- */
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
@@ -15,15 +7,15 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import javax.swing.BorderFactory;
-import javax.swing.JTextField;
+import javax.swing.JPasswordField;
 
-public class FTextField extends JTextField {
+public class FPasswordField extends JPasswordField {
 
     private Color fillColor;
     private Color lineColor;
     private int strokeWidth;
 
-    public FTextField() {
+    public FPasswordField() {
         fillColor = new Color(174, 210, 255);
         lineColor = new Color(148, 0, 255);
         strokeWidth = 1;
@@ -75,9 +67,4 @@ public class FTextField extends JTextField {
         }
         super.paintComponent(g);
     }
-
-    public String getPassword() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
 }

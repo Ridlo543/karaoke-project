@@ -1,19 +1,19 @@
 package View;
 
 import java.awt.Image;
-import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.Timer;
 import Controller.MediaPlayerController;
-import Controller.PaketController;
 import Model.TransaksiModel;
-import java.util.Map;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.SwingWorker;
 
 public class MediaPlayer extends javax.swing.JFrame {
@@ -21,6 +21,8 @@ public class MediaPlayer extends javax.swing.JFrame {
     private TransaksiModel transaksiModel;
     private int timeRemaining;
     private Timer timer;
+    private Timer countdownTimer;
+    private int remainingTimeInSeconds;
 
     public static int count;
     public static String Display;
@@ -49,7 +51,8 @@ public class MediaPlayer extends javax.swing.JFrame {
         MediaPlayerController.jlistPanel = jList1;
         controller = new MediaPlayerController(this);
         this.transaksiModel = transaksiModel;
-        this.timeRemaining = timeRemaining;  // Inisialisasi timeRemaining
+        this.timeRemaining = timeRemaining * 3600;
+        startCountdownTimer();
 
         random = false;
         repeat = false;
@@ -73,67 +76,58 @@ public class MediaPlayer extends javax.swing.JFrame {
 
     }
 
-    public void showMediaPlayer() {
-        startUpdatingTimeRemaining();
-        setVisible(true);
+    // Method to start the countdown timer
+    private void startCountdownTimer() {
+        countdownTimer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Decrement remaining time and update the label
+                updateTimeRemainingLabel();
+                // You can add additional logic if needed
+            }
+        });
+        countdownTimer.start();
     }
 
-    private void startUpdatingTimeRemaining() {
-        SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
-            @Override
-            protected Void doInBackground() throws Exception {
-                updateTimeRemaining(timeRemaining);
-                return null;
-            }
-        };
+//    private void initializeTimer() {
+//        countdownTimer = new Timer(1000, new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                if (remainingTimeInSeconds > 0) {
+//                    remainingTimeInSeconds--;
+//                    System.out.println(remainingTimeInSeconds);
+//                    updateLabel();
+//                } else {
+//                    // Waktu habis, lakukan tindakan sesuai kebutuhan
+//                    countdownTimer.stop();
+//                }
+//            }
+//        });
+//        countdownTimer.start();
+//    }
+    // Method to update the jLabelTimeRemaining
+    private void updateTimeRemainingLabel() {
+        int hours = timeRemaining / 3600;
+        int minutes = (timeRemaining % 3600) / 60;
+        int seconds = timeRemaining % 60;
 
-        worker.execute();
+        String timeFormatted = String.format("%02d:%02d:%02d", hours, minutes, seconds);
+        jLabelTimeRemaining.setText("Time Remaining: " + timeFormatted);
+
+        // Decrement remaining time
+        timeRemaining--;
+
+        // Additional logic can be added here based on your requirements
+    }
+
+    public void showMediaPlayer() {
+//        startUpdatingTimeRemaining();
+        this.setVisible(true);
     }
 
     public void setMusicController(MediaPlayerController controller) {
         this.controller = controller;
     }
-
-    private int calculateTotalHarga(int durasi) {
-        int hargaPerJam = 10000;
-        return durasi * hargaPerJam;
-    }
-
-    private void updateTimeRemaining(int timeRemainingInHours) {
-        int timeRemainingInSeconds = timeRemainingInHours * 3600; // konversi jam ke detik
-        int hours, minutes, seconds;
-
-        while (timeRemainingInSeconds >= 0) {
-            hours = timeRemainingInSeconds / 3600;
-            minutes = (timeRemainingInSeconds % 3600) / 60;
-            seconds = timeRemainingInSeconds % 60;
-
-            String formattedTime = String.format("%02d:%02d:%02d", hours, minutes, seconds);
-
-            // Perbarui label dengan waktu yang diformat
-            jLabelTimeRemaining.setText("Time Remaining: " + formattedTime);
-
-            // Cek apakah waktu tersisa sudah habis
-            if (timeRemainingInSeconds == 0) {
-                // Lakukan tindakan yang diperlukan ketika waktu habis, misalnya, otomatis keluar
-                jButtonLeaveActionPerformed(null);
-            }
-
-            // Tunggu 1 detik
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            // Kurangi waktu tersisa setiap detik
-            timeRemainingInSeconds--;
-        }
-    }
-
-//    public void setLyric(String lyricText) {
-//        PanelLyric.setText(lyricText);
-//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -678,7 +672,7 @@ public class MediaPlayer extends javax.swing.JFrame {
 
         //switch can be used
         if (playState.equals("PLAYING")) {
-//            playImageEntered = "images/play_h.png";
+            playImageEntered = "images/play_h.png";
             playImageExited = "images/play.png";
             changeImage(playImageExited, btnPlay);
             controller.pause();
@@ -687,7 +681,7 @@ public class MediaPlayer extends javax.swing.JFrame {
         }
 
         if (playState.equals("SELECTED")) {
-//            playImageEntered = "images/pause_h.png";
+            playImageEntered = "images/pause_h.png";
             playImageExited = "images/pause.png";
             changeImage(playImageExited, btnPlay);
             controller.play(selectedIndex);
@@ -696,7 +690,7 @@ public class MediaPlayer extends javax.swing.JFrame {
         }
 
         if (playState.equals("PAUSED")) {
-//            playImageEntered = "images/pause_h.png";
+            playImageEntered = "images/pause_h.png";
             playImageExited = "images/pause.png";
             changeImage(playImageExited, btnPlay);
             controller.resume();
@@ -761,13 +755,16 @@ public class MediaPlayer extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jList1MouseClicked
 
-    public void addDuration(int additionalHours) {
-        timeRemaining += additionalHours; // Tambahkan durasi ke waktu tersisa
-        updateTimeRemaining(timeRemaining); // Perbarui label waktu tersisa
-    }
 
     private void jButtonAddDurationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddDurationActionPerformed
-        addDuration(1); // Tambahkan durasi satu jam
+        // Add one hour to the remaining time
+        timeRemaining += 3600;
+
+        // Update hargaTotal in TransaksiModel (you may need to adjust this based on your actual implementation)
+        transaksiModel.setTotalHarga(transaksiModel.getTotalHarga() + 10);
+
+        // Update the jLabelTimeRemaining
+        updateTimeRemainingLabel();
 
         // Perbarui label waktu tersisa
 //        updateTimeRemaining(timeRemaining);

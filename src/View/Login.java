@@ -8,13 +8,12 @@ public class Login extends javax.swing.JFrame {
 
     private List<User> userList;
     private LoginController loginController;
-    
 
     public Login(List<User> userList, LoginController loginController) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.userList = userList;
-        
+
         setLoginController(loginController);
     }
 
@@ -22,7 +21,6 @@ public class Login extends javax.swing.JFrame {
     public void setLoginController(LoginController loginController) {
         this.loginController = loginController;
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -38,14 +36,10 @@ public class Login extends javax.swing.JFrame {
         jLabelRole = new javax.swing.JLabel();
         nameKaraoke = new javax.swing.JLabel();
         jLabelDeskription = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox<>();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jButtonLogin = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         fTextFieldUsername = new source_ui.FTextField();
-        fTextFieldPassword = new source_ui.FTextField();
-        jButtonToRegister = new javax.swing.JButton();
+        fPasswordField = new source_ui.FPasswordField();
         fButtonRegister = new source_ui.FButton();
         fButtonLogin = new source_ui.FButton();
         jLabel2 = new javax.swing.JLabel();
@@ -94,37 +88,12 @@ public class Login extends javax.swing.JFrame {
         getContentPane().add(jLabelDeskription);
         jLabelDeskription.setBounds(640, 110, 70, 30);
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jTextField1);
-        jTextField1.setBounds(894, 191, 72, 22);
-
         jComboBox1.setBackground(new java.awt.Color(174, 210, 255));
         jComboBox1.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
         jComboBox1.setForeground(new java.awt.Color(148, 0, 255));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "User", "Staff" }));
         getContentPane().add(jComboBox1);
         jComboBox1.setBounds(640, 150, 260, 30);
-
-        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jPasswordField1);
-        jPasswordField1.setBounds(925, 254, 72, 22);
-
-        jButtonLogin.setText("Login");
-        jButtonLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonLoginActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButtonLogin);
-        jButtonLogin.setBounds(940, 330, 72, 23);
         getContentPane().add(jLabel1);
         jLabel1.setBounds(570, 602, 0, 0);
 
@@ -135,25 +104,9 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(fTextFieldUsername);
-        fTextFieldUsername.setBounds(640, 330, 270, 48);
-
-        fTextFieldPassword.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
-        fTextFieldPassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fTextFieldPasswordActionPerformed(evt);
-            }
-        });
-        getContentPane().add(fTextFieldPassword);
-        fTextFieldPassword.setBounds(640, 240, 260, 48);
-
-        jButtonToRegister.setText("Register");
-        jButtonToRegister.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonToRegisterActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButtonToRegister);
-        jButtonToRegister.setBounds(910, 110, 76, 23);
+        fTextFieldUsername.setBounds(640, 230, 270, 48);
+        getContentPane().add(fPasswordField);
+        fPasswordField.setBounds(640, 320, 270, 50);
 
         fButtonRegister.setText("Register");
         fButtonRegister.addActionListener(new java.awt.event.ActionListener() {
@@ -196,62 +149,28 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
-    private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
-        // TODO add your handling code here:
-        String role = jComboBox1.getSelectedItem().toString();
-        String username = jTextField1.getText();
-        String password = new String(jPasswordField1.getPassword());
-        
-        // Memanggil metode processLogin pada LoginController
-        boolean loginSuccessful = loginController.processLogin(role, username, password);
-        
-        if (loginSuccessful) {
-            // Jika login berhasil, pindah ke halaman paket
-            loginController.switchToPaket(username);
-        } else {
-            // Jika login gagal, tambahkan logika lainnya jika diperlukan
-            System.out.println("Login Gagal!");
-        }
-    }//GEN-LAST:event_jButtonLoginActionPerformed
-
-    private void jButtonToRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonToRegisterActionPerformed
+    private void fButtonRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fButtonRegisterActionPerformed
         // TODO add your handling code here:
         if (loginController != null) {
             loginController.switchToRegister();
         } else {
             System.err.println("LoginController is null. Make sure it is set before calling switchToRegister.");
         }
-    }//GEN-LAST:event_jButtonToRegisterActionPerformed
-
-    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField1ActionPerformed
-
-    private void fButtonRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fButtonRegisterActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_fButtonRegisterActionPerformed
 
     private void fTextFieldUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fTextFieldUsernameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_fTextFieldUsernameActionPerformed
 
-    private void fTextFieldPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fTextFieldPasswordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fTextFieldPasswordActionPerformed
-
     private void fButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fButtonLoginActionPerformed
         // TODO add your handling code here:
-         String role = jComboBox1.getSelectedItem().toString();
-        String username = jTextField1.getText();
-        String password = new String(jPasswordField1.getPassword());
-        
+        String role = jComboBox1.getSelectedItem().toString();
+        String username = fTextFieldUsername.getText();
+        String password = new String(fPasswordField.getPassword());
+
         // Memanggil metode processLogin pada LoginController
         boolean loginSuccessful = loginController.processLogin(role, username, password);
-        
+
         if (loginSuccessful) {
             // Jika login berhasil, pindah ke halaman paket
             loginController.switchToPaket(username);
@@ -268,10 +187,8 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private source_ui.FButton fButtonLogin;
     private source_ui.FButton fButtonRegister;
-    private source_ui.FTextField fTextFieldPassword;
+    private source_ui.FPasswordField fPasswordField;
     private source_ui.FTextField fTextFieldUsername;
-    private javax.swing.JButton jButtonLogin;
-    private javax.swing.JButton jButtonToRegister;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -281,8 +198,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelPassword;
     private javax.swing.JLabel jLabelRole;
     private javax.swing.JLabel jLabelUsername;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel nameKaraoke;
     // End of variables declaration//GEN-END:variables
 }

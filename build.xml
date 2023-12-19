@@ -10,6 +10,23 @@
 <project name="KaraokeApp" default="default" basedir=".">
     <description>Builds, tests, and runs the project KaraokeApp.</description>
     <import file="nbproject/build-impl.xml"/>
+    
+    <!-- Add a new path element for library JAR files -->
+    <path id="lib.classpath">
+        <fileset dir="lib" includes="*.jar"/>
+    </path>
+
+    <!-- Override the -post-init target to add the library classpath -->
+    <target name="-post-init">
+        <!-- Display a message -->
+        <echo message="Adding JAR files from lib/ to classpath"/>
+
+        <!-- Add the JAR files to the project classpath -->
+        <pathconvert property="javac.classpath" refid="lib.classpath"/>
+        <propertyfile file="${build.classes.dir}/build.properties">
+            <entry key="javac.classpath" value="${javac.classpath}"/>
+        </propertyfile>
+    </target>
     <!--
 
     There exist several targets which are by default empty and which can be 

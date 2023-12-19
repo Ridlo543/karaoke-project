@@ -107,6 +107,7 @@ public class PaketController {
     public void switchToMediaPlayer(String username, int timeRemaining) {
         if (transaksiModel != null) {
             MediaPlayer mediaPlayerFrame = new MediaPlayer(username, timeRemaining, transaksiModel);
+            System.out.println("durasi: "+timeRemaining);
             paketView.setVisible(false);
             paketView.dispose();
             mediaPlayerFrame.showMediaPlayer();

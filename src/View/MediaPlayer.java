@@ -12,9 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.Timer;
 import Controller.MediaPlayerController;
 import Controller.PaketController;
-import Model.Lyric;
 import Model.TransaksiModel;
-import Util.LyricLoader;
 import java.util.Map;
 import javax.swing.SwingWorker;
 
@@ -69,6 +67,7 @@ public class MediaPlayer extends javax.swing.JFrame {
         MediaPlayerController.labelTimeRemaining = labelTimeRemaining;
         MediaPlayerController.lebelImageAlbum = lebelImageAlbum;
         MediaPlayerController.jprogressBar = jProgressBar1;
+        MediaPlayerController.PanelLyric = PanelLyric;
 
         jLabelWelcome.setText("Welcome, " + username);
 
@@ -132,21 +131,9 @@ public class MediaPlayer extends javax.swing.JFrame {
         }
     }
 
-    private void loadLyrics(String jsonFilePath) {
-        Map<String, Lyric> lyricsMap = LyricLoader.loadLyrics(jsonFilePath);
-        if (lyricsMap != null) {
-            // Tampilkan lirik sesuai dengan lagu yang sedang diputar
-            String currentSongTitle = "JudulLagu"; // Ganti dengan judul lagu yang sedang diputar
-            Lyric currentLyric = lyricsMap.get(currentSongTitle);
-            if (currentLyric != null) {
-                PanelLyric.setText(currentLyric.getContent());
-            }
-        }
-    }
-    
-    public void setLyric(String lyricText) {
-        PanelLyric.setText(lyricText);
-    }
+//    public void setLyric(String lyricText) {
+//        PanelLyric.setText(lyricText);
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -161,11 +148,12 @@ public class MediaPlayer extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jLabelPlaylist = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        PanelLyric = new javax.swing.JTextPane();
+        jLabelLyric = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        PanelLyric = new javax.swing.JTextArea();
         jPanel3 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jProgressBar1 = new javax.swing.JProgressBar();
@@ -217,8 +205,8 @@ public class MediaPlayer extends javax.swing.JFrame {
 
         jPanel7.setOpaque(false);
 
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Play List");
+        jLabelPlaylist.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelPlaylist.setText("Play List");
 
         jList1.setBackground(new java.awt.Color(248, 248, 248));
         jList1.setForeground(new java.awt.Color(184, 169, 169));
@@ -230,35 +218,43 @@ public class MediaPlayer extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jList1);
 
-        jScrollPane2.setViewportView(PanelLyric);
+        jLabelLyric.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelLyric.setText("Lyric");
+
+        PanelLyric.setEditable(false);
+        PanelLyric.setBackground(new java.awt.Color(255, 255, 255));
+        PanelLyric.setColumns(20);
+        PanelLyric.setRows(5);
+        jScrollPane3.setViewportView(PanelLyric);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(112, 112, 112)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelPlaylist, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelLyric, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(jScrollPane2)))
+                    .addComponent(jScrollPane3))
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
+                .addComponent(jLabelLyric)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
+                .addComponent(jScrollPane3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabelPlaylist)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -269,9 +265,7 @@ public class MediaPlayer extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jPanel3.setOpaque(false);
@@ -357,7 +351,7 @@ public class MediaPlayer extends javax.swing.JFrame {
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 1, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -652,7 +646,7 @@ public class MediaPlayer extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(kGradientPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(kGradientPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 611, Short.MAX_VALUE)
         );
 
         pack();
@@ -796,7 +790,7 @@ public class MediaPlayer extends javax.swing.JFrame {
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextPane PanelLyric;
+    private javax.swing.JTextArea PanelLyric;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnDeleteAll;
     private javax.swing.JButton btnNext;
@@ -807,7 +801,8 @@ public class MediaPlayer extends javax.swing.JFrame {
     private javax.swing.JButton btnUpload;
     private javax.swing.JButton jButtonAddDuration;
     private javax.swing.JButton jButtonLeave;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabelLyric;
+    private javax.swing.JLabel jLabelPlaylist;
     private javax.swing.JLabel jLabelTimeRemaining;
     private javax.swing.JLabel jLabelWelcome;
     private javax.swing.JList<String> jList1;
@@ -824,7 +819,7 @@ public class MediaPlayer extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private keeptoo.KGradientPanel kGradientPanel1;
     private javax.swing.JLabel labelDetail;
     private javax.swing.JLabel labelMusicTitle;

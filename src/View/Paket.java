@@ -1,6 +1,7 @@
 package View;
 
 import Controller.PaketController;
+import Controller.TransaksiController;
 import Model.PaketModel;
 import Model.TransaksiModel;
 import java.text.SimpleDateFormat;
@@ -15,10 +16,12 @@ public class Paket extends javax.swing.JFrame {
     private PaketModel paketModel;
     private TransaksiModel transaksiModel; 
     private PaketController paketController;
+    private TransaksiController transaksiController;
 
     // Ubah konstruktor untuk menerima TransaksiModel
     public Paket(PaketModel paketModel, String username, TransaksiModel transaksiModel) {
         initComponents();
+        this.setLocationRelativeTo(null);
         this.paketModel = paketModel;
         this.username = username;
 
@@ -162,8 +165,12 @@ public class Paket extends javax.swing.JFrame {
 
         // Mendapatkan total harga dari model transaksi
         int totalHarga = paketController.getTransaksiModel().getTotalHarga();
-
-        paketController.saveTransaksi(tanggalTransaksi, username, durasi, totalHarga);
+        
+        transaksiModel.setTanggalTransaksi(tanggalTransaksi);
+        transaksiModel.setUsername(username);
+        transaksiModel.setDurasi(durasi);
+        transaksiModel.setTotalHarga(totalHarga);
+//        paketController.saveTransaksi(tanggalTransaksi, username, durasi, totalHarga);
         // Memanggil metode switchToMediaPlayer pada PaketController
         paketController.switchToMediaPlayer(username, durasi);
     }//GEN-LAST:event_jButtonNextActionPerformed

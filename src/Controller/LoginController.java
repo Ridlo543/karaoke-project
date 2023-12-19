@@ -7,21 +7,22 @@ package Controller;
 import Model.PaketModel;
 import Model.TransaksiModel;
 import Model.User;
-import Model.UserModel;
 import View.Login;
 import View.Paket;
 import View.Register;
+import java.util.List;
 
 public class LoginController {
 
-    private UserModel userModel;
+    private List<User> userList;
     private Login loginView;
     private Register registerView;
 
-    public LoginController(UserModel userModel, Login loginView) {
-        this.userModel = userModel;
+    public LoginController(List<User> userList, Login loginView) {
+        this.userList = userList;
         this.loginView = loginView;
-        this.registerView = new Register(userModel, new RegisterController(userModel, this));
+        loginView.setLocationRelativeTo(null);
+        this.registerView = new Register(userList, new RegisterController(userList, this));
         loginView.setLoginController(this);
     }
 
@@ -46,7 +47,7 @@ public class LoginController {
     }
 
     private User findUser(String role, String username, String password) {
-        for (User user : userModel.getUsers()) {
+        for (User user : userList) {
             if (user.getRole().equals(role) && user.getUsername().equals(username) && user.getPassword().equals(password)) {
                 return user;
             }

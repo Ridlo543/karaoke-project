@@ -1,25 +1,20 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package View;
 
 import Controller.LoginController;
 import Model.User;
-import Model.UserModel;
+import java.util.List;
 
-/**
- *
- * @author LENOVO
- */
 public class Login extends javax.swing.JFrame {
 
-    private final UserModel userModel;
+    private List<User> userList;
     private LoginController loginController;
+    
 
-    public Login(UserModel userModel, LoginController loginController) {
+    public Login(List<User> userList, LoginController loginController) {
         initComponents();
-        this.userModel = userModel;
+        this.setLocationRelativeTo(null);
+        this.userList = userList;
+        
         setLoginController(loginController);
     }
 

@@ -1,24 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Model;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author LENOVO
- */
 public class PaketModel {
     private List<Ruangan> ruanganList;
 
     public List<Ruangan> getRuanganList() {
         return ruanganList;
     }
-    
-     public PaketModel() {
+
+    public PaketModel() {
         // Inisialisasi ruanganList dengan daftar ruangan
         ruanganList = new ArrayList<>();
         ruanganList.add(new Ruangan("Small", 5, 50000));
@@ -27,6 +19,21 @@ public class PaketModel {
         ruanganList.add(new Ruangan("Deluxe", 14, 100000));
         ruanganList.add(new Ruangan("VVIP", 14, 200000));
     }
-   
-}
 
+    // Metode untuk menambahkan ruangan ke dalam PaketModel
+    public void addRuangan(String nama, int kapasitas, int hargaPerJam) {
+        Ruangan ruangan = new Ruangan(nama, kapasitas, hargaPerJam);
+        ruanganList.add(ruangan);
+    }
+
+    // Metode untuk mendapatkan ruangan berdasarkan indeks
+    public Ruangan getRuangan(int index) {
+        if (index >= 0 && index < ruanganList.size()) {
+            return ruanganList.get(index);
+        } else {
+            return null;
+        }
+    }
+
+    
+}

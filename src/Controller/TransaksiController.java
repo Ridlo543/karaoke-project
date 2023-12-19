@@ -12,15 +12,14 @@ import Model.TransaksiModel;
 import Util.FileHandler;
 import View.Transaksi;
 import java.io.IOException;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TransaksiController {
-    private TransaksiModel transaksiModel;
-    private Transaksi transaksiView;
+    private final TransaksiModel transaksiModel;
 
-    public TransaksiController(TransaksiModel transaksiModel, Transaksi transaksiView) {
+    public TransaksiController(TransaksiModel transaksiModel) {
         this.transaksiModel = transaksiModel;
-        this.transaksiView = transaksiView;
         initController();
     }
 
@@ -28,14 +27,26 @@ public class TransaksiController {
         // Logika inisialisasi controller transaksi jika diperlukan
     }
 
-    // Metode untuk menyimpan data transaksi ke dalam file JSON
     public void saveTransaksi() {
         try {
             FileHandler.createTransaksiFile();
-            FileHandler.writeTransaksi(transaksiModel);
+            // Baca data yang sudah ada dari file
+            List<TransaksiModel> existingData = FileHandler.readTransaksiList();
+
+            // Pastikan existingData tidak null
+            if (existingData == null) {
+                existingData = new ArrayList<>();
+            }
+
+            // Tambahkan transaksi baru ke dalam daftar
+            existingData.add(transaksiModel);
+
+            // Tulis kembali ke file
+            FileHandler.writeTransaksiList(existingData);
         } catch (IOException e) {
             e.printStackTrace();
             // Handle exception, misalnya dengan menampilkan pesan error
         }
     }
+    
 }

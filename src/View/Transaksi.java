@@ -13,6 +13,7 @@ public class Transaksi extends javax.swing.JFrame {
 
     public Transaksi(TransaksiModel transaksiModel) {
         initComponents();
+        this.setLocationRelativeTo(null);
         this.transaksiModel = transaksiModel;
         displayData();
     }

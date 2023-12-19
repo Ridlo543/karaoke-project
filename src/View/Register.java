@@ -1,25 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package View;
 
-import Controller.LoginController;
 import Controller.RegisterController;
-import Model.UserModel;
+import Model.User;
+import java.util.List;
 
-/**
- *
- * @author LENOVO
- */
 public class Register extends javax.swing.JFrame {
 
-    private UserModel userModel;
+    private List<User> userList;
     private RegisterController registerController;
 
-    public Register(UserModel userModel, RegisterController registerController) {
+    public Register(List<User> userList, RegisterController registerController) {
         initComponents();
-        this.userModel = userModel;
+        this.setLocationRelativeTo(null);
+        this.userList = userList;
         setRegisterController(registerController);
         registerController.setRegisterView(this); 
     }

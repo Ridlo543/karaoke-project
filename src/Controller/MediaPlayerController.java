@@ -38,6 +38,7 @@ import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import javax.swing.JTextArea;
 
 public class MediaPlayerController {
 
@@ -57,6 +58,7 @@ public class MediaPlayerController {
     public static JLabel labelDetail, labelMusicTitle, labelTimeElapsed, labelTimeRemaining, lebelImageAlbum;
     public static JList jlistPanel;
     public static JProgressBar jprogressBar;
+    public static JTextArea PanelLyric;
 
     private static Automatic automatic = null;
 
@@ -308,35 +310,41 @@ public class MediaPlayerController {
 
     // MusicController
     public void setDetail(int selectedIndex) {
-        currentMusicPlaying = selectedIndex;
-        Song music = songList.get(currentMusicPlaying);
-        MediaPlayerController.labelDetail.setText(music.getSummary());
-        MediaPlayerController.labelMusicTitle.setText(music.getTitle());
-        MediaPlayerController.jlistPanel.setSelectedIndex(currentMusicPlaying);
-        MediaPlayerController.jprogressBar.setValue(0);
-        ImageIcon imageIcon = null;
-        if (music.getImageData() != null) {
-            imageIcon = new ImageIcon(new ImageIcon(music.getImageData()).getImage().getScaledInstance(257, 207, java.awt.Image.SCALE_DEFAULT));
-            lebelImageAlbum.setIcon(imageIcon);
-        } else {
-            imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/view/images/defaultIcon.png")).getImage().getScaledInstance(227, 192, java.awt.Image.SCALE_DEFAULT));
-            lebelImageAlbum.setIcon(imageIcon);
-        }
+        if (!songList.isEmpty() && selectedIndex >= 0 && selectedIndex < songList.size()) {
+            currentMusicPlaying = selectedIndex;
+            Song music = songList.get(currentMusicPlaying);
+            MediaPlayerController.labelDetail.setText(music.getSummary());
+            MediaPlayerController.labelMusicTitle.setText(music.getTitle());
+            MediaPlayerController.jlistPanel.setSelectedIndex(currentMusicPlaying);
+            MediaPlayerController.jprogressBar.setValue(0);
+            ImageIcon imageIcon = null;
+            if (music.getImageData() != null) {
+                imageIcon = new ImageIcon(new ImageIcon(music.getImageData()).getImage().getScaledInstance(257, 207, java.awt.Image.SCALE_DEFAULT));
+                lebelImageAlbum.setIcon(imageIcon);
+            } else {
+                imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/view/images/defaultIcon.png")).getImage().getScaledInstance(227, 192, java.awt.Image.SCALE_DEFAULT));
+                lebelImageAlbum.setIcon(imageIcon);
+            }
 
-        // Cari lirik berdasarkan judul lagu di JSON
-        String titleToSearch = music.getTitle();
-        System.out.println(music.getTitle());
-        String lyricText = findLyricByTitle(titleToSearch, "lyric.json");
+            // Cari lirik berdasarkan judul lagu di JSON
+            String titleToSearch = music.getTitle();
+            System.out.println(music.getTitle());
+            String lyricText = findLyricByTitle(titleToSearch, "lyric.json");
 
-        // Tampilkan lirik di PanelLyric di kelas MediaPlayer
-        if (lyricText != null && !lyricText.isEmpty()) {
-            mediaPlayer.setLyric(lyricText);
+            // Tampilkan lirik di PanelLyric di kelas MediaPlayer
+            if (lyricText != null && !lyricText.isEmpty()) {
+                PanelLyric.setText(lyricText);
+                PanelLyric.setCaretPosition(0);
+            } else {
+                PanelLyric.setText("Lirik tidak tersedia");
+            }
         } else {
-            mediaPlayer.setLyric("Lirik tidak tersedia.");
+            // Tangani kasus di mana songList kosong atau indeks tidak valid
+            System.out.println("Tidak ada musik yang tersedia atau indeks tidak valid.");
         }
     }
-
     // Metode untuk mencari lirik berdasarkan judul di JSON
+
     private String findLyricByTitle(String titleToSearch, String filePath) {
         try {
             // Baca file JSON menggunakan Gson
@@ -364,19 +372,6 @@ public class MediaPlayerController {
         return null;
     }
 
-//     private void displayLyric(String title) {
-//        // Panggil metode untuk mencari lirik berdasarkan judul
-//        String lyric = findLyricByTitle(title, "lyric.json");
-//
-//        // Periksa apakah lirik ditemukan
-//        if (lyric != null) {
-//            // Tampilkan lirik di PanelLyric
-//            PanelLyric.setText(lyric);
-//        } else {
-//            // Lirik tidak ditemukan
-//            PanelLyric.setText("Lirik tidak ditemukan");
-//        }
-//    }
     public class Automatic extends Observable {
 
         Timer timer;
@@ -411,21 +406,26 @@ public class MediaPlayerController {
     }
 
     public void deleteMusic(int indexMusic) {
+        if (!songList.isEmpty() && indexMusic >= 0 && indexMusic < songList.size()) {
+            // Tangani penghapusan musik hanya jika songList tidak kosong dan indeks valid
+            if (playingState.equals("PLAYING")) {
+                stopMusic();
+            } else {
+                musicPlayer.Stop();
+            }
 
-        if (playingState.equals("PLAYING")) {
-            stopMusic();
+            playingState = "";
+            songDAO.deleteSong(songList, indexMusic);
+            defaultModel.remove(indexMusic);
+            jlistPanel.setModel(defaultModel);
+            currentMusicPlaying = 0;
+            setDetail(currentMusicPlaying);
+            labelTimeElapsed.setText("00:00:00");
+            labelTimeRemaining.setText("00:00:00");
         } else {
-            musicPlayer.Stop();
+            // Tangani kasus di mana songList kosong atau indeks tidak valid
+            System.out.println("Tidak ada musik yang tersedia atau indeks tidak valid.");
         }
-
-        playingState = "";
-        songDAO.deleteSong(songList, indexMusic);
-        defaultModel.remove(indexMusic);
-        jlistPanel.setModel(defaultModel);
-        currentMusicPlaying = 0;
-        setDetail(currentMusicPlaying);
-        labelTimeElapsed.setText("00:00:00");
-        labelTimeRemaining.setText("00:00:00");
     }
 
     public void deleteAllMusics() {
@@ -469,7 +469,7 @@ public class MediaPlayerController {
             if (transaksiModel != null) {
                 // Buat instance Transaksi dan controller
                 Transaksi transaksiView = new Transaksi(transaksiModel);
-                TransaksiController transaksiController = new TransaksiController(transaksiModel, transaksiView);
+                TransaksiController transaksiController = new TransaksiController(transaksiModel);
 
                 // Simpan data transaksi
                 transaksiController.saveTransaksi();

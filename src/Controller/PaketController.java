@@ -8,16 +8,10 @@ import View.MediaPlayer;
 import View.Paket;
 import View.Transaksi;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-/**
- *
- * @author LENOVO
- */
 public class PaketController {
 
     private final PaketModel paketModel;
@@ -73,22 +67,34 @@ public class PaketController {
         return 0; // Mengembalikan 0 jika tidak ada harga yang ditemukan
     }
 
-    public void saveTransaksi(Date tanggalTransaksi, String username, int durasi, int totalHarga) {
-        // Menyimpan data transaksi ke dalam model
-        transaksiModel.setTanggalTransaksi(tanggalTransaksi);
-        transaksiModel.setUsername(username);
-        transaksiModel.setDurasi(durasi);
-        transaksiModel.setTotalHarga(totalHarga);
-
-        // Menyimpan model transaksi ke dalam file JSON
-        try {
-            FileHandler.createTransaksiFile();
-            FileHandler.writeTransaksi(transaksiModel);
-        } catch (IOException e) {
-            e.printStackTrace();
-            // Handle exception, misalnya dengan menampilkan pesan error
-        }
-    }
+//    public void saveTransaksi(Date tanggalTransaksi, String username, int durasi, int totalHarga) {
+//        // Menyimpan data transaksi ke dalam model
+//        transaksiModel.setTanggalTransaksi(tanggalTransaksi);
+//        transaksiModel.setUsername(username);
+//        transaksiModel.setDurasi(durasi);
+//        transaksiModel.setTotalHarga(totalHarga);
+//
+//        // Menyimpan model transaksi ke dalam file JSON
+//        try {
+//            FileHandler.createTransaksiFile();
+//            // Baca data yang sudah ada dari file
+//            List<TransaksiModel> existingData = FileHandler.readTransaksiList();
+//
+//            // Pastikan existingData tidak null
+//            if (existingData == null) {
+//                existingData = new ArrayList<>();
+//            }
+//
+//            // Tambahkan transaksi baru ke dalam daftar
+//            existingData.add(transaksiModel);
+//
+//            // Tulis kembali ke file
+//            FileHandler.writeTransaksiList(existingData);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            // Handle exception, misalnya dengan menampilkan pesan error
+//        }
+//    }
 
 //    public void switchToTransaksi() {
 //

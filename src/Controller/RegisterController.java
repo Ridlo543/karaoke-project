@@ -1,26 +1,18 @@
 package Controller;
 
 import Model.User;
-import Model.UserModel;
-import View.Login;
 import View.Register;
+import java.util.List;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-/**
- *
- * @author LENOVO
- */
+
 public class RegisterController {
-
-    private UserModel userModel;
+    
+    private List<User> userList;
     private Register registerView;
     private LoginController loginController;
 
-    public RegisterController(UserModel userModel, LoginController loginController) {
-        this.userModel = userModel;
+    public RegisterController(List<User> userList, LoginController loginController) {
+        this.userList = userList;
         this.loginController = loginController;
     }
 
@@ -41,7 +33,7 @@ public class RegisterController {
         try {
             if (password.equals(confirmPassword)) {
                 User newUser = new User(role, username, telepon, password);
-                userModel.addUser(newUser);
+                userList.add(newUser);
                 System.out.println("Register Berhasil!");
                 switchToLogin();
             } else {

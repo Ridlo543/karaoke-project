@@ -9,7 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import Util.Connection;
+import Util.StoreSong;
 
 
 public class SongDAO {
@@ -17,12 +17,12 @@ public class SongDAO {
     List<Song> songs=null;
     private ObjectInputStream readConexion;
     private ObjectOutputStream writeConexion;
-    private Connection conn=null;
+    private StoreSong conn=null;
     
     //ObjectOutputStream
     
     public SongDAO(){
-        conn = new Connection();
+        conn = new StoreSong();
         songs = new LinkedList<>();
     }
     
@@ -31,11 +31,11 @@ public class SongDAO {
         try {
             musics.remove(idSong);
             
-            writeConexion = conn.getWriteConexion();
+            writeConexion = conn.getWriteConnection();
             
             writeConexion.writeObject(musics);
             
-            conn.closeWriteConexion(writeConexion);
+            conn.closeWriteConnection(writeConexion);
         } catch (IOException ex) {
             Logger.getLogger(SongDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -52,23 +52,23 @@ public class SongDAO {
     
     public void insertSongs(List<Song> s){
         try {
-            writeConexion = conn.getWriteConexion();
+            writeConexion = conn.getWriteConnection();
             writeConexion.writeObject(s);
             
-            conn.closeWriteConexion(writeConexion);
+            conn.closeWriteConnection(writeConexion);
         } catch (IOException ex) {
             Logger.getLogger(SongDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
     public List<Song> getSongs(){
-        readConexion = conn.getReadConexion();
-//----------------------------------------------------------- falta arreglar esto
+        readConexion = conn.getReadConnection();
+
         try {
             if(readConexion!=null){
                 System.out.println("di songDAO, mendapatkan lagu.. terdapat lagu");
                 songs = (List<Song>) readConexion.readObject();
-                conn.closeReadConexion(readConexion);
+                conn.closeReadConnection(readConexion);
                return songs;
             }else{
                 System.out.println("di songDAO, mendapatkan lagu... tidak ada lagu");

@@ -3,11 +3,12 @@ package Controller;
 import Model.PaketModel;
 import Model.TransaksiModel;
 import Model.User;
-import View.HystoriTransaksi;
+import View.HistoryTransaksi;
 import View.Login;
 import View.Paket;
 import View.Register;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class LoginController {
 
@@ -23,38 +24,58 @@ public class LoginController {
         loginView.setLoginController(this);
     }
 
-    public void switchToRegister() {
-        loginView.setVisible(false);
-        registerView.setVisible(true);
+    public Login getLoginView() {
+        return loginView;
     }
 
     public boolean processLogin(String role, String username, String password) {
-        // Verifikasi login
-        User user = findUser(role, username, password);
+        // Mencari user berdasarkan username
+        User userByUsername = findUserByUsername(username);
 
-        if (user != null) {
-            // Implementasi logika setelah login berhasil
-            System.out.println("Login Berhasil!");
-            return true;
+        if (userByUsername != null) {
+            // Jika username ditemukan, periksa password
+            if (userByUsername.getPassword().equals(password)) {
+                // Jika password sesuai, periksa rolenya
+                if (userByUsername.getRole().equals(role)) {
+                    // Implementasi logika setelah login berhasil
+                    System.out.println("Login Berhasil!");
+                    return true;
+                } else {
+                    // Jika rolenya tidak sesuai, tampilkan pesan kesalahan
+                    showLoginFailedMessage("Login Gagal! Role yang dipilih tidak sesuai dengan data user.", "Login Gagal");
+                }
+            } else {
+                // Jika password tidak sesuai, tampilkan pesan kesalahan
+                showLoginFailedMessage("Login Gagal! Password tidak sesuai", "Login Gagal");
+            }
         } else {
-            // Implementasi logika setelah login gagal
-            System.out.println("Login Gagal!");
-
-            return false;
+            // Jika username tidak ditemukan, tampilkan pesan kesalahan
+            showLoginFailedMessage("Login Gagal! Username tidak ditemukan", "Login Gagal");
         }
+
+        // Jika sampai di sini, artinya login gagal
+        System.out.println("Login Gagal!");
+        return false;
     }
 
-    private User findUser(String role, String username, String password) {
+    // Metode untuk memeriksa apakah rolenya sesuai dengan data user
+    public boolean isRoleValid(String selectedRole) {
         for (User user : userList) {
-            if (user.getRole().equals(role) && user.getUsername().equals(username) && user.getPassword().equals(password)) {
+            if (user.getRole().equals(selectedRole)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Metode untuk mencari user berdasarkan username saja
+    private User findUserByUsername(String username) {
+        for (User user : userList) {
+            if (user.getUsername().equals(username)) {
                 return user;
             }
         }
         return null;
-    }
-
-    public Login getLoginView() {
-        return loginView;
     }
 
     public void nextPage(String role, String username) {
@@ -65,8 +86,11 @@ public class LoginController {
         }
     }
 
-    
-    
+    public void switchToRegister() {
+        loginView.setVisible(false);
+        registerView.setVisible(true);
+    }
+
     private void switchToPaket(String username) {
         // Membuat objek PaketModel
         PaketModel paketModel = new PaketModel();
@@ -85,12 +109,12 @@ public class LoginController {
         });
 
         // Menyembunyikan frame login
-        loginView.setVisible(false);
+        loginView.dispose();
     }
 
     private void switchToHistory() {
-        // Membuat objek HystoriTransaksi
-        HystoriTransaksi historyView = new HystoriTransaksi();
+        // Membuat objek HistoryTransaksi dengan mengirimkan objek LoginController
+        HistoryTransaksi historyView = new HistoryTransaksi(this);
 
         // Menampilkan frame History
         java.awt.EventQueue.invokeLater(() -> {
@@ -98,6 +122,10 @@ public class LoginController {
         });
 
         // Menyembunyikan frame login
-        loginView.setVisible(false);
+        loginView.dispose();
+    }
+
+    private void showLoginFailedMessage(String message, String title) {
+        JOptionPane.showMessageDialog(null, message, title, JOptionPane.ERROR_MESSAGE);
     }
 }

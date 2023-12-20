@@ -1,32 +1,27 @@
-
 package View;
 
+import Controller.TransaksiController;
 import Model.TransaksiModel;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Transaksi extends javax.swing.JFrame {
 
-
     private final TransaksiModel transaksiModel;
+    private TransaksiController transaksiController;
 
-    public Transaksi(TransaksiModel transaksiModel) {
+    public Transaksi(TransaksiModel transaksiModel, TransaksiController transaksiController) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.transaksiModel = transaksiModel;
+        setTransaksiController(transaksiController);
         displayData();
     }
 
-//    private void displayData() {
-//        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-//
-//        // Menampilkan data transaksi pada label-label yang sesuai
-//        jLabelTanggal.setText("Tanggal Transaksi: " + dateFormat.format(transaksiModel.getTanggalTransaksi()));
-//        jLabelUsername.setText("Username: " + transaksiModel.getUsername());
-//        jLabelDurasi.setText("Durasi: " + transaksiModel.getDurasi() + " jam");
-//        jLabelTotalHarga.setText("Total Harga: " + transaksiModel.getTotalHarga());
-//    }
+    public void setTransaksiController(TransaksiController transaksiController) {
+        this.transaksiController = transaksiController;
+    }
 
     private void displayData() {
         // Menampilkan data transaksi pada label-label yang sesuai
@@ -34,10 +29,7 @@ public class Transaksi extends javax.swing.JFrame {
         jLabelUsername.setText("Username: " + transaksiModel.getUsername());
         jLabelDurasi.setText("Durasi: " + transaksiModel.getDurasi() + " jam");
         jLabelTotalHarga.setText("Total Harga: " + transaksiModel.getTotalHarga());
-        System.out.println(transaksiModel.getTanggalTransaksi());
-        System.out.println(transaksiModel.getUsername());
-        System.out.println(transaksiModel.getDurasi());
-        System.out.println(transaksiModel.getTotalHarga());
+
     }
 
     /**
@@ -54,6 +46,7 @@ public class Transaksi extends javax.swing.JFrame {
         jLabelUsername = new javax.swing.JLabel();
         jLabelDurasi = new javax.swing.JLabel();
         jLabelTotalHarga = new javax.swing.JLabel();
+        jButtonLogOut = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,19 +60,31 @@ public class Transaksi extends javax.swing.JFrame {
 
         jLabelTotalHarga.setText("Total Harga:");
 
+        jButtonLogOut.setText("Log Out");
+        jButtonLogOut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLogOutActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelTanggal)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabelUsername)
-                    .addComponent(jLabelDurasi)
-                    .addComponent(jLabelTotalHarga))
-                .addContainerGap(280, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelTanggal)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabelUsername)
+                            .addComponent(jLabelDurasi)
+                            .addComponent(jLabelTotalHarga)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(158, 158, 158)
+                        .addComponent(jButtonLogOut)))
+                .addContainerGap(169, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -94,17 +99,31 @@ public class Transaksi extends javax.swing.JFrame {
                 .addComponent(jLabelDurasi)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelTotalHarga)
-                .addContainerGap(178, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
+                .addComponent(jButtonLogOut)
+                .addGap(36, 36, 36))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-        /**
-         * @param args the command line arguments
-         */
+    private void jButtonLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogOutActionPerformed
+        // Panggil metode untuk membersihkan pengguna yang telah login
+        transaksiModel.clear();
+
+        try {
+            // Kembalikan ke halaman login
+            transaksiController.switchToLogin();
+        } catch (IOException ex) {
+            Logger.getLogger(Transaksi.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonLogOutActionPerformed
+
+    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonLogOut;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelDurasi;
     private javax.swing.JLabel jLabelTanggal;

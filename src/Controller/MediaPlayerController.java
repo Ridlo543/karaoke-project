@@ -323,7 +323,6 @@ public class MediaPlayerController {
 
             // Cari lirik berdasarkan judul lagu di JSON
             String titleToSearch = music.getTitle();
-            System.out.println(music.getTitle());
             String lyricText = findLyricByTitle(titleToSearch, "lyric.json");
 
             // Tampilkan lirik di PanelLyric di kelas MediaPlayer
@@ -454,29 +453,30 @@ public class MediaPlayerController {
     }
 
     public void switchToTransaksi() {
-        if (mediaPlayer != null) {
-            musicPlayer.Stop();
-            mediaPlayer.setVisible(false);
+    if (mediaPlayer != null) {
+        musicPlayer.Stop();
+        mediaPlayer.setVisible(false);
 
-            // Ambil data dari mediaPlayer menggunakan getTransaksiModel()
-            TransaksiModel transaksiModel = mediaPlayer.getTransaksiModel();
+        // Ambil data dari mediaPlayer menggunakan getTransaksiModel()
+        TransaksiModel transaksiModel = mediaPlayer.getTransaksiModel();
 
-            if (transaksiModel != null) {
-                // Buat instance Transaksi dan controller
-                Transaksi transaksiView = new Transaksi(transaksiModel);
-                TransaksiController transaksiController = new TransaksiController(transaksiModel);
+        if (transaksiModel != null) {
+            // Buat objek TransaksiController dengan dua parameter
+            Transaksi transaksiView = new Transaksi(transaksiModel, null);
+            TransaksiController transaksiController = new TransaksiController(transaksiModel,transaksiView);
+            transaksiView.setTransaksiController(transaksiController);
+            // Simpan data transaksi
+            transaksiController.saveTransaksi();
+//            Transaksi transaksiView = new Transaksi(transaksiModel, null);
 
-                // Simpan data transaksi
-                transaksiController.saveTransaksi();
-
-                // Tampilkan Transaksi
-                transaksiView.setVisible(true);
-            } else {
-                System.err.println("TransaksiModel in mediaPlayer is null");
-            }
+            // Tampilkan Transaksi
+            transaksiView.setVisible(true);
         } else {
-            System.err.println("mediaPlayer is null");
+            System.err.println("TransaksiModel in mediaPlayer is null");
         }
+    } else {
+        System.err.println("mediaPlayer is null");
     }
+}
 
 }

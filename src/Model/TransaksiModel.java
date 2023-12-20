@@ -9,6 +9,13 @@ public class TransaksiModel {
     private int durasi;
     private int totalHarga;
 
+    public void clear() {
+        this.tanggalTransaksi = null;
+        this.username = "";
+        this.durasi = 0;
+        this.totalHarga = 0;
+    }
+
     public Date getTanggalTransaksi() {
         return tanggalTransaksi;
     }

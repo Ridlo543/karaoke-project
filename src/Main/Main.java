@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Main;
 
 import Controller.LoginController;
@@ -14,10 +10,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author LENOVO
- */
 public class Main {
     
     public static void main(String[] args) throws IOException {
@@ -25,19 +17,12 @@ public class Main {
         FileHandler.createTransaksiFile();
         
         List<User> userList = FileHandler.readUser();
-        if(userList== null){
-            userList = new ArrayList();
+        if (userList == null) {
+            userList = new ArrayList<>();
         }
-        // Membaca data dari file JSON atau membuat objek UserModel baru jika tidak ada
-//        UserModel userModel = FileHandler.readUser();
-//        if (userModel == null) {
-//            userModel = new UserModel();
-//        }
 
         // Membuat objek LoginController dan Login
-        Login loginView = new Login(userList, null);
-        LoginController loginController = new LoginController(userList, loginView);
-        loginView.setLoginController(loginController);
+        LoginController loginController = createLoginController(userList);
 
         // Menampilkan halaman login
         java.awt.EventQueue.invokeLater(() -> {
@@ -54,4 +39,11 @@ public class Main {
             }
         }));
     }
+
+    public static LoginController createLoginController(List<User> userList) {
+        LoginController loginController = new LoginController(userList, new Login(userList, null));
+        loginController.getLoginView().setLoginController(loginController);
+        return loginController;
+    }
 }
+

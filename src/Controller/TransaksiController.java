@@ -1,30 +1,26 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Controller;
 
-/**
- *
- * @author LENOVO
- */
+import Main.Main;
 import Model.TransaksiModel;
+import Model.User;
 import Util.FileHandler;
+import View.Login;
 import View.Transaksi;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TransaksiController {
+
     private final TransaksiModel transaksiModel;
+    private Transaksi transaksiView;
 
-    public TransaksiController(TransaksiModel transaksiModel) {
+    public TransaksiController(TransaksiModel transaksiModel, Transaksi transaksiView) {
         this.transaksiModel = transaksiModel;
-        initController();
-    }
+        this.transaksiView = transaksiView;
 
-    private void initController() {
-        // Logika inisialisasi controller transaksi jika diperlukan
+    
+
     }
 
     public void saveTransaksi() {
@@ -48,5 +44,17 @@ public class TransaksiController {
             // Handle exception, misalnya dengan menampilkan pesan error
         }
     }
+
+    // Transaksi to Login
+    public void switchToLogin() throws IOException {
+        LoginController loginController = Main.createLoginController(new ArrayList<>());
+        java.awt.EventQueue.invokeLater(() -> {
+            loginController.getLoginView().setVisible(true);
+        });
+        transaksiView.dispose();
+    }
     
+    public Transaksi getTransaksiView() {
+        return transaksiView;
+    }
 }

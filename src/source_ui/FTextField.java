@@ -76,8 +76,4 @@ public class FTextField extends JTextField {
         super.paintComponent(g);
     }
 
-    public String getPassword() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
 }

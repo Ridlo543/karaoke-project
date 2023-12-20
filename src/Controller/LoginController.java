@@ -12,9 +12,9 @@ import javax.swing.JOptionPane;
 
 public class LoginController {
 
-    private List<User> userList;
-    private Login loginView;
-    private Register registerView;
+    private final List<User> userList;
+    private final Login loginView;
+    private final Register registerView;
 
     public LoginController(List<User> userList, Login loginView) {
         this.userList = userList;

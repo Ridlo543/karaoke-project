@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PaketModel {
-    private List<Ruangan> ruanganList;
+    private final List<Ruangan> ruanganList;
 
     public List<Ruangan> getRuanganList() {
         return ruanganList;

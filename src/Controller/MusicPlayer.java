@@ -15,7 +15,6 @@ import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
 import Model.Song;
 import View.MediaPlayer;
-import View.MediaPlayer;
 
 public class MusicPlayer {
 
@@ -171,11 +170,7 @@ public class MusicPlayer {
                 }
             }
 
-        } catch (IOException ex) {
-            Logger.getLogger(MusicPlayer.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnsupportedTagException ex) {
-            Logger.getLogger(MusicPlayer.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InvalidDataException ex) {
+        } catch (IOException | UnsupportedTagException | InvalidDataException ex) {
             Logger.getLogger(MusicPlayer.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

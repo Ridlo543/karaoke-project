@@ -7,9 +7,9 @@ import javax.swing.JOptionPane;
 
 public class RegisterController {
 
-    private List<User> userList;
+    private final List<User> userList;
     private Register registerView;
-    private LoginController loginController;
+    private final LoginController loginController;
 
     public RegisterController(List<User> userList, LoginController loginController) {
         this.userList = userList;

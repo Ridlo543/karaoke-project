@@ -1,6 +1,5 @@
 package Controller;
 
-import Main.Main;
 import Model.TransaksiModel;
 import Model.User;
 import Util.FileHandler;
@@ -9,17 +8,16 @@ import View.Transaksi;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class TransaksiController {
 
     private final TransaksiModel transaksiModel;
-    private Transaksi transaksiView;
+    private final Transaksi transaksiView;
 
     public TransaksiController(TransaksiModel transaksiModel, Transaksi transaksiView) {
         this.transaksiModel = transaksiModel;
         this.transaksiView = transaksiView;
-
-    
 
     }
 
@@ -41,19 +39,41 @@ public class TransaksiController {
             FileHandler.writeTransaksiList(existingData);
         } catch (IOException e) {
             e.printStackTrace();
-            // Handle exception, misalnya dengan menampilkan pesan error
         }
     }
 
-    // Transaksi to Login
     public void switchToLogin() throws IOException {
-        LoginController loginController = Main.createLoginController(new ArrayList<>());
-        java.awt.EventQueue.invokeLater(() -> {
-            loginController.getLoginView().setVisible(true);
-        });
-        transaksiView.dispose();
+        int confirmResult = JOptionPane.showOptionDialog(
+                null,
+                "Terimakasih telah berkaraoke!\nKlik OK untuk kembali ke halaman login.",
+                "Terimakasih",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.INFORMATION_MESSAGE,
+                null,
+                new Object[]{"OK"},
+                "OK"
+        );
+
+        if (confirmResult == JOptionPane.OK_OPTION) {
+            // Membuat objek LoginController dan Login
+            List<User> userList = FileHandler.readUser();
+            if (userList == null) {
+                userList = new ArrayList();
+            }
+            LoginController loginController = new LoginController(userList, new Login(userList, null));
+            loginController.getLoginView().setLoginController(loginController);
+
+            // Menampilkan halaman login
+            java.awt.EventQueue.invokeLater(() -> {
+                loginController.getLoginView().setVisible(true);
+
+            });
+
+            // Menutup frame transaksi
+            transaksiView.dispose();
+        }
     }
-    
+
     public Transaksi getTransaksiView() {
         return transaksiView;
     }

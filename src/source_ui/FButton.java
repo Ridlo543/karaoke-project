@@ -157,10 +157,7 @@ public class FButton extends JButton {
             //gambar background
             g2d.setColor(fill);
             g2d.fillRoundRect(s, s, w, h, h-10, h-10);
-            //gambar border
-            g2d.setStroke(new BasicStroke(s));
-            g2d.setColor(line);
-            g2d.drawRoundRect(s, s, w, h, h-10, h-10);
+
         }
         super.paintComponent(g);
     }

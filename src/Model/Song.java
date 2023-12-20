@@ -1,5 +1,6 @@
 package Model;
 import java.io.Serializable;
+import java.util.Arrays;
 
 public class Song implements Serializable{
     
@@ -105,7 +106,7 @@ public class Song implements Serializable{
 
     @Override
     public String toString() {
-        return "Song{" + "atist=" + atist + ", title=" + title + ", album=" + album + ", path=" + path + ", year=" + year + ", lengthInSeconds=" + lengthInSeconds + ", imageData=" + imageData + ", summary=" + summary + ", id=" + id + ", name=" + fileName + '}';
+        return "Song{" + "atist=" + atist + ", title=" + title + ", album=" + album + ", path=" + path + ", year=" + year + ", lengthInSeconds=" + lengthInSeconds + ", imageData=" + Arrays.toString(imageData) + ", summary=" + summary + ", id=" + id + ", name=" + fileName + '}';
     }
     
     

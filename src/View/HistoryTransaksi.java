@@ -5,23 +5,23 @@ import Main.Main;
 import Model.TransaksiModel;
 import Model.User;
 import Util.FileHandler;
-import com.google.gson.reflect.TypeToken;
 
-import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class HistoryTransaksi extends javax.swing.JFrame {
 
     private DefaultTableModel tableModel;
     private LoginController loginController;
-
+    /**
+     * Creates new form HistoryTransaksi
+     */
     public HistoryTransaksi(LoginController loginController) {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -39,12 +39,29 @@ public class HistoryTransaksi extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        panelRounded1 = new source_ui.PanelRounded();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableTransaksi = new javax.swing.JTable();
-        jButtonLogOut = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        fButtonLogOut = new source_ui.FButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1080, 608));
+        setResizable(false);
+        getContentPane().setLayout(null);
 
+        jPanel1.setBackground(new java.awt.Color(39, 0, 93));
+
+        panelRounded1.setBackground(new java.awt.Color(148, 0, 255));
+        panelRounded1.setRoundBottomLeft(40);
+        panelRounded1.setRoundBottomRight(40);
+        panelRounded1.setRoundTopLeft(40);
+        panelRounded1.setRoundTopRight(40);
+
+        jTableTransaksi.setBackground(new java.awt.Color(228, 241, 255));
+        jTableTransaksi.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        jTableTransaksi.setForeground(new java.awt.Color(102, 0, 102));
         jTableTransaksi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -67,40 +84,70 @@ public class HistoryTransaksi extends javax.swing.JFrame {
         jTableTransaksi.setToolTipText("");
         jScrollPane1.setViewportView(jTableTransaksi);
 
-        jButtonLogOut.setText("Log Out");
-        jButtonLogOut.addActionListener(new java.awt.event.ActionListener() {
+        javax.swing.GroupLayout panelRounded1Layout = new javax.swing.GroupLayout(panelRounded1);
+        panelRounded1.setLayout(panelRounded1Layout);
+        panelRounded1Layout.setHorizontalGroup(
+            panelRounded1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRounded1Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 732, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(31, Short.MAX_VALUE))
+        );
+        panelRounded1Layout.setVerticalGroup(
+            panelRounded1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRounded1Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
+
+        jLabel1.setFont(new java.awt.Font("Poppins", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(228, 241, 255));
+        jLabel1.setText("Histori Transaksi");
+
+        fButtonLogOut.setText("Log Out");
+        fButtonLogOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonLogOutActionPerformed(evt);
+                fButtonLogOutActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(57, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonLogOut)
-                .addGap(14, 14, 14))
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(163, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(432, 432, 432))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(panelRounded1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(138, 138, 138))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(fButtonLogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(41, 41, 41))))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(101, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonLogOut)
-                .addGap(11, 11, 11))
+                .addComponent(panelRounded1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(fButtonLogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(32, Short.MAX_VALUE))
         );
+
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(0, 0, 1080, 580);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogOutActionPerformed
+    private void fButtonLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fButtonLogOutActionPerformed
         int option = JOptionPane.showConfirmDialog(this, "Anda yakin ingin logout?", "Konfirmasi Logout", JOptionPane.YES_NO_OPTION);
 
         if (option == JOptionPane.YES_OPTION) {
@@ -111,14 +158,25 @@ public class HistoryTransaksi extends javax.swing.JFrame {
                 Logger.getLogger(HistoryTransaksi.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }//GEN-LAST:event_jButtonLogOutActionPerformed
+    }//GEN-LAST:event_fButtonLogOutActionPerformed
+
 
     // History to login
     public void switchToLogin() throws IOException {
-        LoginController loginController = Main.createLoginController(new ArrayList<>());
+        // Membuat objek LoginController dan Login
+        List<User> userList = FileHandler.readUser();
+        if (userList == null) {
+            userList = new ArrayList<>();
+        }
+        LoginController loginController = new LoginController(userList, new Login(userList, null));
+        loginController.getLoginView().setLoginController(loginController);
+
+        // Menampilkan halaman login
         java.awt.EventQueue.invokeLater(() -> {
             loginController.getLoginView().setVisible(true);
         });
+
+        // Menutup frame history
         this.dispose();
     }
 
@@ -153,8 +211,11 @@ public class HistoryTransaksi extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonLogOut;
+    private source_ui.FButton fButtonLogOut;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableTransaksi;
+    private source_ui.PanelRounded panelRounded1;
     // End of variables declaration//GEN-END:variables
 }

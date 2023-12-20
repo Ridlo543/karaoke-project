@@ -3,17 +3,14 @@ package View;
 import Controller.LoginController;
 import Model.User;
 import java.util.List;
-import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
 
-    private List<User> userList;
     private LoginController loginController;
 
     public Login(List<User> userList, LoginController loginController) {
         initComponents();
         this.setLocationRelativeTo(null);
-        this.userList = userList;
 
         setLoginController(loginController);
     }

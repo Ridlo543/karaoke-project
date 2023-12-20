@@ -1,5 +1,5 @@
-package source_ui;
 
+package source_ui;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
@@ -9,9 +9,12 @@ import java.awt.RenderingHints;
 import javax.swing.BorderFactory;
 import javax.swing.JPasswordField;
 
-public class FPasswordField extends JPasswordField {
-
-    private Color fillColor;
+/**
+ *
+ * @author Reni Uswatun Hasanah
+ */
+public class FPasswordField extends JPasswordField{
+     private Color fillColor;
     private Color lineColor;
     private int strokeWidth;
 

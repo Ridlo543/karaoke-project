@@ -3,6 +3,7 @@ package Controller;
 import Model.PaketModel;
 import Model.TransaksiModel;
 import Model.User;
+import View.HystoriTransaksi;
 import View.Login;
 import View.Paket;
 import View.Register;
@@ -38,7 +39,7 @@ public class LoginController {
         } else {
             // Implementasi logika setelah login gagal
             System.out.println("Login Gagal!");
-            
+
             return false;
         }
     }
@@ -56,7 +57,17 @@ public class LoginController {
         return loginView;
     }
 
-    public void switchToPaket(String username) {
+    public void nextPage(String role, String username) {
+        if (role.equals("User")) {
+            switchToPaket(username);
+        } else if (role.equals("Staff")) {
+            switchToHistory();
+        }
+    }
+
+    
+    
+    private void switchToPaket(String username) {
         // Membuat objek PaketModel
         PaketModel paketModel = new PaketModel();
         TransaksiModel transaksiModel = new TransaksiModel();
@@ -76,8 +87,17 @@ public class LoginController {
         // Menyembunyikan frame login
         loginView.setVisible(false);
     }
-    
-    public void switchToHistory(){
-        
+
+    private void switchToHistory() {
+        // Membuat objek HystoriTransaksi
+        HystoriTransaksi historyView = new HystoriTransaksi();
+
+        // Menampilkan frame History
+        java.awt.EventQueue.invokeLater(() -> {
+            historyView.setVisible(true);
+        });
+
+        // Menyembunyikan frame login
+        loginView.setVisible(false);
     }
 }

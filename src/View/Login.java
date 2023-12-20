@@ -3,6 +3,8 @@ package View;
 import Controller.LoginController;
 import Model.User;
 import java.util.List;
+import javax.swing.JOptionPane;
+
 
 public class Login extends javax.swing.JFrame {
 
@@ -168,18 +170,33 @@ public class Login extends javax.swing.JFrame {
         String username = fTextFieldUsername.getText();
         String password = new String(fPasswordField.getPassword());
 
-        // Memanggil metode processLogin pada LoginController
-        boolean loginSuccessful = loginController.processLogin(role, username, password);
+        // Pemeriksaan apakah rolenya sesuai dengan JComboBox
+        if (isRoleValid(role)) {
+            // Memanggil metode processLogin pada LoginController
+            boolean loginSuccessful = loginController.processLogin(role, username, password);
 
-        if (loginSuccessful) {
-            // Jika login berhasil, pindah ke halaman paket
-            loginController.switchToPaket(username);
+            if (loginSuccessful) {
+                // Jika login berhasil, pindah ke halaman paket atau history
+                loginController.nextPage(role, username);
+            } else {
+                // Jika login gagal, tambahkan logika lainnya jika diperlukan
+                System.out.println("Login Gagal!");
+            }
         } else {
-            // Jika login gagal, tambahkan logika lainnya jika diperlukan
-            System.out.println("Login Gagal!");
+            // Menampilkan pesan kesalahan jika rolenya tidak sesuai
+            JOptionPane.showMessageDialog(this, "Role yang dipilih tidak sesuai dengan data user.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_fButtonLoginActionPerformed
 
+    // Metode untuk memeriksa apakah rolenya sesuai dengan data user
+    private boolean isRoleValid(String selectedRole) {
+        for (User user : userList) {
+            if (user.getRole().equals(selectedRole)) {
+                return true;
+            }
+        }
+        return false;
+    }
     /**
      * @param args the command line arguments
      */

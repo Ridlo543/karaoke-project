@@ -84,37 +84,5 @@ public class FileHandler {
         writeData(TRANSAKSI_PATH, data);
     }
 
-//    public static TransaksiModel readTransaksi() throws IOException {
-//        return readData(TRANSAKSI_PATH, TransaksiModel.class);
-//    }
-//
-//    public static void writeTransaksi(TransaksiModel data) throws IOException {
-//        writeData(TRANSAKSI_PATH, data);
-//    }
-//    // Metode untuk membaca seluruh transaksi dari file JSON
-//    public static List<TransaksiModel> readAllTransaksi() throws IOException {
-//        try (FileReader reader = new FileReader(TRANSAKSI_PATH)) {
-//            Type type = new TypeToken<List<TransaksiModel>>() {}.getType();
-//            return new Gson().fromJson(reader, type);
-//        } catch (IOException e) {
-//            throw new IOException("Failed to read transaksi data from file", e);
-//        }
-//    }
-//
-//    // Metode untuk menambahkan transaksi ke dalam file JSON
-//    public static void addTransaksi(TransaksiModel transaksi) throws IOException {
-//        List<TransaksiModel> transaksiList = readAllTransaksi();
-//
-//        if (transaksiList == null) {
-//            transaksiList = new ArrayList<>();
-//        }
-//
-//        transaksiList.add(transaksi);
-//
-//        try (FileWriter writer = new FileWriter(TRANSAKSI_PATH)) {
-//            new Gson().toJson(transaksiList, writer);
-//        } catch (IOException e) {
-//            throw new IOException("Failed to write transaksi data to file", e);
-//        }
-//    }
+
 }

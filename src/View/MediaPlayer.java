@@ -760,8 +760,9 @@ public class MediaPlayer extends javax.swing.JFrame {
         // Add one hour to the remaining time
         timeRemaining += 3600;
 
-        // Update hargaTotal in TransaksiModel (you may need to adjust this based on your actual implementation)
-        transaksiModel.setTotalHarga(transaksiModel.getTotalHarga() + 10);
+        // Update hargaTotal in TransaksiModel 
+        transaksiModel.setTotalHarga(transaksiModel.getTotalHarga() + 10000);
+        transaksiModel.setDurasi(transaksiModel.getDurasi()+1);
 
         // Update the jLabelTimeRemaining
         updateTimeRemainingLabel();

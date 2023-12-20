@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Controller;
 
 import Model.PaketModel;
@@ -42,6 +38,7 @@ public class LoginController {
         } else {
             // Implementasi logika setelah login gagal
             System.out.println("Login Gagal!");
+            
             return false;
         }
     }
@@ -55,9 +52,6 @@ public class LoginController {
         return null;
     }
 
-    // Metode untuk mendapatkan tampilan login
-    // Metode untuk mengatur tampilan login
-    // Metode untuk mendapatkan tampilan login
     public Login getLoginView() {
         return loginView;
     }
@@ -82,5 +76,8 @@ public class LoginController {
         // Menyembunyikan frame login
         loginView.setVisible(false);
     }
-
+    
+    public void switchToHistory(){
+        
+    }
 }

@@ -4,8 +4,6 @@ import Controller.PaketController;
 import Controller.TransaksiController;
 import Model.PaketModel;
 import Model.TransaksiModel;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -57,13 +55,32 @@ public class Paket extends javax.swing.JFrame {
 
         jInternalFrame1 = new javax.swing.JInternalFrame();
         jFrame1 = new javax.swing.JFrame();
+        jLabelRuangan = new javax.swing.JLabel();
         jComboBoxDurasi = new javax.swing.JComboBox<>();
         jLabelDurasi = new javax.swing.JLabel();
-        jLabelRuangan = new javax.swing.JLabel();
         jComboBoxRuangan = new javax.swing.JComboBox<>();
+        fButtonNext = new source_ui.FButton();
         jLabelTotal = new javax.swing.JLabel();
-        jButtonNext = new javax.swing.JButton();
         jLabelWelcome = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabelSmallRoom = new javax.swing.JLabel();
+        jLabelMediumRoom = new javax.swing.JLabel();
+        jLabelLargeRoom = new javax.swing.JLabel();
+        jLabelDeluxeRoom = new javax.swing.JLabel();
+        jLabelVVIPRoom = new javax.swing.JLabel();
+        jLabelBackground1 = new javax.swing.JLabel();
+        jLabelBackground2 = new javax.swing.JLabel();
+        jLabelBackground3 = new javax.swing.JLabel();
+        jLabelBackground4 = new javax.swing.JLabel();
 
         jInternalFrame1.setVisible(true);
 
@@ -90,70 +107,162 @@ public class Paket extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1080, 608));
+        setResizable(false);
+        setSize(new java.awt.Dimension(1080, 608));
+        getContentPane().setLayout(null);
 
-        jComboBoxDurasi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 jam", "2 jam ", "3 jam ", "4 jam" }));
-
-        jLabelDurasi.setText("Durasi");
-
+        jLabelRuangan.setFont(new java.awt.Font("Poppins Medium", 0, 20)); // NOI18N
+        jLabelRuangan.setForeground(new java.awt.Color(228, 241, 255));
         jLabelRuangan.setText("Ruangan");
+        getContentPane().add(jLabelRuangan);
+        jLabelRuangan.setBounds(850, 80, 100, 28);
 
+        jComboBoxDurasi.setBackground(new java.awt.Color(174, 210, 255));
+        jComboBoxDurasi.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
+        jComboBoxDurasi.setForeground(new java.awt.Color(148, 0, 255));
+        jComboBoxDurasi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 jam", "2 jam ", "3 jam ", "4 jam" }));
+        getContentPane().add(jComboBoxDurasi);
+        jComboBoxDurasi.setBounds(760, 260, 270, 40);
+
+        jLabelDurasi.setFont(new java.awt.Font("Poppins Medium", 0, 20)); // NOI18N
+        jLabelDurasi.setForeground(new java.awt.Color(228, 241, 255));
+        jLabelDurasi.setText("Durasi");
+        getContentPane().add(jLabelDurasi);
+        jLabelDurasi.setBounds(860, 220, 70, 28);
+
+        jComboBoxRuangan.setBackground(new java.awt.Color(174, 210, 255));
+        jComboBoxRuangan.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
+        jComboBoxRuangan.setForeground(new java.awt.Color(148, 0, 225));
         jComboBoxRuangan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Small \t4 – 5 orang\t= 50.000/jam. ", "Medium \t6 – 8 orang\t= 60.000/jam. ", "Large \t8 -10 orang\t= 80.000/jam. ", "Deluxe \t10 – 14 orang\t= 100.000/jam.", "VVIP  \t10-14 orang\t= 200.000/jam." }));
+        jComboBoxRuangan.setMinimumSize(new java.awt.Dimension(1080, 608));
+        jComboBoxRuangan.setPreferredSize(new java.awt.Dimension(1080, 608));
+        getContentPane().add(jComboBoxRuangan);
+        jComboBoxRuangan.setBounds(760, 120, 270, 40);
 
-        jLabelTotal.setText("Total");
-
-        jButtonNext.setText("Next");
-        jButtonNext.addActionListener(new java.awt.event.ActionListener() {
+        fButtonNext.setText("Next");
+        fButtonNext.setFont(new java.awt.Font("Poppins Medium", 0, 18)); // NOI18N
+        fButtonNext.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonNextActionPerformed(evt);
+                fButtonNextActionPerformed(evt);
             }
         });
+        getContentPane().add(fButtonNext);
+        fButtonNext.setBounds(890, 480, 140, 40);
 
+        jLabelTotal.setFont(new java.awt.Font("Poppins", 1, 24)); // NOI18N
+        jLabelTotal.setForeground(new java.awt.Color(228, 241, 255));
+        jLabelTotal.setText("Total");
+        getContentPane().add(jLabelTotal);
+        jLabelTotal.setBounds(770, 370, 260, 28);
+
+        jLabelWelcome.setFont(new java.awt.Font("Poppins Medium", 0, 20)); // NOI18N
+        jLabelWelcome.setForeground(new java.awt.Color(228, 241, 221));
         jLabelWelcome.setText("Selamat Datang, ");
+        getContentPane().add(jLabelWelcome);
+        jLabelWelcome.setBounds(70, 30, 330, 30);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelWelcome)
-                    .addComponent(jButtonNext)
-                    .addComponent(jLabelTotal)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelDurasi)
-                            .addComponent(jLabelRuangan))
-                        .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBoxRuangan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBoxDurasi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(34, 34, 34))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(89, 89, 89)
-                .addComponent(jLabelWelcome)
-                .addGap(49, 49, 49)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelRuangan)
-                    .addComponent(jComboBoxRuangan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelDurasi)
-                    .addComponent(jComboBoxDurasi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
-                .addComponent(jLabelTotal)
-                .addGap(30, 30, 30)
-                .addComponent(jButtonNext)
-                .addContainerGap(269, Short.MAX_VALUE))
-        );
+        jLabel10.setFont(new java.awt.Font("Poppins Medium", 0, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(228, 241, 221));
+        jLabel10.setText("Medium Room");
+        getContentPane().add(jLabel10);
+        jLabel10.setBounds(190, 190, 140, 30);
 
-        setBounds(0, 0, 1096, 616);
+        jLabel11.setFont(new java.awt.Font("Poppins Medium", 0, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(228, 241, 221));
+        jLabel11.setText("Large Room");
+        getContentPane().add(jLabel11);
+        jLabel11.setBounds(190, 290, 120, 30);
+
+        jLabel12.setFont(new java.awt.Font("Poppins Medium", 0, 18)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(228, 241, 221));
+        jLabel12.setText("Deluxe Room");
+        getContentPane().add(jLabel12);
+        jLabel12.setBounds(190, 380, 140, 40);
+
+        jLabel13.setFont(new java.awt.Font("Poppins Medium", 0, 18)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(228, 241, 221));
+        jLabel13.setText("VVIP Room");
+        getContentPane().add(jLabel13);
+        jLabel13.setBounds(190, 470, 120, 40);
+
+        jLabel14.setFont(new java.awt.Font("Poppins Medium", 0, 18)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(228, 241, 221));
+        jLabel14.setText("Small Room");
+        getContentPane().add(jLabel14);
+        jLabel14.setBounds(190, 90, 120, 30);
+
+        jLabel1.setFont(new java.awt.Font("Poppins ExtraLight", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(228, 241, 221));
+        jLabel1.setText("Up to 6-8 people");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(190, 210, 130, 30);
+
+        jLabel2.setFont(new java.awt.Font("Poppins ExtraLight", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(228, 241, 221));
+        jLabel2.setText("Up to 8-10 people");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(190, 310, 130, 30);
+
+        jLabel3.setFont(new java.awt.Font("Poppins ExtraLight", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(228, 241, 221));
+        jLabel3.setText("Up to 10-14 people");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(190, 400, 140, 40);
+
+        jLabel4.setFont(new java.awt.Font("Poppins ExtraLight", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(228, 241, 221));
+        jLabel4.setText("Up to 10-14 people");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(190, 490, 130, 40);
+
+        jLabel5.setFont(new java.awt.Font("Poppins ExtraLight", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(228, 241, 221));
+        jLabel5.setText("Up to 4-5 people");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(190, 110, 130, 30);
+
+        jLabelSmallRoom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/images/smallRoom.png"))); // NOI18N
+        getContentPane().add(jLabelSmallRoom);
+        jLabelSmallRoom.setBounds(70, 80, 610, 70);
+
+        jLabelMediumRoom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/images/mediumRoom.png"))); // NOI18N
+        getContentPane().add(jLabelMediumRoom);
+        jLabelMediumRoom.setBounds(70, 180, 610, 70);
+
+        jLabelLargeRoom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/images/largeRoom.png"))); // NOI18N
+        getContentPane().add(jLabelLargeRoom);
+        jLabelLargeRoom.setBounds(70, 280, 610, 70);
+
+        jLabelDeluxeRoom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/images/deluxeRoom.png"))); // NOI18N
+        getContentPane().add(jLabelDeluxeRoom);
+        jLabelDeluxeRoom.setBounds(70, 370, 610, 80);
+
+        jLabelVVIPRoom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/images/VVIPRoom.png"))); // NOI18N
+        getContentPane().add(jLabelVVIPRoom);
+        jLabelVVIPRoom.setBounds(70, 450, 610, 100);
+
+        jLabelBackground1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/images/backgroundImage.png"))); // NOI18N
+        getContentPane().add(jLabelBackground1);
+        jLabelBackground1.setBounds(0, 340, 600, 270);
+
+        jLabelBackground2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/images/backgroundImage.png"))); // NOI18N
+        getContentPane().add(jLabelBackground2);
+        jLabelBackground2.setBounds(600, 340, 480, 270);
+
+        jLabelBackground3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/images/backgroundImage.png"))); // NOI18N
+        getContentPane().add(jLabelBackground3);
+        jLabelBackground3.setBounds(0, 0, 600, 340);
+
+        jLabelBackground4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/images/backgroundImage.png"))); // NOI18N
+        getContentPane().add(jLabelBackground4);
+        jLabelBackground4.setBounds(600, 0, 480, 340);
+
+        setBounds(0, 0, 1093, 620);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNextActionPerformed
+    private void fButtonNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fButtonNextActionPerformed
+        // TODO add your handling code here:
         String durasiSelected = jComboBoxDurasi.getSelectedItem().toString();
         int durasi = Integer.parseInt(durasiSelected.split(" ")[0]);
 
@@ -173,32 +282,38 @@ public class Paket extends javax.swing.JFrame {
 //        paketController.saveTransaksi(tanggalTransaksi, username, durasi, totalHarga);
         // Memanggil metode switchToMediaPlayer pada PaketController
         paketController.switchToMediaPlayer(username, durasi);
-    }//GEN-LAST:event_jButtonNextActionPerformed
+    }//GEN-LAST:event_fButtonNextActionPerformed
 
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                // Buat objek PaketModel dan inisialisasi sesuai kebutuhan
-                PaketModel paketModel = new PaketModel();
-
-                // Buat objek TransaksiModel
-                TransaksiModel transaksiModel = new TransaksiModel();
-
-                // Buat objek Paket dan kirimkan objek PaketModel, nama pengguna, dan objek TransaksiModel
-                new Paket(paketModel, "NamaPengguna", transaksiModel).setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonNext;
+    private source_ui.FButton fButtonNext;
     private javax.swing.JComboBox<String> jComboBoxDurasi;
     private javax.swing.JComboBox<String> jComboBoxRuangan;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JInternalFrame jInternalFrame1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabelBackground1;
+    private javax.swing.JLabel jLabelBackground2;
+    private javax.swing.JLabel jLabelBackground3;
+    private javax.swing.JLabel jLabelBackground4;
+    private javax.swing.JLabel jLabelDeluxeRoom;
     private javax.swing.JLabel jLabelDurasi;
+    private javax.swing.JLabel jLabelLargeRoom;
+    private javax.swing.JLabel jLabelMediumRoom;
     private javax.swing.JLabel jLabelRuangan;
+    private javax.swing.JLabel jLabelSmallRoom;
     private javax.swing.JLabel jLabelTotal;
+    private javax.swing.JLabel jLabelVVIPRoom;
     private javax.swing.JLabel jLabelWelcome;
     // End of variables declaration//GEN-END:variables
 

@@ -6,11 +6,17 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Transaksi extends javax.swing.JFrame {
+
+public final class Transaksi extends javax.swing.JFrame {
 
     private final TransaksiModel transaksiModel;
     private TransaksiController transaksiController;
 
+    /**
+     * Creates new form Transaksi
+     * @param transaksiModel
+     * @param transaksiController
+     */
     public Transaksi(TransaksiModel transaksiModel, TransaksiController transaksiController) {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -41,73 +47,167 @@ public class Transaksi extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabelTanggal = new javax.swing.JLabel();
-        jLabelUsername = new javax.swing.JLabel();
+        panelRounded1 = new source_ui.PanelRounded();
+        panelRounded2 = new source_ui.PanelRounded();
         jLabelDurasi = new javax.swing.JLabel();
+        panelRounded3 = new source_ui.PanelRounded();
         jLabelTotalHarga = new javax.swing.JLabel();
-        jButtonLogOut = new javax.swing.JButton();
+        jLabelUsername = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabelTanggal = new javax.swing.JLabel();
+        fButtonPay = new source_ui.FButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1080, 608));
+        setResizable(false);
+        getContentPane().setLayout(null);
 
-        jLabel1.setText("TRANSAKSI");
+        panelRounded1.setBackground(new java.awt.Color(148, 0, 255));
+        panelRounded1.setRoundBottomLeft(50);
+        panelRounded1.setRoundBottomRight(50);
+        panelRounded1.setRoundTopLeft(50);
+        panelRounded1.setRoundTopRight(50);
 
+        panelRounded2.setBackground(new java.awt.Color(174, 210, 255));
+        panelRounded2.setRoundBottomLeft(50);
+        panelRounded2.setRoundBottomRight(50);
+        panelRounded2.setRoundTopLeft(50);
+        panelRounded2.setRoundTopRight(50);
+
+        jLabelDurasi.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
+        jLabelDurasi.setForeground(new java.awt.Color(148, 0, 255));
+        jLabelDurasi.setText("Durasi           :");
+
+        panelRounded3.setBackground(new java.awt.Color(148, 0, 255));
+        panelRounded3.setRoundBottomLeft(60);
+        panelRounded3.setRoundBottomRight(60);
+        panelRounded3.setRoundTopLeft(60);
+        panelRounded3.setRoundTopRight(60);
+
+        jLabelTotalHarga.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
+        jLabelTotalHarga.setForeground(new java.awt.Color(228, 241, 255));
+        jLabelTotalHarga.setText("Total Price :");
+
+        javax.swing.GroupLayout panelRounded3Layout = new javax.swing.GroupLayout(panelRounded3);
+        panelRounded3.setLayout(panelRounded3Layout);
+        panelRounded3Layout.setHorizontalGroup(
+            panelRounded3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRounded3Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jLabelTotalHarga, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(22, Short.MAX_VALUE))
+        );
+        panelRounded3Layout.setVerticalGroup(
+            panelRounded3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRounded3Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jLabelTotalHarga)
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+
+        jLabelUsername.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
+        jLabelUsername.setForeground(new java.awt.Color(148, 0, 255));
+        jLabelUsername.setText("Username  :");
+
+        javax.swing.GroupLayout panelRounded2Layout = new javax.swing.GroupLayout(panelRounded2);
+        panelRounded2.setLayout(panelRounded2Layout);
+        panelRounded2Layout.setHorizontalGroup(
+            panelRounded2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRounded2Layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addGroup(panelRounded2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(panelRounded3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelDurasi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(155, Short.MAX_VALUE))
+        );
+        panelRounded2Layout.setVerticalGroup(
+            panelRounded2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRounded2Layout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addComponent(jLabelUsername)
+                .addGap(18, 18, 18)
+                .addComponent(jLabelDurasi)
+                .addGap(18, 18, 18)
+                .addComponent(panelRounded3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(31, Short.MAX_VALUE))
+        );
+
+        jLabel2.setFont(new java.awt.Font("Poppins", 1, 36)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(228, 241, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel2.setText("Cost Details");
+
+        jLabelTanggal.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
+        jLabelTanggal.setForeground(new java.awt.Color(228, 241, 255));
         jLabelTanggal.setText("Tanggal Transaksi:");
 
-        jLabelUsername.setText("Username:");
-
-        jLabelDurasi.setText("Durasi:");
-
-        jLabelTotalHarga.setText("Total Harga:");
-
-        jButtonLogOut.setText("Log Out");
-        jButtonLogOut.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonLogOutActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelTanggal)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabelUsername)
-                            .addComponent(jLabelDurasi)
-                            .addComponent(jLabelTotalHarga)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(158, 158, 158)
-                        .addComponent(jButtonLogOut)))
-                .addContainerGap(169, Short.MAX_VALUE))
+        javax.swing.GroupLayout panelRounded1Layout = new javax.swing.GroupLayout(panelRounded1);
+        panelRounded1.setLayout(panelRounded1Layout);
+        panelRounded1Layout.setHorizontalGroup(
+            panelRounded1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRounded1Layout.createSequentialGroup()
+                .addContainerGap(36, Short.MAX_VALUE)
+                .addGroup(panelRounded1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelRounded1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(panelRounded1Layout.createSequentialGroup()
+                        .addGroup(panelRounded1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(panelRounded2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelTanggal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(64, 64, 64))))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1)
+        panelRounded1Layout.setVerticalGroup(
+            panelRounded1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRounded1Layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelTanggal)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelUsername)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelDurasi)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelTotalHarga)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
-                .addComponent(jButtonLogOut)
-                .addGap(36, 36, 36))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(panelRounded2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(35, Short.MAX_VALUE))
         );
+
+        getContentPane().add(panelRounded1);
+        panelRounded1.setBounds(170, 60, 760, 400);
+
+        fButtonPay.setText("Pay");
+        fButtonPay.setFont(new java.awt.Font("Poppins Medium", 0, 18)); // NOI18N
+        fButtonPay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fButtonPayActionPerformed(evt);
+            }
+        });
+        getContentPane().add(fButtonPay);
+        fButtonPay.setBounds(790, 490, 140, 40);
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/images/backgroundImage.png"))); // NOI18N
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(0, 340, 600, 270);
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/images/backgroundImage.png"))); // NOI18N
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(600, 340, 480, 270);
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/images/backgroundImage.png"))); // NOI18N
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(0, 0, 600, 340);
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/images/backgroundImage.png"))); // NOI18N
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(600, 0, 480, 340);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogOutActionPerformed
+    private void fButtonPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fButtonPayActionPerformed
+        // TODO add your handling code here:
         // Panggil metode untuk membersihkan pengguna yang telah login
         transaksiModel.clear();
 
@@ -117,17 +217,25 @@ public class Transaksi extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(Transaksi.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButtonLogOutActionPerformed
+    }//GEN-LAST:event_fButtonPayActionPerformed
 
-    
-
+        /**
+         * @param args the command line arguments
+         */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonLogOut;
-    private javax.swing.JLabel jLabel1;
+    private source_ui.FButton fButtonPay;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabelDurasi;
     private javax.swing.JLabel jLabelTanggal;
     private javax.swing.JLabel jLabelTotalHarga;
     private javax.swing.JLabel jLabelUsername;
+    private source_ui.PanelRounded panelRounded1;
+    private source_ui.PanelRounded panelRounded2;
+    private source_ui.PanelRounded panelRounded3;
     // End of variables declaration//GEN-END:variables
 }

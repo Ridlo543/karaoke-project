@@ -33,16 +33,15 @@ import com.google.gson.reflect.TypeToken;
 import java.io.FileReader;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import javax.swing.JTextArea;
+import javax.swing.JTextPane;
 
 public class MediaPlayerController {
 
-    private TransaksiModel transaksiModel;
-    private MusicPlayer musicPlayer;
-    private MediaPlayer mediaPlayer;
+    private final MusicPlayer musicPlayer;
+    private final MediaPlayer mediaPlayer;
 
     private List<Song> songList;
-    private DefaultListModel defaultModel;
+    private final DefaultListModel defaultModel;
     public static int index;
     public static String playingState;
 
@@ -53,7 +52,7 @@ public class MediaPlayerController {
     public static JLabel labelDetail, labelMusicTitle, labelTimeElapsed, labelTimeRemaining, lebelImageAlbum;
     public static JList jlistPanel;
     public static JProgressBar jprogressBar;
-    public static JTextArea PanelLyric;
+    public static JTextPane PanelLyric;
 
     private static Automatic automatic = null;
 
@@ -65,7 +64,7 @@ public class MediaPlayerController {
 
     private ScheduledFuture<?> dynamicDetailsHandle = null;
 
-    private SongDAO songDAO;
+    private final SongDAO songDAO;
 
     public MediaPlayerController(MediaPlayer mediaPlayer) {
         this.mediaPlayer = mediaPlayer;
@@ -80,7 +79,7 @@ public class MediaPlayerController {
 
         songList = songDAO.getSongs();
         if (songList != null) {
-            if (songList.size() > 0) {
+            if (!songList.isEmpty()) {
                 for (Song music : songList) {
 
                     defaultModel.addElement(music.getFileName());
@@ -248,6 +247,7 @@ public class MediaPlayerController {
 
         dynamicDetails = new Runnable() {
 
+            @Override
             public void run() {
 
                 timeTrans++;
@@ -282,6 +282,7 @@ public class MediaPlayerController {
         scheduler = Executors.newScheduledThreadPool(1);
         dynamicDetailsHandle = scheduler.scheduleAtFixedRate(dynamicDetails, 1, 1, SECONDS);
         scheduler.schedule(new Runnable() {
+            @Override
             public void run() {
 
                 dynamicDetailsHandle.cancel(true);
@@ -423,21 +424,32 @@ public class MediaPlayerController {
     }
 
     public void deleteAllMusics() {
-        if (playingState.equals("PLAYING")) {
-            stopMusic();
+        // Tampilkan dialog konfirmasi
+        int confirmResult = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete all music?", "Confirmation", JOptionPane.YES_NO_OPTION);
+
+        // Periksa hasil konfirmasi
+        if (confirmResult == JOptionPane.YES_OPTION) {
+            // Hapus semua musik jika pengguna menekan tombol Yes
+            if (playingState.equals("PLAYING")) {
+                stopMusic();
+            }
+            musicPlayer.Stop();
+            playingState = "";
+            songDAO.deleteAllSongs(songList);
+            defaultModel.removeAllElements();
+            jlistPanel.removeAll();
+            ImageIcon imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/view/images/nomusic.png")).getImage().getScaledInstance(227, 192, java.awt.Image.SCALE_DEFAULT));
+            lebelImageAlbum.setIcon(imageIcon);
+            labelTimeElapsed.setText("00:00:00");
+            labelTimeRemaining.setText("00:00:00");
+            labelDetail.setText("");
+            labelMusicTitle.setText("");
+            infoMessage("All music has been deleted.");
         }
-        musicPlayer.Stop();
-        playingState = "";
-        songDAO.deleteAllSongs(songList);
-        defaultModel.removeAllElements();
-        jlistPanel.removeAll();
-        ImageIcon imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/view/images/nomusic.png")).getImage().getScaledInstance(227, 192, java.awt.Image.SCALE_DEFAULT));
-        lebelImageAlbum.setIcon(imageIcon);
-        labelTimeElapsed.setText("00:00:00");
-        labelTimeRemaining.setText("00:00:00");
-        labelDetail.setText("");
-        labelMusicTitle.setText("");
-        infoMesagge();
+    }
+
+    private void infoMessage(String message) {
+        JOptionPane.showMessageDialog(null, message, "Information", JOptionPane.INFORMATION_MESSAGE);
     }
 
     public List<Song> getMusics() {
@@ -453,30 +465,30 @@ public class MediaPlayerController {
     }
 
     public void switchToTransaksi() {
-    if (mediaPlayer != null) {
-        musicPlayer.Stop();
-        mediaPlayer.setVisible(false);
+        if (mediaPlayer != null) {
+            musicPlayer.Stop();
+            mediaPlayer.setVisible(false);
 
-        // Ambil data dari mediaPlayer menggunakan getTransaksiModel()
-        TransaksiModel transaksiModel = mediaPlayer.getTransaksiModel();
+            // Ambil data dari mediaPlayer menggunakan getTransaksiModel()
+            TransaksiModel transaksiModel = mediaPlayer.getTransaksiModel();
 
-        if (transaksiModel != null) {
-            // Buat objek TransaksiController dengan dua parameter
-            Transaksi transaksiView = new Transaksi(transaksiModel, null);
-            TransaksiController transaksiController = new TransaksiController(transaksiModel,transaksiView);
-            transaksiView.setTransaksiController(transaksiController);
-            // Simpan data transaksi
-            transaksiController.saveTransaksi();
+            if (transaksiModel != null) {
+                // Buat objek TransaksiController dengan dua parameter
+                Transaksi transaksiView = new Transaksi(transaksiModel, null);
+                TransaksiController transaksiController = new TransaksiController(transaksiModel, transaksiView);
+                transaksiView.setTransaksiController(transaksiController);
+                // Simpan data transaksi
+                transaksiController.saveTransaksi();
 //            Transaksi transaksiView = new Transaksi(transaksiModel, null);
 
-            // Tampilkan Transaksi
-            transaksiView.setVisible(true);
+                // Tampilkan Transaksi
+                transaksiView.setVisible(true);
+            } else {
+                System.err.println("TransaksiModel in mediaPlayer is null");
+            }
         } else {
-            System.err.println("TransaksiModel in mediaPlayer is null");
+            System.err.println("mediaPlayer is null");
         }
-    } else {
-        System.err.println("mediaPlayer is null");
     }
-}
 
 }

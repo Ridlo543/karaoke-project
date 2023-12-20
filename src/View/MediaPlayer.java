@@ -12,9 +12,6 @@ import Controller.MediaPlayerController;
 import Model.TransaksiModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import javax.swing.SwingWorker;
 
 public class MediaPlayer extends javax.swing.JFrame {
 
@@ -39,11 +36,7 @@ public class MediaPlayer extends javax.swing.JFrame {
     public String playState;
 
     /**
-     * Creates new form MediaPlayer
-     *
-     * @param username
-     * @param timeRemaining
-     * @param transaksiModel
+     * Creates new form UserInterface
      */
     public MediaPlayer(String username, int timeRemaining, TransaksiModel transaksiModel) {
         initComponents();
@@ -73,7 +66,6 @@ public class MediaPlayer extends javax.swing.JFrame {
         MediaPlayerController.PanelLyric = PanelLyric;
 
         jLabelWelcome.setText("Welcome, " + username);
-
     }
 
     // Method to start the countdown timer
@@ -89,22 +81,6 @@ public class MediaPlayer extends javax.swing.JFrame {
         countdownTimer.start();
     }
 
-//    private void initializeTimer() {
-//        countdownTimer = new Timer(1000, new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                if (remainingTimeInSeconds > 0) {
-//                    remainingTimeInSeconds--;
-//                    System.out.println(remainingTimeInSeconds);
-//                    updateLabel();
-//                } else {
-//                    // Waktu habis, lakukan tindakan sesuai kebutuhan
-//                    countdownTimer.stop();
-//                }
-//            }
-//        });
-//        countdownTimer.start();
-//    }
     // Method to update the jLabelTimeRemaining
     private void updateTimeRemainingLabel() {
         int hours = timeRemaining / 3600;
@@ -142,12 +118,12 @@ public class MediaPlayer extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
-        jLabelPlaylist = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        PanelLyric = new javax.swing.JTextPane();
         jLabelLyric = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        PanelLyric = new javax.swing.JTextArea();
         jPanel3 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jProgressBar1 = new javax.swing.JProgressBar();
@@ -166,22 +142,23 @@ public class MediaPlayer extends javax.swing.JFrame {
         btnNext = new javax.swing.JButton();
         btnRepeat = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
-        btnUpload = new javax.swing.JButton();
-        btnDelete = new javax.swing.JButton();
-        btnDeleteAll = new javax.swing.JButton();
-        jButtonLeave = new javax.swing.JButton();
+        fButtonLeave = new source_ui.FButton();
+        fButtonRemoveAllPlaylist = new source_ui.FButton();
+        fButtonDeleteMusic = new source_ui.FButton();
+        fButtonAddMusic = new source_ui.FButton();
         jPanel11 = new javax.swing.JPanel();
         jLabelWelcome = new javax.swing.JLabel();
         jLabelTimeRemaining = new javax.swing.JLabel();
-        jButtonAddDuration = new javax.swing.JButton();
+        fButton1 = new source_ui.FButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
         kGradientPanel1.setkEndColor(new java.awt.Color(42, 41, 76));
-        kGradientPanel1.setkStartColor(new java.awt.Color(189, 110, 111));
+        kGradientPanel1.setkStartColor(new java.awt.Color(148, 0, 255));
         kGradientPanel1.setPreferredSize(new java.awt.Dimension(1080, 610));
 
+        jPanel1.setBackground(new java.awt.Color(39, 0, 93));
         jPanel1.setOpaque(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -199,10 +176,11 @@ public class MediaPlayer extends javax.swing.JFrame {
 
         jPanel7.setOpaque(false);
 
-        jLabelPlaylist.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelPlaylist.setText("Play List");
+        jLabel1.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(228, 241, 255));
+        jLabel1.setText("Play List");
 
-        jList1.setBackground(new java.awt.Color(248, 248, 248));
+        jList1.setBackground(new java.awt.Color(148, 0, 255));
         jList1.setForeground(new java.awt.Color(184, 169, 169));
         jList1.setSelectionBackground(new java.awt.Color(171, 98, 126));
         jList1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -212,14 +190,12 @@ public class MediaPlayer extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jList1);
 
-        jLabelLyric.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelLyric.setText("Lyric");
+        PanelLyric.setBackground(new java.awt.Color(174, 210, 255));
+        jScrollPane2.setViewportView(PanelLyric);
 
-        PanelLyric.setEditable(false);
-        PanelLyric.setBackground(new java.awt.Color(255, 255, 255));
-        PanelLyric.setColumns(20);
-        PanelLyric.setRows(5);
-        jScrollPane3.setViewportView(PanelLyric);
+        jLabelLyric.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        jLabelLyric.setForeground(new java.awt.Color(228, 241, 255));
+        jLabelLyric.setText("Lyric");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -228,27 +204,25 @@ public class MediaPlayer extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 551, Short.MAX_VALUE)
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelPlaylist, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelLyric, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane3))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jLabelLyric)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabelPlaylist)
+                .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -259,17 +233,22 @@ public class MediaPlayer extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.setOpaque(false);
 
         jPanel8.setOpaque(false);
 
-        labelTimeElapsed.setForeground(new java.awt.Color(184, 169, 169));
+        labelTimeElapsed.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        labelTimeElapsed.setForeground(new java.awt.Color(228, 241, 255));
         labelTimeElapsed.setText("00:00:00");
 
-        labelTimeRemaining.setForeground(new java.awt.Color(184, 169, 169));
+        labelTimeRemaining.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        labelTimeRemaining.setForeground(new java.awt.Color(228, 241, 255));
         labelTimeRemaining.setText("00:00:00");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
@@ -300,10 +279,11 @@ public class MediaPlayer extends javax.swing.JFrame {
 
         jPanel9.setOpaque(false);
 
-        labelMusicTitle.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        labelMusicTitle.setFont(new java.awt.Font("Poppins", 1, 14)); // NOI18N
         labelMusicTitle.setForeground(new java.awt.Color(255, 255, 255));
         labelMusicTitle.setText("Music Title");
 
+        labelDetail.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         labelDetail.setForeground(new java.awt.Color(184, 169, 169));
         labelDetail.setText("Artist Name");
 
@@ -320,7 +300,7 @@ public class MediaPlayer extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel9Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
+                .addGap(97, 97, 97)
                 .addComponent(lebelImageAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -331,8 +311,9 @@ public class MediaPlayer extends javax.swing.JFrame {
                 .addComponent(lebelImageAlbum, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelMusicTitle)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                .addComponent(labelDetail))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(labelDetail)
+                .addContainerGap())
         );
 
         jPanel10.setOpaque(false);
@@ -345,7 +326,7 @@ public class MediaPlayer extends javax.swing.JFrame {
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -457,68 +438,47 @@ public class MediaPlayer extends javax.swing.JFrame {
 
         jPanel6.setOpaque(false);
 
-        btnUpload.setForeground(new java.awt.Color(204, 255, 204));
-        btnUpload.setText("add music");
-        btnUpload.setBorderPainted(false);
-        btnUpload.setContentAreaFilled(false);
-        btnUpload.setFocusPainted(false);
-        btnUpload.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                uploadClicked(evt);
-            }
-        });
-
-        btnDelete.setForeground(new java.awt.Color(204, 255, 204));
-        btnDelete.setText("delete music");
-        btnDelete.setBorderPainted(false);
-        btnDelete.setContentAreaFilled(false);
-        btnDelete.setFocusPainted(false);
-        btnDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteClicked(evt);
-            }
-        });
-
-        btnDeleteAll.setForeground(new java.awt.Color(204, 255, 204));
-        btnDeleteAll.setText("remove all playlist");
-        btnDeleteAll.setBorderPainted(false);
-        btnDeleteAll.setContentAreaFilled(false);
-        btnDeleteAll.setFocusPainted(false);
-        btnDeleteAll.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteAllClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(btnUpload)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
-                .addComponent(btnDeleteAll, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGap(0, 610, Short.MAX_VALUE)
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnDeleteAll, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnUpload, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35))
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jButtonLeave.setText("Leave");
-        jButtonLeave.addActionListener(new java.awt.event.ActionListener() {
+        fButtonLeave.setText("Leave");
+        fButtonLeave.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
+        fButtonLeave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonLeaveActionPerformed(evt);
+                fButtonLeaveActionPerformed(evt);
+            }
+        });
+
+        fButtonRemoveAllPlaylist.setText("Remove All Playlist");
+        fButtonRemoveAllPlaylist.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
+        fButtonRemoveAllPlaylist.setMargin(new java.awt.Insets(2, 14, 2, 14));
+        fButtonRemoveAllPlaylist.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fButtonRemoveAllPlaylistActionPerformed(evt);
+            }
+        });
+
+        fButtonDeleteMusic.setText("Delete Music");
+        fButtonDeleteMusic.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
+        fButtonDeleteMusic.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fButtonDeleteMusicActionPerformed(evt);
+            }
+        });
+
+        fButtonAddMusic.setText("Add Music");
+        fButtonAddMusic.setFont(new java.awt.Font("Poppins Light", 0, 14)); // NOI18N
+        fButtonAddMusic.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fButtonAddMusicActionPerformed(evt);
             }
         });
 
@@ -527,35 +487,48 @@ public class MediaPlayer extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addGap(413, 413, 413)
-                        .addComponent(jButtonLeave)))
-                .addContainerGap())
+                        .addComponent(fButtonAddMusic, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(fButtonDeleteMusic, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(fButtonLeave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(fButtonRemoveAllPlaylist, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE))
+                .addGap(22, 22, 22))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(0, 26, Short.MAX_VALUE)
+                .addGap(39, 39, 39)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(58, 58, 58))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(fButtonDeleteMusic, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(fButtonAddMusic, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(fButtonRemoveAllPlaylist, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonLeave)
-                        .addContainerGap())))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(fButtonLeave, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE))))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
+        jPanel11.setBackground(new java.awt.Color(39, 0, 93));
         jPanel11.setOpaque(false);
 
+        jLabelWelcome.setFont(new java.awt.Font("Poppins", 1, 14)); // NOI18N
+        jLabelWelcome.setForeground(new java.awt.Color(228, 241, 255));
         jLabelWelcome.setText("Selamat Datang, ");
 
+        jLabelTimeRemaining.setFont(new java.awt.Font("Poppins", 1, 14)); // NOI18N
+        jLabelTimeRemaining.setForeground(new java.awt.Color(228, 241, 255));
         jLabelTimeRemaining.setText("Time Remaining: ");
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
@@ -565,24 +538,25 @@ public class MediaPlayer extends javax.swing.JFrame {
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelWelcome)
-                    .addComponent(jLabelTimeRemaining))
-                .addContainerGap(238, Short.MAX_VALUE))
+                    .addComponent(jLabelTimeRemaining, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelWelcome, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(110, Short.MAX_VALUE))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(15, 15, 15)
                 .addComponent(jLabelWelcome)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelTimeRemaining)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButtonAddDuration.setText("Add Duration");
-        jButtonAddDuration.addActionListener(new java.awt.event.ActionListener() {
+        fButton1.setText("Add Duration");
+        fButton1.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
+        fButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAddDurationActionPerformed(evt);
+                fButton1ActionPerformed(evt);
             }
         });
 
@@ -593,19 +567,23 @@ public class MediaPlayer extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
                         .addGap(17, 17, 17)
                         .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 234, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonAddDuration, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(fButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)))
                         .addGap(16, 16, 16))))
             .addGroup(kGradientPanel1Layout.createSequentialGroup()
                 .addContainerGap()
@@ -616,31 +594,32 @@ public class MediaPlayer extends javax.swing.JFrame {
             kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(kGradientPanel1Layout.createSequentialGroup()
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonAddDuration, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(23, 23, 23))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(fButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
+                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(21, 21, 21)))
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14))
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(kGradientPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(kGradientPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1219, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(kGradientPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 611, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(kGradientPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 64, Short.MAX_VALUE))
         );
 
         pack();
@@ -717,20 +696,6 @@ public class MediaPlayer extends javax.swing.JFrame {
         random = false;
     }//GEN-LAST:event_repeatClicked
 
-    private void deleteClicked(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteClicked
-        controller.deleteMusic(jList1.getSelectedIndex());
-        playImageEntered = "images/play_h.png";
-        playImageExited = "images/play.png";
-        changeImage(playImageExited, btnPlay);
-    }//GEN-LAST:event_deleteClicked
-
-    private void deleteAllClicked(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteAllClicked
-        controller.deleteAllMusics();
-        playImageEntered = "images/play_h.png";
-        playImageExited = "images/play.png";
-        changeImage(playImageExited, btnPlay);
-    }//GEN-LAST:event_deleteAllClicked
-
     private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
         if (evt.getClickCount() == 2) {
 
@@ -755,52 +720,67 @@ public class MediaPlayer extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jList1MouseClicked
 
-
-    private void jButtonAddDurationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddDurationActionPerformed
+    private void fButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fButton1ActionPerformed
+        // TODO add your handling code here:
         // Add one hour to the remaining time
         timeRemaining += 3600;
 
         // Update hargaTotal in TransaksiModel 
         transaksiModel.setTotalHarga(transaksiModel.getTotalHarga() + 10000);
-        transaksiModel.setDurasi(transaksiModel.getDurasi()+1);
+        transaksiModel.setDurasi(transaksiModel.getDurasi() + 1);
 
         // Update the jLabelTimeRemaining
         updateTimeRemainingLabel();
+    }//GEN-LAST:event_fButton1ActionPerformed
 
-        // Perbarui label waktu tersisa
-//        updateTimeRemaining(timeRemaining);
-    }//GEN-LAST:event_jButtonAddDurationActionPerformed
+    private void fButtonRemoveAllPlaylistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fButtonRemoveAllPlaylistActionPerformed
+        // TODO add your handling code here:
+        controller.deleteAllMusics();
+        playImageEntered = "images/play_h.png";
+        playImageExited = "images/play.png";
+        changeImage(playImageExited, btnPlay);
+    }//GEN-LAST:event_fButtonRemoveAllPlaylistActionPerformed
 
-    private void jButtonLeaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLeaveActionPerformed
+    private void fButtonLeaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fButtonLeaveActionPerformed
+        // TODO add your handling code here:
         if (controller != null) {
             controller.switchToTransaksi();
         } else {
             System.err.println("musicController is null");
         }
-    }//GEN-LAST:event_jButtonLeaveActionPerformed
+    }//GEN-LAST:event_fButtonLeaveActionPerformed
 
-    private void uploadClicked(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadClicked
+    private void fButtonDeleteMusicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fButtonDeleteMusicActionPerformed
+        // TODO add your handling code here:
+          controller.deleteMusic(jList1.getSelectedIndex());
+        playImageEntered = "images/play_h.png";
+        playImageExited = "images/play.png";
+        changeImage(playImageExited, btnPlay);
+    }//GEN-LAST:event_fButtonDeleteMusicActionPerformed
+
+    private void fButtonAddMusicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fButtonAddMusicActionPerformed
+        // TODO add your handling code here:
         controller.addFiles(jList1);
-    }//GEN-LAST:event_uploadClicked
+    }//GEN-LAST:event_fButtonAddMusicActionPerformed
 
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextArea PanelLyric;
-    private javax.swing.JButton btnDelete;
-    private javax.swing.JButton btnDeleteAll;
+    private javax.swing.JTextPane PanelLyric;
     private javax.swing.JButton btnNext;
     private javax.swing.JButton btnPlay;
     private javax.swing.JButton btnPrevious;
     private javax.swing.JButton btnRandom;
     private javax.swing.JButton btnRepeat;
-    private javax.swing.JButton btnUpload;
-    private javax.swing.JButton jButtonAddDuration;
-    private javax.swing.JButton jButtonLeave;
+    private source_ui.FButton fButton1;
+    private source_ui.FButton fButtonAddMusic;
+    private source_ui.FButton fButtonDeleteMusic;
+    private source_ui.FButton fButtonLeave;
+    private source_ui.FButton fButtonRemoveAllPlaylist;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelLyric;
-    private javax.swing.JLabel jLabelPlaylist;
     private javax.swing.JLabel jLabelTimeRemaining;
     private javax.swing.JLabel jLabelWelcome;
     private javax.swing.JList<String> jList1;
@@ -817,7 +797,7 @@ public class MediaPlayer extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane2;
     private keeptoo.KGradientPanel kGradientPanel1;
     private javax.swing.JLabel labelDetail;
     private javax.swing.JLabel labelMusicTitle;

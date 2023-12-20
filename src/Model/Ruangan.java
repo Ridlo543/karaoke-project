@@ -1,9 +1,9 @@
 package Model;
 
 public class Ruangan {
-    private String nama;
-    private int kapasitas;
-    private int hargaPerJam;
+    private final String nama;
+    private final int kapasitas;
+    private final int hargaPerJam;
 
     public Ruangan(String nama, int kapasitas, int hargaPerJam) {
         this.nama = nama;

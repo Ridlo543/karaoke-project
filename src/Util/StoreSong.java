@@ -14,12 +14,11 @@ public class StoreSong {
     File fileName = new File("song_data.dat");
     ObjectInputStream ReadConnection = null;
     ObjectOutputStream WriteConnection = null;
-    FileOutputStream file;
 
     public ObjectInputStream getReadConnection() {
         try {
             if (!fileName.exists()) {
-                file = new FileOutputStream("song_data.dat");
+                new FileOutputStream("song_data.dat");
                 return null;
             }
             ReadConnection = new ObjectInputStream(new FileInputStream("song_data.dat"));

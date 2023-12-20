@@ -18,15 +18,17 @@ public class Main {
         
         List<User> userList = FileHandler.readUser();
         if (userList == null) {
-            userList = new ArrayList<>();
+            userList = new ArrayList();
         }
 
         // Membuat objek LoginController dan Login
-        LoginController loginController = createLoginController(userList);
+        Login loginView = new Login(userList, null);
+        LoginController loginController = new LoginController(userList, loginView);
+        loginView.setLoginController(loginController);
 
         // Menampilkan halaman login
         java.awt.EventQueue.invokeLater(() -> {
-            loginController.getLoginView().setVisible(true);
+            loginView.setVisible(true);
         });
         
         final List<User> finalUserList = userList;
@@ -39,11 +41,4 @@ public class Main {
             }
         }));
     }
-
-    public static LoginController createLoginController(List<User> userList) {
-        LoginController loginController = new LoginController(userList, new Login(userList, null));
-        loginController.getLoginView().setLoginController(loginController);
-        return loginController;
-    }
 }
-

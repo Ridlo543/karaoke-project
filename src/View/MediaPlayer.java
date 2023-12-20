@@ -37,6 +37,9 @@ public class MediaPlayer extends javax.swing.JFrame {
 
     /**
      * Creates new form UserInterface
+     * @param username
+     * @param timeRemaining
+     * @param transaksiModel
      */
     public MediaPlayer(String username, int timeRemaining, TransaksiModel transaksiModel) {
         initComponents();
@@ -308,7 +311,7 @@ public class MediaPlayer extends javax.swing.JFrame {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lebelImageAlbum, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+                .addComponent(lebelImageAlbum, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelMusicTitle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -509,7 +512,7 @@ public class MediaPlayer extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(fButtonDeleteMusic, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(fButtonAddMusic, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(fButtonRemoveAllPlaylist, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -581,7 +584,6 @@ public class MediaPlayer extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(fButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(10, 10, 10)))
                         .addGap(16, 16, 16))))
@@ -726,7 +728,7 @@ public class MediaPlayer extends javax.swing.JFrame {
         timeRemaining += 3600;
 
         // Update hargaTotal in TransaksiModel 
-        transaksiModel.setTotalHarga(transaksiModel.getTotalHarga() + 10000);
+        transaksiModel.setTotalHarga(transaksiModel.getTotalHarga() + 20000);
         transaksiModel.setDurasi(transaksiModel.getDurasi() + 1);
 
         // Update the jLabelTimeRemaining

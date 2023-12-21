@@ -305,8 +305,6 @@ public class MediaPlayerController {
         label.setText(timeString);
     }
 
-    
-    
     // MusicController
     public void setDetail(int selectedIndex) {
         if (!songList.isEmpty() && selectedIndex >= 0 && selectedIndex < songList.size()) {
@@ -316,19 +314,19 @@ public class MediaPlayerController {
             MediaPlayerController.labelMusicTitle.setText(music.getTitle());
             MediaPlayerController.jlistPanel.setSelectedIndex(currentMusicPlaying);
             MediaPlayerController.jprogressBar.setValue(0);
-//ImageIcon imageIcon = null;
-//            if (music.getImageData() != null) {
-//                imageIcon = new ImageIcon(new ImageIcon(music.getImageData()).getImage().getScaledInstance(257, 207, java.awt.Image.SCALE_DEFAULT));
-//                lebelImageAlbum.setIcon(imageIcon);
-//            } else {
-//                imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/view/images/defaultIcon.png")).getImage().getScaledInstance(227, 192, java.awt.Image.SCALE_DEFAULT));
-//                lebelImageAlbum.setIcon(imageIcon);
-//            }
+            ImageIcon imageIcon = null;
+            if (music.getImageData() != null) {
+                imageIcon = new ImageIcon(new ImageIcon(music.getImageData()).getImage().getScaledInstance(257, 207, java.awt.Image.SCALE_DEFAULT));
+                lebelImageAlbum.setIcon(imageIcon);
+            } else {
+                imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/view/images/defaultIcon.png")).getImage().getScaledInstance(227, 192, java.awt.Image.SCALE_DEFAULT));
+                lebelImageAlbum.setIcon(imageIcon);
+            }
 
             // Mendapatkan gambar secara acak dari direktori
-            ImageIcon randomGifIcon = getRandomGif("build/classes/View/images/animation");
-
-            lebelImageAlbum.setIcon(randomGifIcon);
+//            ImageIcon randomGifIcon = getRandomGif("build/classes/View/images/animation");
+//
+//            lebelImageAlbum.setIcon(randomGifIcon);
 
             // Cari lirik berdasarkan judul lagu di JSON
             String titleToSearch = music.getTitle();
@@ -381,7 +379,7 @@ public class MediaPlayerController {
         File[] files = directory.listFiles((dir, name) -> name.toLowerCase().endsWith(".gif"));
 
         if (files != null && files.length > 0) {
-            System.out.println("gif");
+//            System.out.println("gif");
             // Memilih file GIF secara acak
             int randomIndex = (int) (Math.random() * files.length);
             File randomGifFile = files[randomIndex];
@@ -393,7 +391,7 @@ public class MediaPlayerController {
             Image gifImage = gifIcon.getImage().getScaledInstance(257, 207, Image.SCALE_DEFAULT);
             return new ImageIcon(gifImage);
         } else {
-            System.out.println("default");
+//            System.out.println("default");
             // Mengembalikan gambar default jika tidak ada file GIF dalam direktori
             return new ImageIcon(new ImageIcon(getClass().getResource("/view/images/defaultIcon.png")).getImage().getScaledInstance(227, 192, Image.SCALE_DEFAULT));
         }

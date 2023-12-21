@@ -14,17 +14,23 @@
 
     <target name="-post-jar" depends="run">
         <echo>Copying additional files</echo>
+        <!-- Membuat direktori jika belum ada -->
+        <mkdir dir="${dist.dir}/view/images"/>
+        <mkdir dir="${dist.dir}/view/images/animation"/>
+    
+        <!-- Menyalin file dari dua direktori ke direktori yang berbeda -->
         <copy todir="${dist.dir}/view/images">
             <fileset dir="${basedir}/src/view/images"/>
+        </copy>
+        <copy todir="${dist.dir}/view/images/animation">
             <fileset dir="${basedir}/src/view/images/animation"/>
         </copy>
-    </target>
-
-    <target name="-post-jar-copy-files">
+    
+        <!-- Menyalin file lainnya -->
         <copy todir="${dist.dir}" file="${basedir}/user_data.json"/>
         <copy todir="${dist.dir}" file="${basedir}/transaksi.json"/>
         <copy todir="${dist.dir}" file="${basedir}/song_data.dat"/>
     </target>
-    
+
     
 </project>

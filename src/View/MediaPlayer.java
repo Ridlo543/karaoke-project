@@ -37,6 +37,7 @@ public class MediaPlayer extends javax.swing.JFrame {
 
     /**
      * Creates new form UserInterface
+     *
      * @param username
      * @param timeRemaining
      * @param transaksiModel
@@ -78,7 +79,6 @@ public class MediaPlayer extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 // Decrement remaining time and update the label
                 updateTimeRemainingLabel();
-                // You can add additional logic if needed
             }
         });
         countdownTimer.start();
@@ -96,7 +96,14 @@ public class MediaPlayer extends javax.swing.JFrame {
         // Decrement remaining time
         timeRemaining--;
 
-        // Additional logic can be added here based on your requirements
+        // Check if time has reached zero
+        if (timeRemaining < 0) {
+            // Stop the countdown timer
+            countdownTimer.stop();
+
+            // Switch to the Transaksi view
+            controller.switchToTransaksi();
+        }
     }
 
     public void showMediaPlayer() {
@@ -649,12 +656,11 @@ public class MediaPlayer extends javax.swing.JFrame {
 
     private void randomClicked(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_randomClicked
         random = !random;
-        if(random){
+        if (random) {
             randomImageEntered = "images/random.png";
-            randomImageExited =  "images/randomSelected.png";
+            randomImageExited = "images/randomSelected.png";
             changeImage(randomImageExited, btnRandom);
-        }
-        else{
+        } else {
             randomImageEntered = "images/random_h.png";
             randomImageExited = "images/random.png";
             changeImage(randomImageExited, btnRandom);
@@ -771,7 +777,7 @@ public class MediaPlayer extends javax.swing.JFrame {
 
     private void fButtonDeleteMusicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fButtonDeleteMusicActionPerformed
         // TODO add your handling code here:
-          controller.deleteMusic(jList1.getSelectedIndex());
+        controller.deleteMusic(jList1.getSelectedIndex());
         playImageEntered = "images/play_h.png";
         playImageExited = "images/play.png";
         changeImage(playImageExited, btnPlay);
